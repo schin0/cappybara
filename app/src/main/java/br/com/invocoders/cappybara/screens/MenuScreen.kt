@@ -65,6 +65,6 @@ fun MenuScreen(navController: NavController, selectedItem: String) {
 @Preview
 @Composable
 private fun PreviewMenuScreen() {
-    var nav = rememberNavController()
+    val nav = rememberNavController()
     MenuScreen(nav, "home")
 }
