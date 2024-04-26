@@ -19,9 +19,8 @@ import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.BotaoComponente
 import br.com.invocoders.cappybara.model.MenuItem
 
-
 @Composable
-fun MenuScreen(navController: NavController, selectedItem: String) {
+fun MenuScreen(navController: NavController, itemSelecionado: String) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -56,7 +55,7 @@ fun MenuScreen(navController: NavController, selectedItem: String) {
             )
 
             botoes.forEach { item ->
-                BotaoComponente(item, item.nome == selectedItem, navController)
+                BotaoComponente(item, item.nome == itemSelecionado, navController)
             }
         }
     }
