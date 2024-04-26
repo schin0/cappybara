@@ -32,5 +32,5 @@ fun HomeScreen(navController: NavController) {
         }
     }
 
-    MenuScreen(navController)
+    MenuScreen(navController, "home")
 }
