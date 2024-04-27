@@ -22,6 +22,10 @@ fun HomeScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(32.dp))
 
         HeaderScreen()
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        DestaquesScreen()
     }
 
     MenuScreen(navController, "home")
