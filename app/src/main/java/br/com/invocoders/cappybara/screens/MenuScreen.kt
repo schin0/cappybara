@@ -47,10 +47,11 @@ fun MenuScreen(navController: NavController, itemSelecionado: String) {
                     "Pesquisar"
                 ),
                 MenuItem(
-                    "calendario",
+                    "home",
                     R.drawable.baseline_calendar_month_24,
-                    R.drawable.baseline_calendar_month_24_white,
-                    "Calendário"
+                    R.drawable.baseline_calendar_month_24,
+                    "Calendário",
+                    habilitado = false
                 )
             )
 
