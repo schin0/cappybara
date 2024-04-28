@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.components.CardComponent
-import br.com.invocoders.cappybara.services.listarEventos
+import br.com.invocoders.cappybara.services.listarCardsEventos
 
 @Composable
 fun EventosScreen(navController: NavController, tituloSecao: String) {
@@ -37,7 +37,7 @@ fun EventosScreen(navController: NavController, tituloSecao: String) {
         Spacer(modifier = Modifier.height(32.dp))
         
         Row {
-            val listaEventos = listarEventos()
+            val listaEventos = listarCardsEventos()
 
             Column (
                 modifier = Modifier
