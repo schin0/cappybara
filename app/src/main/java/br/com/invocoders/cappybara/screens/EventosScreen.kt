@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.components.BotaoComponente
 import br.com.invocoders.cappybara.components.CardComponent
 import br.com.invocoders.cappybara.model.CardItem
 

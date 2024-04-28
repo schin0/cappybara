@@ -16,7 +16,7 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun HomeScreen(navController: NavController) {
-    val scrollState = rememberScrollState(0);
+    val scrollState = rememberScrollState(0)
 
     Column(
         modifier = Modifier
