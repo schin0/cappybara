@@ -86,6 +86,10 @@ fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            MapScreen()
+
+            Spacer(modifier = Modifier.height(16.dp))
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
