@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.model.CardItem
+import br.com.invocoders.cappybara.services.obterEvento
 
 @Composable
 fun CardComponent(cardItem: CardItem, navController: NavController) {
@@ -33,7 +34,7 @@ fun CardComponent(cardItem: CardItem, navController: NavController) {
             .padding(bottom = 32.dp)
             .fillMaxWidth()
             .clickable {
-                navController.navigate(cardItem.destinoClique)
+                obterEvento(navController, cardItem.destinoClique)
             },
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
@@ -43,12 +44,12 @@ fun CardComponent(cardItem: CardItem, navController: NavController) {
                 .background(Color.White)
         ) {
             Image(
-                painter = cardItem.imagem,
+                painter = painterResource(id = cardItem.imagemId),
                 contentDescription = cardItem.titulo,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(170.dp),
-                contentScale = ContentScale.FillHeight
+                contentScale = ContentScale.FillWidth
             )
 
             Row(
@@ -70,8 +71,8 @@ fun CardComponent(cardItem: CardItem, navController: NavController) {
                     Image(
                         painterResource(id = R.drawable.baseline_stars_24),
                         contentDescription = "Ícone estrela",
-                        modifier = Modifier.
-                            size(20.dp, 20.dp)
+                        modifier = Modifier
+                            .size(20.dp, 20.dp)
                             .padding(start = 4.dp)
                     )
                 }

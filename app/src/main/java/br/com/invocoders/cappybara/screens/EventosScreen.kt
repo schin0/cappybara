@@ -12,14 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.CardComponent
-import br.com.invocoders.cappybara.model.CardItem
+import br.com.invocoders.cappybara.services.listarEventos
 
 @Composable
 fun EventosScreen(navController: NavController, tituloSecao: String) {
@@ -39,20 +37,7 @@ fun EventosScreen(navController: NavController, tituloSecao: String) {
         Spacer(modifier = Modifier.height(32.dp))
         
         Row {
-            val listaEventos = listOf(
-                CardItem(
-                    imagem = painterResource(R.drawable.placeholder),
-                    avaliacao = 5.0F,
-                    titulo = "Teste",
-                    destinoClique = "pesquisa"
-                ),
-                CardItem(
-                    imagem = painterResource(R.drawable.placeholder),
-                    avaliacao = 5.0F,
-                    titulo = "Teste",
-                    destinoClique = "pesquisa"
-                )
-            )
+            val listaEventos = listarEventos();
 
             Column (
                 modifier = Modifier
