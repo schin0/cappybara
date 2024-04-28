@@ -16,12 +16,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.CardComponent
 import br.com.invocoders.cappybara.model.CardItem
 
 @Composable
-fun EventosScreen(tituloSecao: String) {
+fun EventosScreen(navController: NavController, tituloSecao: String) {
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -42,12 +43,14 @@ fun EventosScreen(tituloSecao: String) {
                 CardItem(
                     imagem = painterResource(R.drawable.placeholder),
                     avaliacao = 5.0F,
-                    titulo = "Teste"
+                    titulo = "Teste",
+                    destinoClique = "pesquisa"
                 ),
                 CardItem(
                     imagem = painterResource(R.drawable.placeholder),
                     avaliacao = 5.0F,
-                    titulo = "Teste"
+                    titulo = "Teste",
+                    destinoClique = "pesquisa"
                 )
             )
 
@@ -58,7 +61,7 @@ fun EventosScreen(tituloSecao: String) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 listaEventos.forEach { card ->
-                    CardComponent(card)
+                    CardComponent(card, navController)
                 }
             }
 

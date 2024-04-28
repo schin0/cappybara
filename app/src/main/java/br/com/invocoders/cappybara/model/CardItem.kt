@@ -5,5 +5,6 @@ import androidx.compose.ui.graphics.painter.Painter
 data class CardItem(
     val imagem: Painter,
     val titulo: String,
-    val avaliacao: Float
+    val avaliacao: Float,
+    val destinoClique: String
 )

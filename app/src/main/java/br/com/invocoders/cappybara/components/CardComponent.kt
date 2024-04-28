@@ -2,6 +2,7 @@ package br.com.invocoders.cappybara.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,16 +21,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.model.CardItem
 
 @Composable
-fun CardComponent(cardItem: CardItem) {
+fun CardComponent(cardItem: CardItem, navController: NavController) {
     Card(
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(bottom = 32.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                navController.navigate(cardItem.destinoClique)
+            },
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
         Column(
