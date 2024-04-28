@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.model.CardItem
-import br.com.invocoders.cappybara.services.obterEvento
+import br.com.invocoders.cappybara.services.abrirEvento
 
 @Composable
 fun CardComponent(cardItem: CardItem, navController: NavController) {
@@ -34,7 +34,7 @@ fun CardComponent(cardItem: CardItem, navController: NavController) {
             .padding(bottom = 32.dp)
             .fillMaxWidth()
             .clickable {
-                obterEvento(navController, cardItem.destinoClique)
+                abrirEvento(navController, cardItem.destinoClique)
             },
         elevation = CardDefaults.cardElevation(8.dp)
     ) {
