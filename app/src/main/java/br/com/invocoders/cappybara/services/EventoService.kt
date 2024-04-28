@@ -36,5 +36,5 @@ fun abrirEvento(navController: NavController, destinoClique: String) {
 }
 
 fun obterEventoPorId(eventoId: Int): CardItem? {
-    return listarEventos().find { it.eventoId == eventoId };
+    return listarEventos().find { it.eventoId == eventoId }
 }
