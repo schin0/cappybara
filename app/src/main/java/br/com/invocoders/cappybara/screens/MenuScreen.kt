@@ -24,7 +24,7 @@ fun MenuScreen(navController: NavController, itemSelecionado: String) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.BottomCenter
+        contentAlignment = Alignment.BottomCenter,
     ) {
         Row(
             modifier = Modifier
