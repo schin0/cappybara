@@ -37,7 +37,7 @@ fun EventosScreen(navController: NavController, tituloSecao: String) {
         Spacer(modifier = Modifier.height(32.dp))
         
         Row {
-            val listaEventos = listarEventos();
+            val listaEventos = listarEventos()
 
             Column (
                 modifier = Modifier

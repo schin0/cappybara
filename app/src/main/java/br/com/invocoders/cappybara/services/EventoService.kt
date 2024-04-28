@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.model.CardItem
 
-public fun listarEventos(): List<CardItem> {
+fun listarEventos(): List<CardItem> {
     return listOf(
         CardItem(
             imagemId = R.drawable.exposicao_chaves,
@@ -27,6 +27,6 @@ public fun listarEventos(): List<CardItem> {
     )
 }
 
-public fun obterEvento(navController: NavController, destinoClique: String) {
-    navController.navigate(destinoClique);
+fun obterEvento(navController: NavController, destinoClique: String) {
+    navController.navigate(destinoClique)
 }
