@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -24,7 +23,6 @@ import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.BotaoComponente
 import br.com.invocoders.cappybara.model.MenuItem
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PesquisaScreen(navController: NavController) {
     Column(
@@ -64,6 +62,10 @@ fun PesquisaScreen(navController: NavController) {
                 navController = navController
             )
         }
+
+        CategoriasScreen()
+
+        IntervaloPreco()
     }
 
     MenuScreen(navController, "pesquisa")
