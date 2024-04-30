@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -50,8 +51,8 @@ fun PesquisaScreen(navController: NavController) {
                 modifier = Modifier
                     .size(230.dp, 40.dp)
                     .padding(0.dp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    Color.Black,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = Color.Black,
                     disabledTextColor = Color.Black,
                     disabledBorderColor = Color.Black,
                     disabledLabelColor = Color.Black,
