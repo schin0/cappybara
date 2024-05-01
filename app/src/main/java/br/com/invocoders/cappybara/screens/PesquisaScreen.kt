@@ -70,6 +70,8 @@ fun PesquisaScreen(navController: NavController) {
 
         CategoriasScreen()
 
+        DataScreen()
+
         IntervaloPreco()
         
         Spacer(modifier = Modifier.height(16.dp))
