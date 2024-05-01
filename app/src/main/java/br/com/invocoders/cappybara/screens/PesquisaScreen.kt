@@ -57,7 +57,12 @@ fun PesquisaScreen(navController: NavController) {
             )
 
             BotaoComponente(
-                item = MenuItem("pesquisa", R.drawable.baseline_search_24, R.drawable.baseline_search_24_white, "pesquisa"),
+                item = MenuItem(
+                    "pesquisa",
+                    R.drawable.baseline_search_24,
+                    R.drawable.baseline_search_24_white,
+                    "pesquisa"
+                ),
                 selecionado = true,
                 navController = navController
             )
@@ -66,6 +71,10 @@ fun PesquisaScreen(navController: NavController) {
         CategoriasScreen()
 
         IntervaloPreco()
+        
+        Spacer(modifier = Modifier.height(16.dp))
+
+        EventosBombasticosScreen(navController)
     }
 
     MenuScreen(navController, "pesquisa")
