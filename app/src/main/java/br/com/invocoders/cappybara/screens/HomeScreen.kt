@@ -23,7 +23,6 @@ fun HomeScreen(navController: NavController) {
             .fillMaxSize()
             .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 64.dp)
             .verticalScroll(scrollState)
-
     ) {
         Spacer(modifier = Modifier.height(32.dp))
 

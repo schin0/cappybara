@@ -2,7 +2,9 @@ package br.com.invocoders.cappybara.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,7 +12,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -31,12 +35,15 @@ import br.com.invocoders.cappybara.services.obterEventoPorId
 
 @Composable
 fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
+    val scrollState = rememberScrollState(0)
+
     val evento = obterEventoPorId(eventoId)
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 32.dp, vertical = 16.dp)
+            .padding(start = 32.dp, end = 32.dp, top = 16.dp, bottom = 100.dp)
+            .verticalScroll(scrollState)
     ) {
         Spacer(modifier = Modifier.height(32.dp))
 
@@ -63,54 +70,63 @@ fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        if (evento is Evento) {
-            Image(
-                painter = painterResource(id = evento.imagemIds[0]),
-                contentDescription = evento.titulo
-            )
+        Column {
+            if (evento is Evento) {
+                Image(
+                    painter = painterResource(id = evento.imagemIds[0]),
+                    contentDescription = evento.titulo
+                )
 
-            Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
-            Text(
-                text = evento.titulo,
-                color = Color.Black,
-                fontWeight = FontWeight.Bold
-            )
+                Text(
+                    text = evento.titulo,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            Text(
-                text = evento.descricao,
-                color = Color.Black
-            )
+                Text(
+                    text = evento.descricao + evento.descricao + evento.descricao + evento.descricao + evento.descricao,
+                    color = Color.Black
+                )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(16.dp))
 
-            MapScreen()
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Button(
-                    onClick = { },
-                    modifier = Modifier.clip(RoundedCornerShape(15.dp)),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.Black,
-                        contentColor = Color.White
-                    )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(300.dp)
+                        .padding(horizontal = 32.dp)
                 ) {
-                    Text(text = "COMO CHEGAR")
+                    MapaScreen(evento)
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Button(
+                        onClick = { },
+                        modifier = Modifier.clip(RoundedCornerShape(15.dp)),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color.Black,
+                            contentColor = Color.White
+                        )
+                    ) {
+                        Text(text = "COMO CHEGAR")
+                    }
+                }
+            } else {
+                Text(
+                    text = "Não foi possível encontrar o evento. Busque novamente.",
+                    color = Color.Black
+                )
             }
-        } else {
-            Text(
-                text = "Não foi possível encontrar o evento. Busque novamente.",
-                color = Color.Black
-            )
         }
     }
 

@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.model.CardItem
 import br.com.invocoders.cappybara.model.Evento
+import com.google.android.gms.maps.model.LatLng
 
 fun listarCardsEventos(): List<CardItem> {
     return listOf(
@@ -49,28 +50,32 @@ fun listarEventos(): List<Evento> {
             listOf(R.drawable.user_conf_manage_engine),
             "UserConf - Manage Engine",
             "Descrição teste",
-            4.9F
+            4.9F,
+            LatLng(-23.542582436865693, -46.57684393236166)
         ),
         Evento(
             2,
             listOf(R.drawable.next2023),
             "Next - FIAP - 2024",
             "Descrição teste",
-            4.8F
+            4.8F,
+            LatLng(-23.53997745694232, -46.73428043295)
         ),
         Evento(
             3,
             listOf(R.drawable.exposicao_chaves),
             "Exposição Vila do Chaves",
             "Descrição teste",
-            4.5F
+            4.5F,
+            LatLng(-23.51296927426321, -46.69478687364815)
         ),
         Evento(
             4,
             listOf(R.drawable.braziljs),
             "Brazil JS - Conf 2024",
             "Descrição teste",
-            4.3F
+            4.3F,
+            LatLng(-30.035453769869775, -51.2143120441744)
         ),
     )
 }
