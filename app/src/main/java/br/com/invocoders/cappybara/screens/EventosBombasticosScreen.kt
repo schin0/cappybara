@@ -24,6 +24,7 @@ import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.BotaoComponente
 import br.com.invocoders.cappybara.model.MenuItem
 
+// TODO: Criar componente para os eventos, e chama-lo com foreach
 @Composable
 fun EventosBombasticosScreen(navController: NavController) {
     Column(
@@ -136,6 +137,50 @@ fun EventosBombasticosScreen(navController: NavController) {
                         Image(
                             painter = painterResource(id = R.drawable.baseline_favorite_24),
                             contentDescription = "Logo de estrela",
+                            Modifier
+                                .padding(15.dp)
+                        )
+                    }
+                }
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 0.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = colorResource(id = R.color.cinza_claro),
+                        contentColor = Color.Black
+                    ),
+                    shape = RoundedCornerShape(12.dp)
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 5.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        BotaoComponente(
+                            item = MenuItem(
+                                "pesquisa",
+                                R.drawable.baseline_wheelchair_pickup_24,
+                                R.drawable.baseline_wheelchair_pickup_24,
+                                "eventos",
+                                habilitado = false
+                            ),
+                            selecionado = true,
+                            navController = navController
+                        )
+
+                        Text(text = "Eventos acessíveis", color = Color.Black)
+
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_favorite_24),
+                            contentDescription = "Logo de cadeira de rodas",
                             Modifier
                                 .padding(15.dp)
                         )

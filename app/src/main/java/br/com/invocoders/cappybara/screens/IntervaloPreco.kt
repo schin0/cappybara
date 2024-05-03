@@ -34,12 +34,12 @@ fun IntervaloPreco() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Faixa de preço",
+                text = "Preço",
                 color = Color.Black
             )
 
             Text(
-                text = "R$ ${valorLimiteDesejado.toString().substringBefore(".")}",
+                text = if (valorLimiteDesejado != 0f) "R$ ${valorLimiteDesejado.toString().substringBefore(".")}" else "Rolês na faixa",
                 color = Color.Black
             )
         }
