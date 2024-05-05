@@ -45,8 +45,10 @@ class MainActivity : ComponentActivity() {
                             PesquisaScreen(navController)
                         }
 
-                        composable("detalhes-evento") {
-                            DetalhesEventoScreen(navController)
+                        composable("detalhesEvento/{eventoId}") {
+                            val eventoId = it.arguments?.getString("eventoId")
+                            eventoId?.toInt()
+                                ?.let { it1 -> DetalhesEventoScreen(navController, it1) }
                         }
                     }
                 }

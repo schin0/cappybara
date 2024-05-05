@@ -1,9 +1,11 @@
 package br.com.invocoders.cappybara.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -23,19 +25,22 @@ import br.com.invocoders.cappybara.R
 
 @Composable
 fun DestaquesScreen() {
-    Row (
+    Row(
         modifier = Modifier
-            .padding(16.dp)
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Column {
             Card(
                 modifier = Modifier
-                    .size(150.dp, 150.dp),
+                    .size(130.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = colorResource(id = R.color.cinza_claro),
                     contentColor = Color.Black
                 ),
-                elevation = CardDefaults.cardElevation(4.dp),
+                elevation = CardDefaults.cardElevation(8.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Row(
@@ -54,7 +59,7 @@ fun DestaquesScreen() {
         Column {
             Card(
                 modifier = Modifier
-                    .size(150.dp, 150.dp),
+                    .size(130.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = colorResource(id = R.color.cinza_claro),
                     contentColor = Color.Black

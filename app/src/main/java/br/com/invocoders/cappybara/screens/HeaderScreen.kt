@@ -52,7 +52,7 @@ fun HeaderScreen() {
 
         Image(
             painterResource(id = R.drawable.baseline_settings_24),
-            contentDescription = "Ícone de seta",
+            contentDescription = "Ícone de configurações",
             modifier = Modifier.size(35.dp, 35.dp)
         )
     }
