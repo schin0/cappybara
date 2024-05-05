@@ -1,10 +1,10 @@
 package br.com.invocoders.cappybara.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -31,11 +32,13 @@ import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.BotaoComponente
 import br.com.invocoders.cappybara.model.Evento
 import br.com.invocoders.cappybara.model.MenuItem
+import br.com.invocoders.cappybara.services.mostrarMensagemEmConstrucao
 import br.com.invocoders.cappybara.services.obterEventoPorId
 
 @Composable
 fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
     val scrollState = rememberScrollState(0)
+    val contexto = LocalContext.current
 
     val evento = obterEventoPorId(eventoId)
 
@@ -64,7 +67,11 @@ fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
             Image(
                 painterResource(id = R.drawable.baseline_settings_24),
                 contentDescription = "Ícone de configurações",
-                modifier = Modifier.size(35.dp, 35.dp)
+                modifier = Modifier
+                    .size(35.dp, 35.dp)
+                    .clickable {
+                    mostrarMensagemEmConstrucao(contexto)
+                }
             )
         }
 
@@ -88,11 +95,11 @@ fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = evento.descricao + evento.descricao + evento.descricao + evento.descricao + evento.descricao,
+                    text = evento.descricao,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 Box(
                     modifier = Modifier
@@ -103,7 +110,7 @@ fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
                     MapaScreen(evento)
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -111,7 +118,9 @@ fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Button(
-                        onClick = { },
+                        onClick = {
+                            mostrarMensagemEmConstrucao(contexto)
+                        },
                         modifier = Modifier.clip(RoundedCornerShape(15.dp)),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color.Black,
