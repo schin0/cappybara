@@ -88,11 +88,11 @@ fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = evento.descricao + evento.descricao + evento.descricao + evento.descricao + evento.descricao,
+                    text = evento.descricao,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 Box(
                     modifier = Modifier
@@ -103,7 +103,7 @@ fun DetalhesEventoScreen(navController: NavController, eventoId: Int) {
                     MapaScreen(evento)
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
