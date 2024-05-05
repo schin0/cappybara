@@ -63,7 +63,7 @@ fun EventoSugestao(
                         evento.descricaoIcone,
                         habilitado = false
                     ),
-                    selecionado = true,
+                    selecionado = false,
                     navController = navController
                 )
 

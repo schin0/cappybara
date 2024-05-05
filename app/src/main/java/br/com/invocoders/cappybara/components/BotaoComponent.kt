@@ -26,11 +26,10 @@ fun BotaoComponente(item: MenuItem, selecionado: Boolean, navController: NavCont
                 navController.navigate(item.nome)
         },
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (selecionado) Color.Black else Color.White
+            containerColor = if (selecionado || !item.acaoDisponivel) Color.Black else Color.White
         ),
         shape = RoundedCornerShape(10.dp),
-        border = BorderStroke(1.dp, Color.Black),
-        enabled = item.habilitado
+        border = BorderStroke(1.dp, Color.Black)
     ) {
         Image(
             painter = painterResource(id = if (selecionado) item.iconeIdSelecionado else item.iconeId),
