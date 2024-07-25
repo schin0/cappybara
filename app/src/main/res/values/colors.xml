@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="cinza_claro">#FFECF0F3</color>
-    <color name="laranja">#FFFF8C00</color>
+    <color name="azul">#FF4A43EC</color>
     <color name="branco">#FFFFFFFF</color>
     <color name="cinza">#FFC2CFD6</color>
+    <color name="salmao">#FFEE544A</color>
 </resources>

@@ -14,9 +14,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.invocoders.cappybara.screens.DetalhesEventoScreen
-import br.com.invocoders.cappybara.screens.HomeScreen
-import br.com.invocoders.cappybara.screens.PesquisaScreen
+import br.com.invocoders.cappybara.screens.HomeScreenNovo
+import br.com.invocoders.cappybara.screens.PesquisaScreenNovo
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
+
 // TODO: Alterar fonte global
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,11 +39,11 @@ class MainActivity : ComponentActivity() {
                             .background(colorResource(id = R.color.cinza_claro))
                     ) {
                         composable("home") {
-                            HomeScreen(navController)
+                            HomeScreenNovo(navController)
                         }
 
                         composable("pesquisa") {
-                            PesquisaScreen(navController)
+                            PesquisaScreenNovo(navController)
                         }
 
                         composable("detalhesEvento/{eventoId}") {
