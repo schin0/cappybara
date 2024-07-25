@@ -35,7 +35,8 @@ fun HomeScreen(navController: NavController) {
         EventosScreen(navController, "Melhores avaliações")
     }
 
-    MenuScreen(navController, "home")
+    //MenuScreen(navController, "home")
+    MenuScreenNovo(navController, "home")
 }
 
 @Preview(showBackground = true, showSystemUi = true)
