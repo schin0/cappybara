@@ -4,5 +4,6 @@
     <color name="azul">#FF4A43EC</color>
     <color name="branco">#FFFFFFFF</color>
     <color name="cinza">#FFC2CFD6</color>
+    <color name="cinza_escuro">#B2FFFFFF</color>
     <color name="salmao">#FFEE544A</color>
 </resources>
