@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -68,42 +70,56 @@ fun MenuScreenNovo(navController: NavController, itemSelecionado: String) {
                     .zIndex(0f),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                val botoes = listOf(
+                val botoesColuna1 = listOf(
                     MenuItem(
                         "home",
                         R.drawable.baseline_explore_24,
-                        R.drawable.baseline_explore_24_laranja,
+                        R.drawable.baseline_explore_24_azul,
                         "Explorar"
                     ),
                     MenuItem(
                         "pesquisa",
                         R.drawable.baseline_calendar_month_24,
-                        R.drawable.baseline_calendar_month_24_laranja,
+                        R.drawable.baseline_calendar_month_24_azul,
                         "Eventos"
-                    ),
-                    MenuItem(
-                        "buscar",
-                        R.drawable.baseline_location_on_24,
-                        R.drawable.baseline_location_on_24_laranja,
-                        "Mapa",
-                        habilitado = true
-                    ),
-                    MenuItem(
-                        "pesquisa",
-                        R.drawable.baseline_person_24,
-                        R.drawable.baseline_person_24_laranja,
-                        "Perfil",
-                        habilitado = false
                     )
                 )
 
-                botoes.forEach { item ->
+                botoesColuna1.forEach { item ->
                     Box(
                         modifier = Modifier.weight(1f)
                     ) {
                         BotaoMenuComponent(item, item.nome == itemSelecionado, navController)
                     }
                 }
+                
+                Spacer(modifier = Modifier.width(20.dp))
+
+                val botoesColuna2 = listOf(
+                    MenuItem(
+                        "pesquisa",
+                        R.drawable.baseline_location_on_24,
+                        R.drawable.baseline_location_on_24_azul,
+                        "Mapa",
+                        habilitado = false
+                    ),
+                    MenuItem(
+                        "pesquisa",
+                        R.drawable.baseline_person_24,
+                        R.drawable.baseline_person_24_azul,
+                        "Perfil",
+                        habilitado = false
+                    )
+                )
+
+                botoesColuna2.forEach { item ->
+                    Box(
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        BotaoMenuComponent(item, item.nome == itemSelecionado, navController)
+                    }
+                }
+
             }
         }
     }

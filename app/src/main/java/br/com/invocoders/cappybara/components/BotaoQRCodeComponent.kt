@@ -42,7 +42,10 @@ fun BotaoQRCodeComponent(item: MenuItem, navController: NavController) {
                     .shadow(8.dp, CircleShape, ambientColor = Color.Black)
             ),
         contentPadding = PaddingValues(0.dp),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor =  Color.White, containerColor = colorResource(id = R.color.laranja))
+        colors = ButtonDefaults.outlinedButtonColors(
+            contentColor = Color.White,
+            containerColor = colorResource(id = R.color.salmao)
+        )
     ) {
         Icon(
             painter = painterResource(id = item.iconeId),

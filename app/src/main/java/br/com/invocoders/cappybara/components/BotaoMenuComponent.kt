@@ -3,8 +3,8 @@ package br.com.invocoders.cappybara.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -47,11 +47,12 @@ fun BotaoMenuComponent(item: MenuItem, selecionado: Boolean, navController: NavC
         ),
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
+            .fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.padding(0.dp),
+            modifier = Modifier
+                .padding(0.dp)
+                .fillMaxSize(),
             Arrangement.Center,
             Alignment.CenterHorizontally
         ) {
@@ -66,9 +67,10 @@ fun BotaoMenuComponent(item: MenuItem, selecionado: Boolean, navController: NavC
                     fontSize = 12.sp,
                     fontFamily = andikaNewBasicFont,
                     fontWeight = FontWeight(700),
-                    color = colorResource(if (selecionado) R.color.laranja else R.color.cinza),
-                    textAlign = TextAlign.Center,
-                )
+                    color = colorResource(if (selecionado) R.color.azul else R.color.cinza),
+                    textAlign = TextAlign.Center
+                ),
+                modifier = Modifier.fillMaxWidth()
             )
         }
     }
