@@ -82,11 +82,11 @@ fun MenuScreenNovo(navController: NavController, itemSelecionado: String) {
                         "Eventos"
                     ),
                     MenuItem(
-                        "pesquisa",
+                        "buscar",
                         R.drawable.baseline_location_on_24,
                         R.drawable.baseline_location_on_24_laranja,
                         "Mapa",
-                        habilitado = false
+                        habilitado = true
                     ),
                     MenuItem(
                         "pesquisa",
