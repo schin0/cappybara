@@ -1,7 +1,9 @@
 package br.com.invocoders.cappybara.components
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +16,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
@@ -25,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -32,10 +34,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import br.com.invocoders.cappybara.R
 
 @Composable
-fun CardEventoComponent() {
+fun CardEventoComponent(imagemId: Int) {
     val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
 
     Card(
@@ -65,70 +68,80 @@ fun CardEventoComponent() {
                 .width(237.dp)
                 .height(120.dp),
             colors = CardColors(
-                containerColor = colorResource(id = R.color.azul),
+                containerColor = Color.Transparent,
                 contentColor = Color.White,
                 disabledContentColor = Color(0xFFFFFFFF),
                 disabledContainerColor = Color(0xFFFFFFFF)
             )
         ) {
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Top,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth()
-            ) {
-                Card(
+            Box {
+                Image(
+                    painterResource(id = imagemId),
+                    contentDescription = "Evento",
                     modifier = Modifier
-                        .width(45.dp)
-                        .height(45.dp),
-                    colors = CardColors(
-                        containerColor = colorResource(id = R.color.cinza_escuro),
-                        contentColor = Color.White,
-                        disabledContentColor = Color(0xFFFFFFFF),
-                        disabledContainerColor = Color(0xFFFFFFFF)
-                    ),
-                    shape = RoundedCornerShape(size = 7.dp)
-                ) {
-                    Text(
-                        text = "12\nJUL",
-                        style = TextStyle(
-                            fontSize = 18.sp,
-                            lineHeight = 18.sp,
-                            fontFamily = andikaNewBasicFont,
-                            fontWeight = FontWeight(700),
-                            color = Color(0xFFE7215F),
-                            textAlign = TextAlign.Center,
-                        ),
-                        modifier = Modifier.fillMaxSize()
-                    )
-                }
+                        .fillMaxSize()
+                        .zIndex(-1f)
+                )
 
-                Card(
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Top,
                     modifier = Modifier
-                        .width(30.dp)
-                        .height(30.dp),
-                    colors = CardColors(
-                        containerColor = colorResource(id = R.color.cinza_escuro),
-                        contentColor = Color.White,
-                        disabledContentColor = Color(0xFFFFFFFF),
-                        disabledContainerColor = Color(0xFFFFFFFF)
-                    ),
-                    shape = RoundedCornerShape(size = 7.dp)
+                        .padding(8.dp)
+                        .fillMaxWidth()
+                        .zIndex(1f)
                 ) {
-                    Icon(
-                        Icons.Default.ThumbUp,
-                        contentDescription = "Salvar",
-                        tint = colorResource(
-                            id = R.color.salmao
-                        ),
+                    Card(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(5.dp)
-                    )
+                            .width(45.dp)
+                            .height(45.dp),
+                        colors = CardColors(
+                            containerColor = colorResource(id = R.color.cinza_escuro),
+                            contentColor = Color.White,
+                            disabledContentColor = Color(0xFFFFFFFF),
+                            disabledContainerColor = Color(0xFFFFFFFF)
+                        ),
+                        shape = RoundedCornerShape(size = 7.dp)
+                    ) {
+                        Text(
+                            text = "12\nJUL",
+                            style = TextStyle(
+                                fontSize = 18.sp,
+                                lineHeight = 18.sp,
+                                fontFamily = andikaNewBasicFont,
+                                fontWeight = FontWeight(700),
+                                color = Color(0xFFE7215F),
+                                textAlign = TextAlign.Center,
+                            ),
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    }
+
+                    Card(
+                        modifier = Modifier
+                            .width(30.dp)
+                            .height(30.dp),
+                        colors = CardColors(
+                            containerColor = colorResource(id = R.color.cinza_escuro),
+                            contentColor = Color.White,
+                            disabledContentColor = Color(0xFFFFFFFF),
+                            disabledContainerColor = Color(0xFFFFFFFF)
+                        ),
+                        shape = RoundedCornerShape(size = 7.dp)
+                    ) {
+                        Icon(
+                            painterResource(id = R.drawable.baseline_bookmark_24),
+                            contentDescription = "Salvar",
+                            tint = colorResource(
+                                id = R.color.salmao
+                            ),
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(5.dp)
+                        )
+                    }
                 }
             }
-
         }
 
         Text(

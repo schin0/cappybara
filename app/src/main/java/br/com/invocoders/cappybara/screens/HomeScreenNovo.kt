@@ -79,12 +79,11 @@ fun HomeScreenNovo(navController: NavController) {
                 .fillMaxWidth()
                 .horizontalScroll(scrollStateEventos),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically,
-
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            CardEventoComponent()
-            CardEventoComponent()
-            CardEventoComponent()
+            CardEventoComponent(R.drawable.exposicao_chaves)
+            CardEventoComponent(R.drawable.next2023)
+            CardEventoComponent(R.drawable.braziljs)
         }
     }
 
