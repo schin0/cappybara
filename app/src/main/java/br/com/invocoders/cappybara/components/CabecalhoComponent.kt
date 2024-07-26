@@ -6,9 +6,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,7 +36,7 @@ fun CabecalhoComponent() {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(65.dp),
+            .height(150.dp),
         colors = CardColors(
             containerColor = colorResource(id = R.color.azul),
             contentColor = Color.White,
@@ -45,7 +50,7 @@ fun CabecalhoComponent() {
             bottomStart = 33.dp
         )
     ) {
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(32.dp))
 
         Column(
             modifier = Modifier
@@ -58,7 +63,7 @@ fun CabecalhoComponent() {
                 horizontalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Localização Atual",
+                    text = "Localização",
                     style = TextStyle(
                         fontSize = 12.sp,
                         fontFamily = andikaNewBasicFont,
@@ -71,20 +76,13 @@ fun CabecalhoComponent() {
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .offset(y = -(20).dp)
+                    .padding(end = 40.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.End
             ) {
-                Text(
-                    text = "São Paulo, SP",
-                    style = TextStyle(
-                        fontSize = 13.sp,
-                        fontFamily = andikaNewBasicFont,
-                        fontWeight = FontWeight(700),
-                        color = Color(0xFFF4F4FE),
-                        textAlign = TextAlign.Center,
-                    )
-                )
+                Icon(Icons.Default.Notifications, contentDescription = "Notificações")
             }
         }
     }

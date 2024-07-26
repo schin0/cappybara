@@ -27,10 +27,12 @@ import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.CabecalhoComponent
 import br.com.invocoders.cappybara.components.CardEventoComponent
+import br.com.invocoders.cappybara.components.EventosIniciaisComponent
 
 @Composable
 fun HomeScreenNovo(navController: NavController) {
     val scrollState = rememberScrollState(0)
+    val scrollStateEventosIniciais = rememberScrollState(0)
     val scrollStateEventos = rememberScrollState(0)
     val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
 
@@ -42,6 +44,20 @@ fun HomeScreenNovo(navController: NavController) {
             .padding(start = 16.dp, top = 85.dp, end = 16.dp, bottom = 64.dp)
             .verticalScroll(scrollState)
     ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(scrollStateEventosIniciais),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Bottom
+        ) {
+            EventosIniciaisComponent("Atrações")
+            EventosIniciaisComponent("Perto de você")
+            EventosIniciaisComponent("Teste")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+        
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
