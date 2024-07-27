@@ -32,7 +32,7 @@ fun HomeScreen(navController: NavController) {
 
         DestaquesScreen()
 
-        EventosScreen(navController, "Melhores avaliações")
+//        EventosScreen(navController, "Melhores avaliações")
     }
 
     //MenuScreen(navController, "home")
