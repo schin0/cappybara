@@ -16,8 +16,9 @@ import androidx.navigation.compose.rememberNavController
 import br.com.invocoders.cappybara.screens.DetalhesEventoScreen
 import br.com.invocoders.cappybara.screens.HomeScreen
 import br.com.invocoders.cappybara.screens.PesquisaScreen
+import br.com.invocoders.cappybara.screens.telabuscar.BuscaScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
-
+// TODO: Alterar fonte global
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +44,9 @@ class MainActivity : ComponentActivity() {
 
                         composable("pesquisa") {
                             PesquisaScreen(navController)
+                        }
+                        composable("buscar") {
+                            BuscaScreen(navController)
                         }
 
                         composable("detalhesEvento/{eventoId}") {

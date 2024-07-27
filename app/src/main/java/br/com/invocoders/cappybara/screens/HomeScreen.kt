@@ -28,14 +28,15 @@ fun HomeScreen(navController: NavController) {
 
         HeaderScreen()
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         DestaquesScreen()
 
         EventosScreen(navController, "Melhores avaliações")
     }
 
-    MenuScreen(navController, "home")
+    //MenuScreen(navController, "home")
+    MenuScreenNovo(navController, "home")
 }
 
 @Preview(showBackground = true, showSystemUi = true)
