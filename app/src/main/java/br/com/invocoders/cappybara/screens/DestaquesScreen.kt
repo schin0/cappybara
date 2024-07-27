@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -43,7 +44,8 @@ fun DestaquesScreen() {
         Column {
             Card(
                 modifier = Modifier
-                    .size(130.dp),
+                    .width(150.dp)
+                    .height(120.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = colorResource(id = R.color.cinza_claro),
                     contentColor = Color.Black
@@ -67,7 +69,8 @@ fun DestaquesScreen() {
         Column {
             Card(
                 modifier = Modifier
-                    .size(130.dp),
+                    .width(150.dp)
+                    .height(120.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = colorResource(id = R.color.cinza_claro),
                     contentColor = Color.Black
