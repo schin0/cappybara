@@ -1,43 +1,48 @@
 package br.com.invocoders.cappybara.services
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.model.CardItem
+import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import br.com.invocoders.cappybara.model.Evento
+import br.com.invocoders.cappybara.viewmodel.EventoViewModel
 import com.google.android.gms.maps.model.LatLng
 
-fun listarCardsEventos(): List<CardItem> {
-    return listOf(
-        CardItem(
-            eventoId = 1,
-            imagemId = R.drawable.user_conf_manage_engine,
-            avaliacao = 4.9F,
-            titulo = "UserConf - Manage Engine",
-            destinoClique = "detalhesEvento/1"
-        ),
-        CardItem(
-            eventoId = 2,
-            imagemId = R.drawable.next2023,
-            avaliacao = 4.8F,
-            titulo = "Next - FIAP - 2024",
-            destinoClique = "detalhesEvento/2"
-        ),
-        CardItem(
-            eventoId = 3,
-            imagemId = R.drawable.exposicao_chaves,
-            avaliacao = 4.5F,
-            titulo = "Exposição Vila do Chaves",
-            destinoClique = "detalhesEvento/3"
-        ),
-        CardItem(
-            eventoId = 4,
-            imagemId = R.drawable.braziljs,
-            avaliacao = 4.3F,
-            titulo = "Brazil JS - Conf 2024",
-            destinoClique = "detalhesEvento/4"
-        )
-    )
-}
+//fun listarCardsEventos(): List<CardItem> {
+//    return listOf(
+//        CardItem(
+//            eventoId = 1,
+//            imagemId = R.drawable.user_conf_manage_engine,
+//            avaliacao = 4.9F,
+//            titulo = "UserConf - Manage Engine",
+//            destinoClique = "detalhesEvento/1"
+//        ),
+//        CardItem(
+//            eventoId = 2,
+//            imagemId = R.drawable.next2023,
+//            avaliacao = 4.8F,
+//            titulo = "Next - FIAP - 2024",
+//            destinoClique = "detalhesEvento/2"
+//        ),
+//        CardItem(
+//            eventoId = 3,
+//            imagemId = R.drawable.exposicao_chaves,
+//            avaliacao = 4.5F,
+//            titulo = "Exposição Vila do Chaves",
+//            destinoClique = "detalhesEvento/3"
+//        ),
+//        CardItem(
+//            eventoId = 4,
+//            imagemId = R.drawable.braziljs,
+//            avaliacao = 4.3F,
+//            titulo = "Brazil JS - Conf 2024",
+//            destinoClique = "detalhesEvento/4"
+//        )
+//    )
+//}
 
 fun abrirEvento(navController: NavController, destinoClique: String) {
     navController.navigate(destinoClique)
@@ -82,4 +87,28 @@ fun listarEventos(): List<Evento> {
 
 fun obterEventoPorId(eventoId: Int): Evento? {
     return listarEventos().find { it.id == eventoId }
+}
+
+
+
+
+
+
+
+
+
+
+@Composable
+fun listarEventosDetalhes(eventoViewModel: EventoViewModel = viewModel()): List<EventoDetalhe> {
+    val eventosDetalhes by eventoViewModel.eventosDetalhes
+
+    LaunchedEffect(Unit) {
+        eventoViewModel.listarEventosDetalhes()
+    }
+
+    if (eventosDetalhes.isNotEmpty()) {
+        return eventosDetalhes
+    }
+
+    return emptyList()
 }

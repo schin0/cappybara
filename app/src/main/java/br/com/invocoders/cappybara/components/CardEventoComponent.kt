@@ -1,6 +1,5 @@
 package br.com.invocoders.cappybara.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,10 +20,17 @@ import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -36,9 +42,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import br.com.invocoders.cappybara.R
+import br.com.invocoders.cappybara.data.model.EventoDetalhe
+import coil.compose.AsyncImage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+
 
 @Composable
-fun CardEventoComponent(imagemId: Int) {
+fun CardEventoComponent(evento: EventoDetalhe) {
     val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
 
     Card(
@@ -75,12 +95,13 @@ fun CardEventoComponent(imagemId: Int) {
             )
         ) {
             Box {
-                Image(
-                    painterResource(id = imagemId),
-                    contentDescription = "Evento",
+                AsyncImage(
+                    model = evento.urlImagem.first(),
+                    contentDescription = evento.titulo,
                     modifier = Modifier
                         .fillMaxSize()
-                        .zIndex(-1f)
+                        .zIndex(-1f),
+                    contentScale = ContentScale.Crop
                 )
 
                 Row(
@@ -103,8 +124,18 @@ fun CardEventoComponent(imagemId: Int) {
                         ),
                         shape = RoundedCornerShape(size = 7.dp)
                     ) {
+                        val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+                        val data = LocalDateTime.parse(evento.dataHoraInicio, formatter)
+
+                        val dia = data.dayOfMonth
+                        val mes = data.month.getDisplayName(
+                            java.time.format.TextStyle.SHORT,
+                            Locale.ENGLISH
+                        )
+                            .uppercase(Locale.ROOT)
+
                         Text(
-                            text = "12\nJUL",
+                            text = "${dia}\n${mes}",
                             style = TextStyle(
                                 fontSize = 18.sp,
                                 lineHeight = 18.sp,
@@ -145,7 +176,7 @@ fun CardEventoComponent(imagemId: Int) {
         }
 
         Text(
-            text = "FIAP NEXT 2024",
+            text = evento.titulo,
             style = TextStyle(
                 fontSize = 18.sp,
                 fontFamily = andikaNewBasicFont,
@@ -223,8 +254,17 @@ fun CardEventoComponent(imagemId: Int) {
                 )
             )
 
+            var address by remember { mutableStateOf("Carregando...") }
+            val scope = rememberCoroutineScope()
+
+            LaunchedEffect(Unit) {
+                scope.launch {
+                    address = getAddressFromCoordinates(evento.latitude, evento.longitude, "")
+                }
+            }
+
             Text(
-                text = "Av. Higienópolis, 257 - São P...",
+                text = address,
                 style = TextStyle(
                     fontSize = 13.sp,
                     fontFamily = andikaNewBasicFont,
@@ -232,6 +272,60 @@ fun CardEventoComponent(imagemId: Int) {
                     color = Color(0xFF2B2849),
                 )
             )
+
+
         }
     }
+}
+
+
+object RetrofitClient {
+    private const val BASE_URL = "https://maps.googleapis.com/maps/api/"
+
+    val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+}
+
+interface GoogleMapsService {
+    @GET("geocode/json")
+    suspend fun getAddress(
+        @Query("latlng") latlng: String,
+        @Query("key") apiKey: String
+    ): Response<GeocodingResponse>
+}
+
+data class GeocodingResponse(
+    val results: List<Result>,
+    val status: String
+)
+
+data class Result(
+    val formatted_address: String
+)
+
+val googleMapsService = RetrofitClient.retrofit.create(GoogleMapsService::class.java)
+
+suspend fun getAddressFromCoordinates(latitude: Double, longitude: Double, apiKey: String): String {
+    return withContext(Dispatchers.IO) {
+        val response = googleMapsService.getAddress("$latitude,$longitude", apiKey)
+
+        if (response.isSuccessful) {
+            val address = response.body()?.results?.firstOrNull()?.formatted_address
+
+            val nomeRua = address?.let { extractStreetName(it) }
+
+            nomeRua ?: "Endereço não encontrado"
+        } else {
+            "Erro ao obter endereço"
+        }
+    }
+}
+
+fun extractStreetName(fullAddress: String): String {
+    val parts = fullAddress.split(",")
+    return parts.getOrNull(0)?.trim() ?: "Nome da rua não encontrado"
 }

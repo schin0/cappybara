@@ -26,16 +26,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.CabecalhoComponent
-import br.com.invocoders.cappybara.components.CardEventoComponent
 import br.com.invocoders.cappybara.components.CardEventoProximo
 import br.com.invocoders.cappybara.components.EventosIniciaisComponent
+import br.com.invocoders.cappybara.components.home.ProximosEventosComponent
 
 @Composable
 fun HomeScreenNovo(navController: NavController) {
     val scrollState = rememberScrollState(0)
     val scrollStateEventosIniciais = rememberScrollState(0)
     rememberScrollState(0)
-    val scrollStateEventos = rememberScrollState(0)
     val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
 
     CabecalhoComponent()
@@ -92,17 +91,18 @@ fun HomeScreenNovo(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(scrollStateEventos),
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            CardEventoComponent(R.drawable.exposicao_chaves)
-            CardEventoComponent(R.drawable.next2023)
-            CardEventoComponent(R.drawable.braziljs)
-        }
+        ProximosEventosComponent()
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .horizontalScroll(scrollStateEventos),
+//            horizontalArrangement = Arrangement.Center,
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            CardEventoComponent(R.drawable.exposicao_chaves)
+//            CardEventoComponent(R.drawable.next2023)
+//            CardEventoComponent(R.drawable.braziljs)
+//        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
