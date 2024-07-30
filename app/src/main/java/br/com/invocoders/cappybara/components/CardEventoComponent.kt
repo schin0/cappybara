@@ -34,6 +34,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -59,13 +60,13 @@ import java.util.Locale
 
 @Composable
 fun CardEventoComponent(evento: EventoDetalhe) {
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
         Modifier
             .shadow(
-                elevation = 30.dp,
-                spotColor = Color(0x0F505588),
+                elevation = 20.dp,
+                spotColor = Color.LightGray,
                 ambientColor = Color(0x0F505588)
             )
             .padding(10.dp)
@@ -139,7 +140,7 @@ fun CardEventoComponent(evento: EventoDetalhe) {
                             style = TextStyle(
                                 fontSize = 18.sp,
                                 lineHeight = 18.sp,
-                                fontFamily = andikaNewBasicFont,
+                                fontFamily = roboto,
                                 fontWeight = FontWeight(700),
                                 color = Color(0xFFE7215F),
                                 textAlign = TextAlign.Center,
@@ -179,7 +180,7 @@ fun CardEventoComponent(evento: EventoDetalhe) {
             text = evento.titulo,
             style = TextStyle(
                 fontSize = 18.sp,
-                fontFamily = andikaNewBasicFont,
+                fontFamily = roboto,
                 fontWeight = FontWeight(700),
                 color = Color(0xFF000000),
             ),
@@ -229,7 +230,7 @@ fun CardEventoComponent(evento: EventoDetalhe) {
                     style = TextStyle(
                         fontSize = 12.sp,
                         lineHeight = 19.24.sp,
-                        fontFamily = andikaNewBasicFont,
+                        fontFamily = roboto,
                         fontWeight = FontWeight(700),
                         color = Color(0xFF3F38DD),
                     ),
@@ -267,7 +268,7 @@ fun CardEventoComponent(evento: EventoDetalhe) {
                 text = address,
                 style = TextStyle(
                     fontSize = 13.sp,
-                    fontFamily = andikaNewBasicFont,
+                    fontFamily = roboto,
                     fontWeight = FontWeight(700),
                     color = Color(0xFF2B2849),
                 )

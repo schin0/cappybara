@@ -28,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -37,13 +38,13 @@ import br.com.invocoders.cappybara.R
 
 @Composable
 fun CardEventoProximo() {
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
         modifier = Modifier
             .shadow(
-                elevation = 30.dp,
-                spotColor = Color(0x0F505588),
+                elevation = 20.dp,
+                spotColor = Color.LightGray,
                 ambientColor = Color(0x0F505588)
             )
             .padding(bottom = 10.dp)
@@ -81,7 +82,7 @@ fun CardEventoProximo() {
                     .padding(top = 0.dp, end = 0.dp, start = 8.dp, bottom = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Row (
+                Row(
                     Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -90,7 +91,7 @@ fun CardEventoProximo() {
                         text = "11 JUL - QUI - 15h00",
                         style = TextStyle(
                             fontSize = 12.sp,
-                            fontFamily = andikaNewBasicFont,
+                            fontFamily = roboto,
                             fontWeight = FontWeight(700),
                             color = Color(0xFFEE544A),
                         )
@@ -112,7 +113,7 @@ fun CardEventoProximo() {
                         text = "Bar do Alemão - Samba ao vivo",
                         style = TextStyle(
                             fontSize = 15.sp,
-                            fontFamily = andikaNewBasicFont,
+                            fontFamily = roboto,
                             fontWeight = FontWeight(700),
                             color = Color(0xFF120D26),
                         )
@@ -135,14 +136,13 @@ fun CardEventoProximo() {
                         text = "Av. Juriti, 651 - Moema",
                         style = TextStyle(
                             fontSize = 13.sp,
-                            fontFamily = andikaNewBasicFont,
+                            fontFamily = roboto,
                             fontWeight = FontWeight(700),
                             color = Color(0xFF2B2849),
                         )
                     )
                 }
             }
-
 
         }
     }

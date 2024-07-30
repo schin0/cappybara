@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -31,7 +32,7 @@ import br.com.invocoders.cappybara.R
 
 @Composable
 fun CabecalhoComponent() {
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
         modifier = Modifier
@@ -66,7 +67,7 @@ fun CabecalhoComponent() {
                     text = "Localização",
                     style = TextStyle(
                         fontSize = 12.sp,
-                        fontFamily = andikaNewBasicFont,
+                        fontFamily = roboto,
                         fontWeight = FontWeight(700),
                         color = Color(0xFFFFFFFF),
                         textAlign = TextAlign.Center,

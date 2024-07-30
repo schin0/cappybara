@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -36,7 +37,7 @@ fun HomeScreenNovo(navController: NavController) {
     val scrollState = rememberScrollState(0)
     val scrollStateEventosIniciais = rememberScrollState(0)
     rememberScrollState(0)
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Column(
         modifier = Modifier
@@ -57,9 +58,9 @@ fun HomeScreenNovo(navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom
             ) {
-                EventosIniciaisComponent("Atrações")
-                EventosIniciaisComponent("Perto de você")
-                EventosIniciaisComponent("Teste")
+                EventosIniciaisComponent("Atrações", R.drawable.noite)
+                EventosIniciaisComponent("Perto de você", R.drawable.gastronomia)
+                EventosIniciaisComponent("Novidades", R.drawable.spdois)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -75,7 +76,7 @@ fun HomeScreenNovo(navController: NavController) {
                     style = TextStyle(
                         fontSize = 18.sp,
                         lineHeight = 34.sp,
-                        fontFamily = andikaNewBasicFont,
+                        fontFamily = roboto,
                         fontWeight = FontWeight(700),
                         color = Color(0xFF120D26),
                     )
@@ -86,7 +87,7 @@ fun HomeScreenNovo(navController: NavController) {
                     style = TextStyle(
                         fontSize = 14.sp,
                         lineHeight = 23.sp,
-                        fontFamily = andikaNewBasicFont,
+                        fontFamily = roboto,
                         fontWeight = FontWeight(700),
                         color = Color(0xFF747688),
                         textAlign = TextAlign.Right,
@@ -97,17 +98,6 @@ fun HomeScreenNovo(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             ProximosEventosComponent()
-//        Row(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .horizontalScroll(scrollStateEventos),
-//            horizontalArrangement = Arrangement.Center,
-//            verticalAlignment = Alignment.CenterVertically
-//        ) {
-//            CardEventoComponent(R.drawable.exposicao_chaves)
-//            CardEventoComponent(R.drawable.next2023)
-//            CardEventoComponent(R.drawable.braziljs)
-//        }
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -122,7 +112,7 @@ fun HomeScreenNovo(navController: NavController) {
                     style = TextStyle(
                         fontSize = 18.sp,
                         lineHeight = 34.sp,
-                        fontFamily = andikaNewBasicFont,
+                        fontFamily = roboto,
                         fontWeight = FontWeight(700),
                         color = Color(0xFF120D26),
                     )
@@ -133,7 +123,7 @@ fun HomeScreenNovo(navController: NavController) {
                     style = TextStyle(
                         fontSize = 14.sp,
                         lineHeight = 23.sp,
-                        fontFamily = andikaNewBasicFont,
+                        fontFamily = roboto,
                         fontWeight = FontWeight(700),
                         color = Color(0xFF747688),
                         textAlign = TextAlign.Right,
@@ -152,7 +142,6 @@ fun HomeScreenNovo(navController: NavController) {
                 CardEventoProximo()
                 CardEventoProximo()
             }
-
 
         }
 

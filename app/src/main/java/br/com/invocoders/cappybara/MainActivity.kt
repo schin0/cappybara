@@ -9,7 +9,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,7 +17,7 @@ import br.com.invocoders.cappybara.screens.HomeScreenNovo
 import br.com.invocoders.cappybara.screens.PesquisaScreenNovo
 import br.com.invocoders.cappybara.screens.telabuscar.BuscaScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
-// TODO: Alterar fonte global
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +35,7 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = "home",
                         modifier = Modifier
-                            .background(colorResource(id = R.color.cinza_claro))
+                            .background(Color.White)
                     ) {
                         composable("home") {
                             HomeScreenNovo(navController)

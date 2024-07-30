@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -37,7 +38,7 @@ import br.com.invocoders.cappybara.services.mostrarMensagemEmConstrucao
 @Composable
 fun PesquisaScreenNovo(navController: NavController) {
     val contexto = LocalContext.current
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Column(
         modifier = Modifier
@@ -64,7 +65,7 @@ fun PesquisaScreenNovo(navController: NavController) {
                 text = "Explorar",
                 style = TextStyle(
                     fontSize = 24.sp,
-                    fontFamily = andikaNewBasicFont,
+                    fontFamily = roboto,
                     fontWeight = FontWeight(700),
                     color = Color(0xFF120D26),
                 )
@@ -91,7 +92,7 @@ fun PesquisaScreenNovo(navController: NavController) {
                 text = "Buscar...",
                 style = TextStyle(
                     fontSize = 24.33.sp,
-                    fontFamily = andikaNewBasicFont,
+                    fontFamily = roboto,
                     fontWeight = FontWeight(700),
                     color = Color(0xFF000000).copy(alpha = 0.3f)
                 ),
@@ -121,7 +122,7 @@ fun PesquisaScreenNovo(navController: NavController) {
                         text = "Filtros",
                         style = TextStyle(
                             fontSize = 12.sp,
-                            fontFamily = andikaNewBasicFont,
+                            fontFamily = roboto,
                             fontWeight = FontWeight(700),
                             color = Color(0xFFECEBFC),
                             textAlign = TextAlign.Center,
