@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -37,61 +38,65 @@ fun HomeScreenNovo(navController: NavController) {
     rememberScrollState(0)
     val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
 
-    CabecalhoComponent()
-
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(start = 16.dp, top = 85.dp, end = 16.dp, bottom = 64.dp)
             .verticalScroll(scrollState)
     ) {
-        Row(
+        CabecalhoComponent()
+
+        Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(scrollStateEventosIniciais),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Bottom
+                .fillMaxSize()
+                .padding(start = 16.dp, top = 0.dp, end = 16.dp, bottom = 64.dp)
+                .offset(y = -(65).dp)
         ) {
-            EventosIniciaisComponent("Atrações")
-            EventosIniciaisComponent("Perto de você")
-            EventosIniciaisComponent("Teste")
-        }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(scrollStateEventosIniciais),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom
+            ) {
+                EventosIniciaisComponent("Atrações")
+                EventosIniciaisComponent("Perto de você")
+                EventosIniciaisComponent("Teste")
+            }
 
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Bottom
-        ) {
-            Text(
-                text = "Próximos eventos",
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    lineHeight = 34.sp,
-                    fontFamily = andikaNewBasicFont,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF120D26),
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom
+            ) {
+                Text(
+                    text = "Próximos eventos",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        lineHeight = 34.sp,
+                        fontFamily = andikaNewBasicFont,
+                        fontWeight = FontWeight(700),
+                        color = Color(0xFF120D26),
+                    )
                 )
-            )
 
-            Text(
-                text = "Ver tudo",
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    lineHeight = 23.sp,
-                    fontFamily = andikaNewBasicFont,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF747688),
-                    textAlign = TextAlign.Right,
+                Text(
+                    text = "Ver tudo",
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        lineHeight = 23.sp,
+                        fontFamily = andikaNewBasicFont,
+                        fontWeight = FontWeight(700),
+                        color = Color(0xFF747688),
+                        textAlign = TextAlign.Right,
+                    )
                 )
-            )
-        }
+            }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        ProximosEventosComponent()
+            ProximosEventosComponent()
 //        Row(
 //            modifier = Modifier
 //                .fillMaxWidth()
@@ -104,51 +109,52 @@ fun HomeScreenNovo(navController: NavController) {
 //            CardEventoComponent(R.drawable.braziljs)
 //        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Bottom
-        ) {
-            Text(
-                text = "Perto de mim",
-                style = TextStyle(
-                    fontSize = 18.sp,
-                    lineHeight = 34.sp,
-                    fontFamily = andikaNewBasicFont,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF120D26),
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom
+            ) {
+                Text(
+                    text = "Perto de mim",
+                    style = TextStyle(
+                        fontSize = 18.sp,
+                        lineHeight = 34.sp,
+                        fontFamily = andikaNewBasicFont,
+                        fontWeight = FontWeight(700),
+                        color = Color(0xFF120D26),
+                    )
                 )
-            )
 
-            Text(
-                text = "Ver tudo",
-                style = TextStyle(
-                    fontSize = 14.sp,
-                    lineHeight = 23.sp,
-                    fontFamily = andikaNewBasicFont,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF747688),
-                    textAlign = TextAlign.Right,
+                Text(
+                    text = "Ver tudo",
+                    style = TextStyle(
+                        fontSize = 14.sp,
+                        lineHeight = 23.sp,
+                        fontFamily = andikaNewBasicFont,
+                        fontWeight = FontWeight(700),
+                        color = Color(0xFF747688),
+                        textAlign = TextAlign.Right,
+                    )
                 )
-            )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                CardEventoProximo()
+                CardEventoProximo()
+            }
+
+
         }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Column(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.SpaceBetween
-        ) {
-            CardEventoProximo()
-            CardEventoProximo()
-        }
-
-
 
     }
 

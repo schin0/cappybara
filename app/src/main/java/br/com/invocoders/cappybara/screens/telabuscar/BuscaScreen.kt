@@ -30,16 +30,17 @@ import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.screens.MenuScreenNovo
 
 @Composable
-fun BuscaScreen(navController: NavController){
+fun BuscaScreen(navController: NavController) {
     val scrollState = rememberScrollState(0)
 
-    Column(modifier = Modifier.fillMaxWidth()
-        .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 64.dp)
-        .verticalScroll(scrollState),
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 64.dp)
+            .verticalScroll(scrollState),
+    ) {
 
-        ){
-
-        Row(modifier = Modifier.padding()){
+        Row(modifier = Modifier.padding()) {
             Image(
                 painterResource(id = R.drawable.baseline_arrow_back_24),
                 contentDescription = "Ícone de seta",
@@ -56,15 +57,15 @@ fun BuscaScreen(navController: NavController){
                     fontSize = 24.sp,
                     fontWeight = FontWeight(500),
                     color = Color(0xFF120D26),
-
-                    )
+                )
             )
         }
         Spacer(modifier = Modifier.height(32.dp))
 
-        Row(modifier = Modifier,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+        Row(
+            modifier = Modifier,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Image(
                 painterResource(id = R.drawable.baseline_search_24),
                 contentDescription = "Ícone de seta",
@@ -102,14 +103,15 @@ fun BuscaScreen(navController: NavController){
                 },
 
                 modifier = Modifier
-                .width(90.dp)
-                .height(32.1428.dp)
+                    .width(90.dp)
+                    .height(32.1428.dp)
 
-            ){
+            ) {
                 //Icon(Icons.Default.Edit, contentDescription = "Check Icon", modifier = Modifier.padding(end = 2.dp))
                 Text(
-                    text = "Filtros" ,
-                    style = TextStyle(fontSize = 12.sp,
+                    text = "Filtros",
+                    style = TextStyle(
+                        fontSize = 12.sp,
                         fontWeight = FontWeight(500),
                         color = Color(0xFFECEBFC),
 
