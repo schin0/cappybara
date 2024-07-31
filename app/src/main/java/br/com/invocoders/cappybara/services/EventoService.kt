@@ -6,13 +6,10 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.data.api.GoogleMapsRetrofitFactory
 import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import br.com.invocoders.cappybara.model.Evento
 import br.com.invocoders.cappybara.viewmodel.EventoViewModel
 import com.google.android.gms.maps.model.LatLng
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 //fun listarCardsEventos(): List<CardItem> {
 //    return listOf(
@@ -114,25 +111,4 @@ fun listarEventosDetalhes(eventoViewModel: EventoViewModel = viewModel()): List<
     }
 
     return emptyList()
-}
-
-suspend fun obterEnderecoTexto(latitude: Double, longitude: Double, apiKey: String): String {
-    return withContext(Dispatchers.IO) {
-        val response = GoogleMapsRetrofitFactory().googleMapsRepository().obterEndereco("$latitude,$longitude", apiKey)
-
-        if (response.isSuccessful) {
-            val endereco = response.body()?.retorno?.firstOrNull()?.endereco
-
-            val nomeRua = endereco?.let { obterNomeRua(it) }
-
-            nomeRua ?: "Endereço não encontrado"
-        } else {
-            "Erro ao obter endereço"
-        }
-    }
-}
-
-fun obterNomeRua(endereco: String) : String {
-    val partes = endereco.split(",")
-    return partes.getOrNull(0)?.trim() ?: "Nome da rua não encontrado"
 }
