@@ -44,15 +44,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.data.model.EventoDetalhe
+import br.com.invocoders.cappybara.services.obterEnderecoTexto
 import coil.compose.AsyncImage
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -260,7 +254,7 @@ fun CardEventoComponent(evento: EventoDetalhe) {
 
             LaunchedEffect(Unit) {
                 scope.launch {
-                    address = getAddressFromCoordinates(evento.latitude, evento.longitude, "")
+                    address = obterEnderecoTexto(evento.latitude, evento.longitude, "")
                 }
             }
 
@@ -277,56 +271,4 @@ fun CardEventoComponent(evento: EventoDetalhe) {
 
         }
     }
-}
-
-
-object RetrofitClient {
-    private const val BASE_URL = "https://maps.googleapis.com/maps/api/"
-
-    val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-}
-
-interface GoogleMapsService {
-    @GET("geocode/json")
-    suspend fun getAddress(
-        @Query("latlng") latlng: String,
-        @Query("key") apiKey: String
-    ): Response<GeocodingResponse>
-}
-
-data class GeocodingResponse(
-    val results: List<Result>,
-    val status: String
-)
-
-data class Result(
-    val formatted_address: String
-)
-
-val googleMapsService = RetrofitClient.retrofit.create(GoogleMapsService::class.java)
-
-suspend fun getAddressFromCoordinates(latitude: Double, longitude: Double, apiKey: String): String {
-    return withContext(Dispatchers.IO) {
-        val response = googleMapsService.getAddress("$latitude,$longitude", apiKey)
-
-        if (response.isSuccessful) {
-            val address = response.body()?.results?.firstOrNull()?.formatted_address
-
-            val nomeRua = address?.let { extractStreetName(it) }
-
-            nomeRua ?: "Endereço não encontrado"
-        } else {
-            "Erro ao obter endereço"
-        }
-    }
-}
-
-fun extractStreetName(fullAddress: String): String {
-    val parts = fullAddress.split(",")
-    return parts.getOrNull(0)?.trim() ?: "Nome da rua não encontrado"
 }
