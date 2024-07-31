@@ -1,6 +1,5 @@
-package br.com.invocoders.cappybara.components
+package br.com.invocoders.cappybara.components.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +18,12 @@ import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,9 +40,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.invocoders.cappybara.R
+import br.com.invocoders.cappybara.data.model.EventoDetalhe
+import br.com.invocoders.cappybara.services.obterEnderecoTexto
+import coil.compose.AsyncImage
+import kotlinx.coroutines.launch
 
 @Composable
-fun CardEventoProximo() {
+fun CardEventoPertoComponent(evento: EventoDetalhe) {
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
@@ -68,11 +77,12 @@ fun CardEventoProximo() {
                     .height(96.dp)
                     .clip(RoundedCornerShape(18.dp))
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.next2023),
-                    contentDescription = "Evento",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
+                AsyncImage(
+                    model = evento.urlImagem.firstOrNull(),
+                    contentDescription = evento.titulo,
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentScale = ContentScale.Crop
                 )
             }
 
@@ -110,7 +120,7 @@ fun CardEventoProximo() {
 
                 Row {
                     Text(
-                        text = "Bar do Alemão - Samba ao vivo",
+                        text = evento.titulo,
                         style = TextStyle(
                             fontSize = 15.sp,
                             fontFamily = roboto,
@@ -132,8 +142,17 @@ fun CardEventoProximo() {
                         )
                     )
 
+                    var endereco by remember { mutableStateOf("Carregando...") }
+                    val scope = rememberCoroutineScope()
+
+                    LaunchedEffect(Unit) {
+                        scope.launch {
+                            endereco = obterEnderecoTexto(evento.latitude, evento.longitude)
+                        }
+                    }
+
                     Text(
-                        text = "Av. Juriti, 651 - Moema",
+                        text = endereco,
                         style = TextStyle(
                             fontSize = 13.sp,
                             fontFamily = roboto,

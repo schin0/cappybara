@@ -16,9 +16,16 @@ import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.DeviceFontFamilyName
@@ -29,6 +36,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.invocoders.cappybara.R
+import br.com.invocoders.cappybara.services.LocalizacaoService
+import br.com.invocoders.cappybara.services.obterEnderecoTexto
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @Composable
 fun CabecalhoComponent() {
@@ -63,8 +75,24 @@ fun CabecalhoComponent() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
+                var endereco by remember { mutableStateOf("Carregando...") }
+                val scope = rememberCoroutineScope()
+                val context = LocalContext.current
+
+                LaunchedEffect(Unit) {
+                    val localizacaoAtual = withContext(Dispatchers.Main) {
+                        LocalizacaoService(context).obterLocalizacaoAtual(context)
+                    }
+
+                    localizacaoAtual?.let {
+                        scope.launch {
+                            endereco = obterEnderecoTexto(it.latitude, it.longitude)
+                        }
+                    }
+                }
+
                 Text(
-                    text = "Localização",
+                    text = endereco,
                     style = TextStyle(
                         fontSize = 12.sp,
                         fontFamily = roboto,

@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.components.CabecalhoComponent
-import br.com.invocoders.cappybara.components.CardEventoProximo
 import br.com.invocoders.cappybara.components.EventosIniciaisComponent
+import br.com.invocoders.cappybara.components.EventosPertoDeMimComponent
 import br.com.invocoders.cappybara.components.home.ProximosEventosComponent
 
 @Composable
@@ -133,15 +133,7 @@ fun HomeScreenNovo(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                CardEventoProximo()
-                CardEventoProximo()
-            }
+            EventosPertoDeMimComponent()
 
         }
 

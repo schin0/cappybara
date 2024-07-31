@@ -1,6 +1,8 @@
 package br.com.invocoders.cappybara
 
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -21,6 +23,7 @@ import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             CappybaraTheme {
                 Surface(
@@ -55,6 +58,25 @@ class MainActivity : ComponentActivity() {
                                 ?.let { it1 -> DetalhesEventoScreen(navController, it1) }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        val REQUEST_CODE_PERMISSAO_LOCALIZACAO = 100
+
+        when (requestCode) {
+            REQUEST_CODE_PERMISSAO_LOCALIZACAO -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+
+                } else {
+                    Toast.makeText(this, "Permissão de localização negada", Toast.LENGTH_SHORT).show()
                 }
             }
         }

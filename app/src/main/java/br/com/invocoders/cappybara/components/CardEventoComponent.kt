@@ -249,17 +249,17 @@ fun CardEventoComponent(evento: EventoDetalhe) {
                 )
             )
 
-            var address by remember { mutableStateOf("Carregando...") }
+            var endereco by remember { mutableStateOf("Carregando...") }
             val scope = rememberCoroutineScope()
 
             LaunchedEffect(Unit) {
                 scope.launch {
-                    address = obterEnderecoTexto(evento.latitude, evento.longitude, "")
+                    endereco = obterEnderecoTexto(evento.latitude, evento.longitude)
                 }
             }
 
             Text(
-                text = address,
+                text = endereco,
                 style = TextStyle(
                     fontSize = 13.sp,
                     fontFamily = roboto,
