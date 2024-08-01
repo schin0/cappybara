@@ -1,6 +1,8 @@
 package br.com.invocoders.cappybara
 
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -10,6 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,10 +23,11 @@ import br.com.invocoders.cappybara.screens.telabuscar.BuscaScreen
 import br.com.invocoders.cappybara.screens.InicioAppSreen
 import br.com.invocoders.cappybara.screens.telalogin.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
-// TODO: Alterar fonte global
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             CappybaraTheme {
                 Surface(
@@ -37,7 +41,7 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = "inicio",
                         modifier = Modifier
-                            .background(colorResource(id = R.color.cinza_claro))
+                            .background(Color.White)
                     ) {
                         composable("inicio") {
                             InicioAppSreen(navController)
@@ -63,6 +67,25 @@ class MainActivity : ComponentActivity() {
                                 ?.let { it1 -> DetalhesEventoScreen(navController, it1) }
                         }
                     }
+                }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        val REQUEST_CODE_PERMISSAO_LOCALIZACAO = 100
+
+        when (requestCode) {
+            REQUEST_CODE_PERMISSAO_LOCALIZACAO -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+
+                } else {
+                    Toast.makeText(this, "Permissão de localização negada", Toast.LENGTH_SHORT).show()
                 }
             }
         }

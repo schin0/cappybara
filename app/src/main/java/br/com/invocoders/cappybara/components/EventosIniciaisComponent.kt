@@ -17,16 +17,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.invocoders.cappybara.R
 
 @Composable
-fun EventosIniciaisComponent(textoEvento: String) {
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+fun EventosIniciaisComponent(textoEvento: String, imagemId: Int) {
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
         modifier = Modifier
@@ -41,9 +41,8 @@ fun EventosIniciaisComponent(textoEvento: String) {
         )
     ) {
         Box {
-            // TODO: Alterar imagem eventos iniciais
             Image(
-                painterResource(id = R.drawable.next2023),
+                painterResource(id = imagemId),
                 contentDescription = "Eventos",
                 Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
@@ -60,7 +59,7 @@ fun EventosIniciaisComponent(textoEvento: String) {
                     style = TextStyle(
                         fontSize = 16.sp,
                         lineHeight = 24.sp,
-                        fontFamily = andikaNewBasicFont,
+                        fontFamily = roboto,
                         fontWeight = FontWeight(500),
                         color = Color(0xFFFFFFFF),
                         letterSpacing = 0.15.sp,

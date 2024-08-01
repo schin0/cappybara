@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -32,7 +33,7 @@ import br.com.invocoders.cappybara.services.mostrarMensagemEmConstrucao
 @Composable
 fun BotaoMenuComponent(item: MenuItem, selecionado: Boolean, navController: NavController) {
     val contexto = LocalContext.current
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Button(
         onClick = {
@@ -65,7 +66,7 @@ fun BotaoMenuComponent(item: MenuItem, selecionado: Boolean, navController: NavC
                 text = item.descricaoIcone,
                 style = TextStyle(
                     fontSize = 12.sp,
-                    fontFamily = andikaNewBasicFont,
+                    fontFamily = roboto,
                     fontWeight = FontWeight(700),
                     color = colorResource(if (selecionado) R.color.azul else R.color.cinza),
                     textAlign = TextAlign.Center

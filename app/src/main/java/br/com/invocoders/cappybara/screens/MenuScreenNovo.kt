@@ -58,8 +58,8 @@ fun MenuScreenNovo(navController: NavController, itemSelecionado: String) {
             Row(
                 modifier = Modifier
                     .shadow(
-                        elevation = 8.dp,
-                        spotColor = Color(0x219DB2D6),
+                        elevation = 20.dp,
+                        spotColor = Color.Red,
                         ambientColor = Color(0x219DB2D6)
                     )
                     .background(
@@ -78,7 +78,7 @@ fun MenuScreenNovo(navController: NavController, itemSelecionado: String) {
                         "Explorar"
                     ),
                     MenuItem(
-                        "pesquisa",
+                        "buscar",
                         R.drawable.baseline_calendar_month_24,
                         R.drawable.baseline_calendar_month_24_azul,
                         "Eventos"
@@ -97,10 +97,11 @@ fun MenuScreenNovo(navController: NavController, itemSelecionado: String) {
 
                 val botoesColuna2 = listOf(
                     MenuItem(
-                        "buscar",
+                        "mapa",
                         R.drawable.baseline_location_on_24,
                         R.drawable.baseline_location_on_24_azul,
-                        "Mapa"
+                        "Mapa",
+                        habilitado = false
                     ),
                     MenuItem(
                         "pesquisa",
