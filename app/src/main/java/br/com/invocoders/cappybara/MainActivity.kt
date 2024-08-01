@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -18,6 +20,8 @@ import br.com.invocoders.cappybara.screens.DetalhesEventoScreen
 import br.com.invocoders.cappybara.screens.HomeScreenNovo
 import br.com.invocoders.cappybara.screens.PesquisaScreenNovo
 import br.com.invocoders.cappybara.screens.telabuscar.BuscaScreen
+import br.com.invocoders.cappybara.screens.InicioAppSreen
+import br.com.invocoders.cappybara.screens.telalogin.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,18 +32,23 @@ class MainActivity : ComponentActivity() {
             CappybaraTheme {
                 Surface(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.White),
+                        .fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
 
                     NavHost(
                         navController = navController,
-                        startDestination = "home",
+                        startDestination = "inicio",
                         modifier = Modifier
                             .background(Color.White)
                     ) {
+                        composable("inicio") {
+                            InicioAppSreen(navController)
+                        }
+                        composable("login") {
+                            LoginScreen(navController)
+                        }
                         composable("home") {
                             HomeScreenNovo(navController)
                         }
