@@ -6,7 +6,7 @@ import kotlinx.coroutines.withContext
 
 suspend fun obterEnderecoTexto(latitude: Double, longitude: Double): String {
     return withContext(Dispatchers.IO) {
-        val apiKey = ""
+        val apiKey = "AIzaSyBFtsFp1S8yj0ljaqZWOheIAniJT7F2wzA"
         val response = GoogleMapsRetrofitFactory().googleMapsRepository().obterEndereco("$latitude,$longitude", apiKey)
 
         if (response.isSuccessful) {
