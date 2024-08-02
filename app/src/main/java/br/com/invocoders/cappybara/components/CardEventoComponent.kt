@@ -1,6 +1,5 @@
 package br.com.invocoders.cappybara.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,13 +20,21 @@ import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -36,16 +43,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import br.com.invocoders.cappybara.R
+import br.com.invocoders.cappybara.data.model.EventoDetalhe
+import br.com.invocoders.cappybara.services.obterEnderecoTexto
+import coil.compose.AsyncImage
+import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+
 
 @Composable
-fun CardEventoComponent(imagemId: Int) {
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+fun CardEventoComponent(evento: EventoDetalhe) {
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
         Modifier
             .shadow(
-                elevation = 30.dp,
-                spotColor = Color(0x0F505588),
+                elevation = 20.dp,
+                spotColor = Color.LightGray,
                 ambientColor = Color(0x0F505588)
             )
             .padding(10.dp)
@@ -75,12 +90,13 @@ fun CardEventoComponent(imagemId: Int) {
             )
         ) {
             Box {
-                Image(
-                    painterResource(id = imagemId),
-                    contentDescription = "Evento",
+                AsyncImage(
+                    model = evento.urlImagem.first(),
+                    contentDescription = evento.titulo,
                     modifier = Modifier
                         .fillMaxSize()
-                        .zIndex(-1f)
+                        .zIndex(-1f),
+                    contentScale = ContentScale.Crop
                 )
 
                 Row(
@@ -103,12 +119,22 @@ fun CardEventoComponent(imagemId: Int) {
                         ),
                         shape = RoundedCornerShape(size = 7.dp)
                     ) {
+                        val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+                        val data = LocalDateTime.parse(evento.dataHoraInicio, formatter)
+
+                        val dia = data.dayOfMonth
+                        val mes = data.month.getDisplayName(
+                            java.time.format.TextStyle.SHORT,
+                            Locale.ENGLISH
+                        )
+                            .uppercase(Locale.ROOT)
+
                         Text(
-                            text = "12\nJUL",
+                            text = "${dia}\n${mes}",
                             style = TextStyle(
                                 fontSize = 18.sp,
                                 lineHeight = 18.sp,
-                                fontFamily = andikaNewBasicFont,
+                                fontFamily = roboto,
                                 fontWeight = FontWeight(700),
                                 color = Color(0xFFE7215F),
                                 textAlign = TextAlign.Center,
@@ -145,10 +171,10 @@ fun CardEventoComponent(imagemId: Int) {
         }
 
         Text(
-            text = "FIAP NEXT 2024",
+            text = evento.titulo,
             style = TextStyle(
                 fontSize = 18.sp,
-                fontFamily = andikaNewBasicFont,
+                fontFamily = roboto,
                 fontWeight = FontWeight(700),
                 color = Color(0xFF000000),
             ),
@@ -198,7 +224,7 @@ fun CardEventoComponent(imagemId: Int) {
                     style = TextStyle(
                         fontSize = 12.sp,
                         lineHeight = 19.24.sp,
-                        fontFamily = andikaNewBasicFont,
+                        fontFamily = roboto,
                         fontWeight = FontWeight(700),
                         color = Color(0xFF3F38DD),
                     ),
@@ -223,15 +249,26 @@ fun CardEventoComponent(imagemId: Int) {
                 )
             )
 
+            var endereco by remember { mutableStateOf("Carregando...") }
+            val scope = rememberCoroutineScope()
+
+            LaunchedEffect(Unit) {
+                scope.launch {
+                    endereco = obterEnderecoTexto(evento.latitude, evento.longitude)
+                }
+            }
+
             Text(
-                text = "Av. Higienópolis, 257 - São P...",
+                text = endereco,
                 style = TextStyle(
                     fontSize = 13.sp,
-                    fontFamily = andikaNewBasicFont,
+                    fontFamily = roboto,
                     fontWeight = FontWeight(700),
                     color = Color(0xFF2B2849),
                 )
             )
+
+
         }
     }
 }

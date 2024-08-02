@@ -1,6 +1,5 @@
-package br.com.invocoders.cappybara.components
+package br.com.invocoders.cappybara.components.home
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +18,12 @@ import androidx.compose.material3.CardColors
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,22 +33,27 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.invocoders.cappybara.R
+import br.com.invocoders.cappybara.data.model.EventoDetalhe
+import br.com.invocoders.cappybara.services.obterEnderecoTexto
+import coil.compose.AsyncImage
+import kotlinx.coroutines.launch
 
 @Composable
-fun CardEventoProximo() {
-    val andikaNewBasicFont = FontFamily(Font(R.font.andika_new_basic))
+fun CardEventoPertoComponent(evento: EventoDetalhe) {
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
         modifier = Modifier
             .shadow(
-                elevation = 30.dp,
-                spotColor = Color(0x0F505588),
+                elevation = 20.dp,
+                spotColor = Color.LightGray,
                 ambientColor = Color(0x0F505588)
             )
             .padding(bottom = 10.dp)
@@ -67,11 +77,12 @@ fun CardEventoProximo() {
                     .height(96.dp)
                     .clip(RoundedCornerShape(18.dp))
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.next2023),
-                    contentDescription = "Evento",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
+                AsyncImage(
+                    model = evento.urlImagem.firstOrNull(),
+                    contentDescription = evento.titulo,
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    contentScale = ContentScale.Crop
                 )
             }
 
@@ -81,7 +92,7 @@ fun CardEventoProximo() {
                     .padding(top = 0.dp, end = 0.dp, start = 8.dp, bottom = 8.dp),
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Row (
+                Row(
                     Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -90,7 +101,7 @@ fun CardEventoProximo() {
                         text = "11 JUL - QUI - 15h00",
                         style = TextStyle(
                             fontSize = 12.sp,
-                            fontFamily = andikaNewBasicFont,
+                            fontFamily = roboto,
                             fontWeight = FontWeight(700),
                             color = Color(0xFFEE544A),
                         )
@@ -109,10 +120,10 @@ fun CardEventoProximo() {
 
                 Row {
                     Text(
-                        text = "Bar do Alemão - Samba ao vivo",
+                        text = evento.titulo,
                         style = TextStyle(
                             fontSize = 15.sp,
-                            fontFamily = andikaNewBasicFont,
+                            fontFamily = roboto,
                             fontWeight = FontWeight(700),
                             color = Color(0xFF120D26),
                         )
@@ -131,18 +142,26 @@ fun CardEventoProximo() {
                         )
                     )
 
+                    var endereco by remember { mutableStateOf("Carregando...") }
+                    val scope = rememberCoroutineScope()
+
+                    LaunchedEffect(Unit) {
+                        scope.launch {
+                            endereco = obterEnderecoTexto(evento.latitude, evento.longitude)
+                        }
+                    }
+
                     Text(
-                        text = "Av. Juriti, 651 - Moema",
+                        text = endereco,
                         style = TextStyle(
                             fontSize = 13.sp,
-                            fontFamily = andikaNewBasicFont,
+                            fontFamily = roboto,
                             fontWeight = FontWeight(700),
                             color = Color(0xFF2B2849),
                         )
                     )
                 }
             }
-
 
         }
     }
