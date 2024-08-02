@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = "inicio",
+                        startDestination = "home",
                         modifier = Modifier
                             .background(Color.White)
                     ) {
