@@ -8,7 +8,8 @@ class EventoRetrofitFactory {
     private val URL = "http://192.168.1.196:8080/evento/"
 
     val retrofitFactory = Retrofit.Builder()
-        .baseUrl(URL).addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(URL)
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     fun eventoRepository() : EventoRepository {

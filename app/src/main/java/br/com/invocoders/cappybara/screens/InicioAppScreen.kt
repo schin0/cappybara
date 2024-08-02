@@ -27,6 +27,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.DeviceFontFamilyName
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
@@ -40,9 +43,10 @@ import kotlinx.coroutines.delay
 @Composable
 fun InicioAppSreen(navController: NavController) {
     val visible = remember { mutableStateOf(false) }
+    val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     LaunchedEffect(Unit) {
-        delay(500) // Espera 500ms antes de iniciar a animação
+        delay(500)
         visible.value = true
         delay(1500)
         navController.navigate("login")
@@ -54,13 +58,16 @@ fun InicioAppSreen(navController: NavController) {
     ) {
         AnimatedVisibility(
             visible = visible.value,
-            enter = fadeIn(animationSpec = tween(1000)) + scaleIn(animationSpec = tween(1000), initialScale = 0.5f)
+            enter = fadeIn(animationSpec = tween(1000)) + scaleIn(
+                animationSpec = tween(1000),
+                initialScale = 0.5f
+            )
 
         ) {
-            Column (
+            Column(
                 modifier = Modifier
                     .size(200.dp)
-                    .scale(1.2f), // Tamanho final após a animação
+                    .scale(1.2f),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -75,7 +82,6 @@ fun InicioAppSreen(navController: NavController) {
 
                 val gradientColors = listOf(Color(0xFFFFA68D), Color(0xFFFD3A84))
                 val brush = Brush.linearGradient(colors = gradientColors)
-                // Conteúdo da tela inicial
                 Text(
                     text = buildAnnotatedString {
                         withStyle(style = SpanStyle(brush = brush)) {
@@ -85,7 +91,7 @@ fun InicioAppSreen(navController: NavController) {
                     style = TextStyle(
                         fontSize = 35.sp,
                         lineHeight = 48.37.sp,
-                        // fontFamily = FontFamily(Font(R.font.roboto)),
+                        fontFamily = roboto,
                         fontWeight = FontWeight(500),
                         color = Color(0xFFFFA68D),
 

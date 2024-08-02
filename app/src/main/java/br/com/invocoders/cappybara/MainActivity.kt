@@ -10,17 +10,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.invocoders.cappybara.screens.DetalhesEventoScreen
 import br.com.invocoders.cappybara.screens.HomeScreenNovo
+import br.com.invocoders.cappybara.screens.InicioAppSreen
 import br.com.invocoders.cappybara.screens.PesquisaScreenNovo
 import br.com.invocoders.cappybara.screens.telabuscar.BuscaScreen
-import br.com.invocoders.cappybara.screens.InicioAppSreen
 import br.com.invocoders.cappybara.screens.telalogin.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 
@@ -36,6 +35,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
+                    val contexto = LocalContext.current
 
                     NavHost(
                         navController = navController,
@@ -47,8 +47,9 @@ class MainActivity : ComponentActivity() {
                             InicioAppSreen(navController)
                         }
                         composable("login") {
-                            LoginScreen(navController)
+                            LoginScreen(navController, contexto)
                         }
+
                         composable("home") {
                             HomeScreenNovo(navController)
                         }
