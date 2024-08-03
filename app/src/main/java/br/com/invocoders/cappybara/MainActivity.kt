@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = "inicio",
+                        startDestination = "home",
                         modifier = Modifier
                             .background(Color.White)
                     ) {
@@ -92,3 +92,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+// TODO: Ajustar padding tela home
+// TODO: Adicionar funcionalidade de "bolinhas" embaixo do carrossel
+// TODO: No resumo do evento, pensar em ícones de acessibilidades

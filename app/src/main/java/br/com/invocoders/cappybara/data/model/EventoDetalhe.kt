@@ -8,3 +8,4 @@ data class EventoDetalhe(
     val dataHoraInicio: String,
     val urlImagem: List<String>
 )
+// TODO: Evento Resumo

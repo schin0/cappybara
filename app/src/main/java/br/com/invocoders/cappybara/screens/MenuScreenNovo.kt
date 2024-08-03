@@ -78,10 +78,11 @@ fun MenuScreenNovo(navController: NavController, itemSelecionado: String) {
                         "Explorar"
                     ),
                     MenuItem(
-                        "buscar",
+                        "pesquisa",
                         R.drawable.baseline_calendar_month_24,
                         R.drawable.baseline_calendar_month_24_azul,
-                        "Eventos"
+                        "Eventos",
+                        habilitado = false
                     )
                 )
 
@@ -97,11 +98,10 @@ fun MenuScreenNovo(navController: NavController, itemSelecionado: String) {
 
                 val botoesColuna2 = listOf(
                     MenuItem(
-                        "mapa",
-                        R.drawable.baseline_location_on_24,
-                        R.drawable.baseline_location_on_24_azul,
-                        "Mapa",
-                        habilitado = false
+                        "buscar",
+                        R.drawable.baseline_search_24_menu,
+                        R.drawable.baseline_search_24,
+                        "Buscar"
                     ),
                     MenuItem(
                         "pesquisa",
