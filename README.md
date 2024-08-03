@@ -13,6 +13,12 @@ Bem-vindo ao repositório do Cappybara! Este projeto é dividido em duas partes 
     └── CappybaraApp
 ```
 
+### 🛠️ Tecnologias Utilizadas
+    - Backend: Java com Spring Boot
+    - Frontend: Kotlin com Jetpack Compose
+    - Banco de Dados: PostgreSQL
+    - Armazenamento de Imagens: Azure Blob Storage
+
 ## 🚀 Como Rodar o Projeto
 
 ### Backend
