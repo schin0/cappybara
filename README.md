@@ -67,6 +67,7 @@ Utilizamos a Geocoding API do Google para obter o nome do endereço a partir da 
 
 - 🎨[Figma](https://www.figma.com/design/B3DTn5RlmunHxD8IKBEHPD/DESIGN-SYSTEM%3A-The-Cappybara-Project%3A-Enterprise-Challenge---ManageEngine?node-id=296-422&t=s6vNofi7TBjlnnIr-0)
 - 💻 [Vídeo técnico](https://www.youtube.com/watch?v=kAcxnidVAeE)
+- 📅 [Cronograma](https://docs.google.com/spreadsheets/d/1fLMJTAmETbPDATLy6dYs3G-HygjCjWUNQBwMHjY8lXo/edit?usp=sharing)
 
 ## 📞 Participantes
 - [Alex Coelho de Oliveira](https://www.linkedin.com/in/alex-coelho-de-oliveira/)
