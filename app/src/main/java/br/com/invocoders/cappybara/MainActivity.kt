@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.invocoders.cappybara.screens.DetalhesEventoScreen
+import br.com.invocoders.cappybara.screens.DetalhesEventoScreenNovo
 import br.com.invocoders.cappybara.screens.HomeScreenNovo
 import br.com.invocoders.cappybara.screens.InicioAppSreen
 import br.com.invocoders.cappybara.screens.PesquisaScreenNovo
@@ -66,6 +67,12 @@ class MainActivity : ComponentActivity() {
                             val eventoId = it.arguments?.getString("eventoId")
                             eventoId?.toInt()
                                 ?.let { it1 -> DetalhesEventoScreen(navController, it1) }
+                        }
+
+                        composable("detalhesEventoNovo/{id}") {
+                            val eventoId = it.arguments?.getString("id")
+                            eventoId?.toLong()
+                                ?.let { id -> DetalhesEventoScreenNovo(id) }
                         }
                     }
                 }

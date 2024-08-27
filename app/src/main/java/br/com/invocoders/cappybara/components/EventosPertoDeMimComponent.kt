@@ -6,11 +6,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import br.com.invocoders.cappybara.components.home.CardEventoPertoComponent
 import br.com.invocoders.cappybara.services.listarEventosProximos
 
 @Composable
-fun EventosPertoDeMimComponent() {
+fun EventosPertoDeMimComponent(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -21,7 +22,7 @@ fun EventosPertoDeMimComponent() {
 
         if (eventosPerto.isNotEmpty()) {
             eventosPerto.forEach {
-                CardEventoPertoComponent(it)
+                CardEventoPertoComponent(it, navController)
             }
         }
     }

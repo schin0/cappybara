@@ -8,11 +8,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import br.com.invocoders.cappybara.components.CardEventoComponent
 import br.com.invocoders.cappybara.services.listarEventosDetalhes
 
 @Composable
-fun ProximosEventosComponent() {
+fun ProximosEventosComponent(navController: NavController) {
     val scrollStateEventos = rememberScrollState(0)
     val proximosEventos = listarEventosDetalhes()
 
@@ -24,7 +25,7 @@ fun ProximosEventosComponent() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         proximosEventos.forEach {
-            CardEventoComponent(it)
+            CardEventoComponent(it, navController)
         }
     }
 }

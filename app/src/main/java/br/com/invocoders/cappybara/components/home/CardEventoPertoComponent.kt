@@ -1,5 +1,6 @@
 package br.com.invocoders.cappybara.components.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -39,14 +40,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.data.model.EventoDetalhe
+import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.services.obterEnderecoTexto
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
 
 @Composable
-fun CardEventoPertoComponent(evento: EventoDetalhe) {
+fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController) {
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
@@ -58,7 +60,10 @@ fun CardEventoPertoComponent(evento: EventoDetalhe) {
             )
             .padding(bottom = 10.dp)
             .fillMaxWidth()
-            .height(112.dp),
+            .height(112.dp)
+            .clickable {
+                navController.navigate("detalhesEventoNovo/${evento.id}")
+            },
         shape = RoundedCornerShape(size = 18.dp),
         colors = CardColors(
             containerColor = Color.White,

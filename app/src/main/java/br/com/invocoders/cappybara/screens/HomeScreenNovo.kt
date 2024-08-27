@@ -97,7 +97,7 @@ fun HomeScreenNovo(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            ProximosEventosComponent()
+            ProximosEventosComponent(navController)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -133,7 +133,7 @@ fun HomeScreenNovo(navController: NavController) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            EventosPertoDeMimComponent()
+            EventosPertoDeMimComponent(navController)
 
         }
 

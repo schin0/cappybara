@@ -8,6 +8,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.data.model.EventoDetalhe
+import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.model.Evento
 import br.com.invocoders.cappybara.viewmodel.EventoViewModel
 import com.google.android.gms.maps.model.LatLng
@@ -61,22 +62,21 @@ fun obterEventoPorId(eventoId: Int): Evento? {
 
 
 @Composable
-fun listarEventosDetalhes(eventoViewModel: EventoViewModel = viewModel()): List<EventoDetalhe> {
+fun listarEventosDetalhes(eventoViewModel: EventoViewModel = viewModel()): List<EventoResumo> {
     val eventosDetalhes by eventoViewModel.eventosDetalhes
 
     LaunchedEffect(Unit) {
         eventoViewModel.listarEventosDetalhes()
     }
 
-    if (eventosDetalhes.isNotEmpty()) {
+    if (eventosDetalhes.isNotEmpty())
         return eventosDetalhes
-    }
 
     return emptyList()
 }
 
 @Composable
-fun listarEventosProximos(eventoViewModel: EventoViewModel = viewModel()): List<EventoDetalhe> {
+fun listarEventosProximos(eventoViewModel: EventoViewModel = viewModel()): List<EventoResumo> {
     val eventosProximos by eventoViewModel.eventosProximos
     val context = LocalContext.current
 
@@ -95,4 +95,18 @@ fun listarEventosProximos(eventoViewModel: EventoViewModel = viewModel()): List<
     }
 
     return emptyList()
+}
+
+@Composable
+fun obterEventoDetalhePorId(
+    id: Long,
+    eventoViewModel: EventoViewModel = viewModel()
+): EventoDetalhe {
+    val evento by eventoViewModel.eventoDetalhe
+
+    LaunchedEffect(Unit) {
+        eventoViewModel.obterEventoDetalhePorId(id)
+    }
+
+    return evento
 }
