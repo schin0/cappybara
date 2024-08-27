@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class EventoRetrofitFactory {
-    private val URL = "http://10.0.2.2:8080/evento/"
+    private val URL = "https://cappybara-evento.azurewebsites.net/evento/"
 
     val retrofitFactory = Retrofit.Builder()
         .baseUrl(URL)
