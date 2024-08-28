@@ -19,7 +19,7 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.model.MenuItem
-import br.com.invocoders.cappybara.services.mostrarMensagemEmConstrucao
+import br.com.invocoders.cappybara.utils.mostrarMensagemEmConstrucao
 
 @Composable
 fun BotaoQRCodeComponent(item: MenuItem, navController: NavController) {

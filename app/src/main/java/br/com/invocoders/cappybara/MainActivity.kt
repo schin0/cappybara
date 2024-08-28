@@ -15,7 +15,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.invocoders.cappybara.screens.DetalhesEventoScreen
 import br.com.invocoders.cappybara.screens.DetalhesEventoScreenNovo
 import br.com.invocoders.cappybara.screens.HomeScreenNovo
 import br.com.invocoders.cappybara.screens.InicioAppSreen
@@ -61,12 +60,6 @@ class MainActivity : ComponentActivity() {
 
                         composable("buscar") {
                             BuscaScreen(navController)
-                        }
-
-                        composable("detalhesEvento/{eventoId}") {
-                            val eventoId = it.arguments?.getString("eventoId")
-                            eventoId?.toInt()
-                                ?.let { it1 -> DetalhesEventoScreen(navController, it1) }
                         }
 
                         composable("detalhesEventoNovo/{id}") {

@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.services.mostrarMensagemEmConstrucao
+import br.com.invocoders.cappybara.utils.mostrarMensagemEmConstrucao
 
 @Composable
 fun PesquisaScreenNovo(navController: NavController) {

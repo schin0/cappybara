@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.services
+package br.com.invocoders.cappybara.utils
 
 import android.content.Context
 import android.widget.Toast

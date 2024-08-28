@@ -24,16 +24,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.invocoders.cappybara.R
 
-
 @Composable
-fun LogoComponent(){
-
+fun LogoComponent() {
     val gradientColors = listOf(Color(0xFFFFA68D), Color(0xFFFD3A84))
     val brush = Brush.linearGradient(colors = gradientColors)
-    Column (modifier = Modifier.fillMaxWidth(),
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-    ){
+    ) {
         Image(
             painter = painterResource(R.drawable.img),
             contentDescription = null,
@@ -43,7 +43,6 @@ fun LogoComponent(){
                 .width(80.dp)
         )
 
-        // Conteúdo da tela inicial
         Text(
             text = buildAnnotatedString {
                 withStyle(style = SpanStyle(brush = brush)) {
@@ -53,10 +52,8 @@ fun LogoComponent(){
             style = TextStyle(
                 fontSize = 35.sp,
                 lineHeight = 48.37.sp,
-                // fontFamily = FontFamily(Font(R.font.roboto)),
                 fontWeight = FontWeight(500),
                 color = Color(0xFFFFA68D),
-
                 textAlign = TextAlign.Center,
             )
         )
