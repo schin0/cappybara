@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.components
+package br.com.invocoders.cappybara.view.components.menu
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

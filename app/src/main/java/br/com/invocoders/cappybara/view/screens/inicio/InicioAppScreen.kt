@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.screens
+package br.com.invocoders.cappybara.view.screens.inicio
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -39,9 +39,8 @@ import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import kotlinx.coroutines.delay
 
-
 @Composable
-fun InicioAppSreen(navController: NavController) {
+fun InicioScreen(navController: NavController) {
     val visible = remember { mutableStateOf(false) }
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 

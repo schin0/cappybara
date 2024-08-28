@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.screens
+package br.com.invocoders.cappybara.view.screens.home
 
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -27,13 +27,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.view.components.CabecalhoComponent
-import br.com.invocoders.cappybara.view.components.EventosIniciaisComponent
-import br.com.invocoders.cappybara.view.components.EventosPertoDeMimComponent
+import br.com.invocoders.cappybara.view.components.home.CabecalhoComponent
+import br.com.invocoders.cappybara.view.components.home.EventosIniciaisComponent
+import br.com.invocoders.cappybara.view.components.home.EventosPertoDeMimComponent
 import br.com.invocoders.cappybara.view.components.home.ProximosEventosComponent
+import br.com.invocoders.cappybara.view.components.menu.MenuComponent
 
 @Composable
-fun HomeScreenNovo(navController: NavController) {
+fun HomeScreen(navController: NavController) {
     val scrollState = rememberScrollState(0)
     val scrollStateEventosIniciais = rememberScrollState(0)
     rememberScrollState(0)
@@ -139,5 +140,5 @@ fun HomeScreenNovo(navController: NavController) {
 
     }
 
-    MenuScreenNovo(navController, "home")
+    MenuComponent(navController, "home")
 }

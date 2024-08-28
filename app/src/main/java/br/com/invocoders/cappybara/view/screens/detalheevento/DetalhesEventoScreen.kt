@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.screens
+package br.com.invocoders.cappybara.view.screens.detalheevento
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.sp
 import br.com.invocoders.cappybara.core.services.obterEventoDetalhePorId
 
 @Composable
-fun DetalhesEventoScreenNovo(eventoId: Long) {
+fun DetalhesEventoScreen(eventoId: Long) {
     val evento = obterEventoDetalhePorId(eventoId)
 
     Column(

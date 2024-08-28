@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.components
+package br.com.invocoders.cappybara.view.components.shared
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -47,6 +47,7 @@ import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.core.services.obterEnderecoTexto
+import br.com.invocoders.cappybara.view.components.home.ImagemUsuarioComponent
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime

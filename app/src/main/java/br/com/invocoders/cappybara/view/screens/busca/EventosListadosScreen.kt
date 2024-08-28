@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.screens.telabuscar
+package br.com.invocoders.cappybara.view.screens.busca
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -23,16 +23,14 @@ import androidx.compose.ui.unit.sp
 import br.com.invocoders.cappybara.R
 
 @Composable
-fun EventosListadosScreen(){
+fun EventosListadosScreen() {
     Column {
         Row(modifier = Modifier) {
             Card(
                 modifier = Modifier.padding(end = 15.dp),
                 elevation = CardDefaults.cardElevation(8.dp),
-
-                shape = RoundedCornerShape(8.dp) // Define canto arredondado para o Card
-
-            ){
+                shape = RoundedCornerShape(8.dp)
+            ) {
                 Image(
                     painter = painterResource(R.drawable.next2023),
                     contentDescription = null,
@@ -41,10 +39,8 @@ fun EventosListadosScreen(){
                         .height(120.dp)
                         .width(90.dp)
                 )
-
             }
-            Column() {
-
+            Column {
                 Text(
                     text = "11 JUL - QUI - 15h00",
                     style = TextStyle(
@@ -66,9 +62,6 @@ fun EventosListadosScreen(){
                     )
                 )
             }
-
-
-
         }
     }
 
@@ -79,10 +72,8 @@ fun EventosListadosScreen(){
             Card(
                 modifier = Modifier.padding(end = 15.dp),
                 elevation = CardDefaults.cardElevation(8.dp),
-
-                shape = RoundedCornerShape(8.dp) // Define canto arredondado para o Card
-
-            ){
+                shape = RoundedCornerShape(8.dp)
+            ) {
                 Image(
                     painter = painterResource(R.drawable.next2023),
                     contentDescription = null,
@@ -91,10 +82,8 @@ fun EventosListadosScreen(){
                         .height(120.dp)
                         .width(90.dp)
                 )
-
             }
-            Column() {
-
+            Column {
                 Text(
                     text = "11 JUL - QUI - 15h00",
                     style = TextStyle(
@@ -116,9 +105,6 @@ fun EventosListadosScreen(){
                     )
                 )
             }
-
-
-
         }
     }
 }

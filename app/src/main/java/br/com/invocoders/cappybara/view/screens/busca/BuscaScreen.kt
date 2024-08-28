@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.screens.telabuscar
+package br.com.invocoders.cappybara.view.screens.busca
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.view.screens.MenuScreenNovo
+import br.com.invocoders.cappybara.view.components.menu.MenuComponent
 
 @Composable
 fun BuscaScreen(navController: NavController) {
@@ -39,17 +39,13 @@ fun BuscaScreen(navController: NavController) {
             .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 64.dp)
             .verticalScroll(scrollState),
     ) {
-
         Row(modifier = Modifier.padding()) {
             Image(
                 painterResource(id = R.drawable.baseline_arrow_back_24),
                 contentDescription = "Ícone de seta",
                 modifier = Modifier
                     .size(25.dp, 25.dp)
-
-                    .clickable {
-
-                    }
+                    .clickable { }
             )
             Text(
                 text = "Buscar",
@@ -71,56 +67,44 @@ fun BuscaScreen(navController: NavController) {
                 contentDescription = "Ícone de seta",
                 modifier = Modifier
                     .size(33.dp, 33.dp)
-                    .clickable {
-
-                    }
+                    .clickable { }
             )
             TextField(
                 value = "",
                 colors = TextFieldDefaults.colors(
-                    focusedTextColor = Color.Black, // Cor do texto quando o campo está focado
-                    unfocusedTextColor = Color.Black, // Cor do texto quando o campo não está focado
-                    focusedContainerColor = Color.White, // Cor de fundo quando o campo está focado
-                    unfocusedContainerColor = Color.White, // Cor de fundo quando o campo não está focado
-                    focusedIndicatorColor = Color.Blue, // Cor da linha de indicador quando o campo está focado
-                    unfocusedIndicatorColor = Color.Gray, // Cor da linha de indicador quando o campo não está focado
-                    cursorColor = Color.Blue // Cor do cursor
+                    focusedTextColor = Color.Black,
+                    unfocusedTextColor = Color.Black,
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White,
+                    focusedIndicatorColor = Color.Blue,
+                    unfocusedIndicatorColor = Color.Gray,
+                    cursorColor = Color.Blue
                 ),
-                onValueChange = {
-
-                },
+                onValueChange = { },
                 modifier = Modifier
                     .width(240.dp)
-                    .height(60.dp), // Ajuste a altura conforme necessário
+                    .height(60.dp),
                 placeholder = { Text("Eventos, Lugares ...") },
                 singleLine = true,
                 maxLines = 1
             )
 
             Button(
-                onClick = {
-
-                },
-
+                onClick = { },
                 modifier = Modifier
                     .width(90.dp)
                     .height(32.1428.dp)
 
             ) {
-                //Icon(Icons.Default.Edit, contentDescription = "Check Icon", modifier = Modifier.padding(end = 2.dp))
                 Text(
                     text = "Filtros",
                     style = TextStyle(
                         fontSize = 12.sp,
                         fontWeight = FontWeight(500),
                         color = Color(0xFFECEBFC),
-
-                        )
+                    )
                 )
-
             }
-
-
         }
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -130,10 +114,9 @@ fun BuscaScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(18.dp))
 
         TaBombandoScreen()
-
-
     }
-    MenuScreenNovo(navController, "buscar")
+
+    MenuComponent(navController, "buscar")
 }
 
 

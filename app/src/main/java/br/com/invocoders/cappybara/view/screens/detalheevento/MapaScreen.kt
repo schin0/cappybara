@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.screens
+package br.com.invocoders.cappybara.view.screens.detalheevento
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

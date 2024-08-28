@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.screens.telalogin
+package br.com.invocoders.cappybara.view.screens.login
 
 import android.content.Context
 import android.widget.Toast
@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.view.components.LogoComponent
+import br.com.invocoders.cappybara.view.components.login.LogoComponent
 import br.com.invocoders.cappybara.core.services.LoginService
 
 @Composable
@@ -81,7 +81,6 @@ fun LoginScreen(navController: NavController, contexto: Context) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                placeholder = { "Buscar..." },
                 singleLine = true,
                 label = {
                     Row(
@@ -116,7 +115,6 @@ fun LoginScreen(navController: NavController, contexto: Context) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),
-                placeholder = { "Buscar..." },
                 label = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically

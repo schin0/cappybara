@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.components
+package br.com.invocoders.cappybara.view.components.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import br.com.invocoders.cappybara.view.components.home.CardEventoPertoComponent
 import br.com.invocoders.cappybara.core.services.listarEventosProximos
 
 @Composable

@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.screens
+package br.com.invocoders.cappybara.view.components.menu
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -20,12 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.view.components.BotaoMenuComponent
-import br.com.invocoders.cappybara.view.components.BotaoQRCodeComponent
 import br.com.invocoders.cappybara.model.MenuItem
 
 @Composable
-fun MenuScreenNovo(navController: NavController, itemSelecionado: String) {
+fun MenuComponent(navController: NavController, itemSelecionado: String) {
     Box(
         modifier = Modifier
             .fillMaxSize(),

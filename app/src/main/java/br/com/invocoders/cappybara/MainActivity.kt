@@ -15,12 +15,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.invocoders.cappybara.view.screens.DetalhesEventoScreenNovo
-import br.com.invocoders.cappybara.view.screens.HomeScreenNovo
-import br.com.invocoders.cappybara.view.screens.InicioAppSreen
-import br.com.invocoders.cappybara.view.screens.PesquisaScreenNovo
-import br.com.invocoders.cappybara.view.screens.telabuscar.BuscaScreen
-import br.com.invocoders.cappybara.view.screens.telalogin.LoginScreen
+import br.com.invocoders.cappybara.view.screens.detalheevento.DetalhesEventoScreen
+import br.com.invocoders.cappybara.view.screens.home.HomeScreen
+import br.com.invocoders.cappybara.view.screens.inicio.InicioScreen
+import br.com.invocoders.cappybara.view.screens.busca.BuscaScreen
+import br.com.invocoders.cappybara.view.screens.login.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,18 +43,15 @@ class MainActivity : ComponentActivity() {
                             .background(Color.White)
                     ) {
                         composable("inicio") {
-                            InicioAppSreen(navController)
+                            InicioScreen(navController)
                         }
+
                         composable("login") {
                             LoginScreen(navController, contexto)
                         }
 
                         composable("home") {
-                            HomeScreenNovo(navController)
-                        }
-
-                        composable("pesquisa") {
-                            PesquisaScreenNovo(navController)
+                            HomeScreen(navController)
                         }
 
                         composable("buscar") {
@@ -65,7 +61,7 @@ class MainActivity : ComponentActivity() {
                         composable("detalhesEventoNovo/{id}") {
                             val eventoId = it.arguments?.getString("id")
                             eventoId?.toLong()
-                                ?.let { id -> DetalhesEventoScreenNovo(id) }
+                                ?.let { id -> DetalhesEventoScreen(id) }
                         }
                     }
                 }
@@ -86,7 +82,8 @@ class MainActivity : ComponentActivity() {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
 
                 } else {
-                    Toast.makeText(this, "Permissão de localização negada", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Permissão de localização negada", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
