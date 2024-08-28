@@ -15,12 +15,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import br.com.invocoders.cappybara.screens.DetalhesEventoScreenNovo
-import br.com.invocoders.cappybara.screens.HomeScreenNovo
-import br.com.invocoders.cappybara.screens.InicioAppSreen
-import br.com.invocoders.cappybara.screens.PesquisaScreenNovo
-import br.com.invocoders.cappybara.screens.telabuscar.BuscaScreen
-import br.com.invocoders.cappybara.screens.telalogin.LoginScreen
+import br.com.invocoders.cappybara.view.screens.DetalhesEventoScreenNovo
+import br.com.invocoders.cappybara.view.screens.HomeScreenNovo
+import br.com.invocoders.cappybara.view.screens.InicioAppSreen
+import br.com.invocoders.cappybara.view.screens.PesquisaScreenNovo
+import br.com.invocoders.cappybara.view.screens.telabuscar.BuscaScreen
+import br.com.invocoders.cappybara.view.screens.telalogin.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 
 class MainActivity : ComponentActivity() {
