@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.components.home
+package br.com.invocoders.cappybara.view.components.shared
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset

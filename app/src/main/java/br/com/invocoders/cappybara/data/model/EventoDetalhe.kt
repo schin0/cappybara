@@ -10,5 +10,6 @@ data class EventoDetalhe(
     val preco: Double,
     val artistas: String,
     val dataHoraInicio: String,
+    val dataHoraTermino: String,
     val imagens: List<String>
 )

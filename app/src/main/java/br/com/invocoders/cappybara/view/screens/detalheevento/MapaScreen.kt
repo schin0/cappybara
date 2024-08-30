@@ -10,16 +10,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import br.com.invocoders.cappybara.model.Evento
+import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 
 @Composable
-fun MapaScreen(evento: Evento) {
+fun MapaScreen(evento: EventoDetalhe) {
     var mapaCarregado by remember { mutableStateOf(false) }
 
     Row(
@@ -28,7 +29,7 @@ fun MapaScreen(evento: Evento) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         val posicaoCamera = rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(evento.localizacao, 15f)
+            position = CameraPosition.fromLatLngZoom(LatLng(evento.latitude, evento.longitude), 15f)
         }
 
         GoogleMap(
@@ -41,9 +42,8 @@ fun MapaScreen(evento: Evento) {
             cameraPositionState = posicaoCamera,
         ) {
             Marker(
-                state = rememberMarkerState(position = evento.localizacao),
+                state = rememberMarkerState(position = LatLng(evento.latitude, evento.longitude)),
                 title = evento.titulo,
-//                snippet = evento.localizacao.toString(),
                 tag = evento,
                 onClick = { marker ->
                     false
