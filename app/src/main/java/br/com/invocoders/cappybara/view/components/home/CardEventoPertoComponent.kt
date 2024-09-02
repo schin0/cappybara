@@ -62,7 +62,7 @@ fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController)
             .fillMaxWidth()
             .height(112.dp)
             .clickable {
-                navController.navigate("detalhesEventoNovo/${evento.id}")
+                navController.navigate("detalhesEvento/${evento.id}")
             },
         shape = RoundedCornerShape(size = 18.dp),
         colors = CardColors(

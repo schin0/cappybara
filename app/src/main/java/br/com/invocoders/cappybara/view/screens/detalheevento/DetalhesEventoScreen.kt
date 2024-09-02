@@ -493,10 +493,7 @@ fun DetalhesEventoScreen(eventoId: Long, navController: NavController) {
 
                                     LaunchedEffect(Unit) {
                                         scope.launch {
-                                            endereco = obterEnderecoTexto(
-                                                evento.latitude,
-                                                evento.longitude
-                                            )
+                                            endereco = obterEnderecoTexto(evento.latitude, evento.longitude)
                                         }
                                     }
 
@@ -636,7 +633,7 @@ fun DetalhesEventoScreen(eventoId: Long, navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    mostrarMensagemEmConstrucao(contexto)
+                    navController.navigate("rotaEvento/${evento.latitude},${evento.longitude}")
                 },
                 modifier = Modifier
                     .shadow(
