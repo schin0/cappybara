@@ -21,6 +21,7 @@ import br.com.invocoders.cappybara.view.screens.inicio.InicioScreen
 import br.com.invocoders.cappybara.view.screens.busca.BuscaScreen
 import br.com.invocoders.cappybara.view.screens.login.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
+import br.com.invocoders.cappybara.view.screens.detalheevento.RotaScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,10 +59,21 @@ class MainActivity : ComponentActivity() {
                             BuscaScreen(navController)
                         }
 
-                        composable("detalhesEventoNovo/{id}") {
+                        composable("detalhesEvento/{id}") {
                             val eventoId = it.arguments?.getString("id")
                             eventoId?.toLong()
                                 ?.let { id -> DetalhesEventoScreen(id, navController) }
+                        }
+
+                        composable("rotaEvento/{latitudeDestino},{longitudeDestino}") {
+                            val latitudeDestino = it.arguments?.getString("latitudeDestino")
+                            val longitudeDestino = it.arguments?.getString("longitudeDestino")
+
+                            if (latitudeDestino != null && longitudeDestino != null)
+                                RotaScreen(
+                                    latitudeDestino.toDouble(),
+                                    longitudeDestino.toDouble()
+                                )
                         }
                     }
                 }
