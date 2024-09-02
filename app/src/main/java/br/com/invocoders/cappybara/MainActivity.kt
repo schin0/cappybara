@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import br.com.invocoders.cappybara.view.screens.detalheevento.DetalhesEventoScreen
 import br.com.invocoders.cappybara.view.screens.home.HomeScreen
 import br.com.invocoders.cappybara.view.screens.inicio.InicioScreen
@@ -22,6 +23,7 @@ import br.com.invocoders.cappybara.view.screens.busca.BuscaScreen
 import br.com.invocoders.cappybara.view.screens.login.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 import br.com.invocoders.cappybara.view.screens.detalheevento.RotaScreen
+import com.google.gson.Gson
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,15 +67,15 @@ class MainActivity : ComponentActivity() {
                                 ?.let { id -> DetalhesEventoScreen(id, navController) }
                         }
 
-                        composable("rotaEvento/{latitudeDestino},{longitudeDestino}") {
-                            val latitudeDestino = it.arguments?.getString("latitudeDestino")
-                            val longitudeDestino = it.arguments?.getString("longitudeDestino")
+                        composable("rotaEvento/?eventoDetalhe={eventoDetalhe}") { backStackEntry->
+                            val jsonEvento = backStackEntry.arguments?.getString("eventoDetalhe")
 
-                            if (latitudeDestino != null && longitudeDestino != null)
-                                RotaScreen(
-                                    latitudeDestino.toDouble(),
-                                    longitudeDestino.toDouble()
-                                )
+                            if (jsonEvento != null) {
+                                val eventoDetalhe = Gson().fromJson(jsonEvento, EventoDetalhe::class.java)
+
+                                RotaScreen(eventoDetalhe, navController)
+                            }
+
                         }
                     }
                 }

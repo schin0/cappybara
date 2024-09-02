@@ -1,5 +1,6 @@
 package br.com.invocoders.cappybara.view.screens.detalheevento
 
+import com.google.gson.Gson
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -633,7 +634,9 @@ fun DetalhesEventoScreen(eventoId: Long, navController: NavController) {
         ) {
             Button(
                 onClick = {
-                    navController.navigate("rotaEvento/${evento.latitude},${evento.longitude}")
+                    val jsonEvento = Gson().toJson(evento)
+
+                    navController.navigate("rotaEvento/?eventoDetalhe=$jsonEvento")
                 },
                 modifier = Modifier
                     .shadow(

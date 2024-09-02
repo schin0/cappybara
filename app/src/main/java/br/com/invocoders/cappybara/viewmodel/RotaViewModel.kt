@@ -20,7 +20,18 @@ class RotaViewModel : ViewModel() {
     val rotas: LiveData<List<List<LatLng>>>
         get() = _rotas
 
-    fun obterRota(key: String, localizacaoAtual: LatLng, localizacaoEvento: LatLng, deveConsiderarAlternativas: Boolean) {
+    private val _tempoRota = MutableLiveData<String?>()
+    val tempoRota: MutableLiveData<String?> get() = _tempoRota
+
+    private val _distanciaRota = MutableLiveData<String?>()
+    val distanciaRota: MutableLiveData<String?> get() = _distanciaRota
+
+    fun obterRota(
+        key: String,
+        localizacaoAtual: LatLng,
+        localizacaoEvento: LatLng,
+        deveConsiderarAlternativas: Boolean
+    ) {
         val tag = "Erro Rota:"
 
         viewModelScope.launch {
@@ -41,9 +52,21 @@ class RotaViewModel : ViewModel() {
 
                 if (retorno is ResponseBody) {
                     val json = JsonParser().parse(retorno.string()).asJsonObject
+
                     if (json.get("status").asString == "OK") {
                         CoroutineScope(Dispatchers.IO).launch {
-                            _rotas.postValue(RotaService().getRoutes(json.getAsJsonArray("routes")))
+                            val rotasJsonArray = json.getAsJsonArray("routes")
+                            val rotaService = RotaService()
+                            val rotas = rotaService.listarRotas(rotasJsonArray)
+                            val duracoes = rotaService.listarDuracoes(rotasJsonArray)
+                            val distancias = rotaService.listarDistancias(rotasJsonArray)
+
+                            val tempoRota = duracoes.firstOrNull()
+                            val distanciaRota = distancias.firstOrNull()
+
+                            _rotas.postValue(rotas)
+                            _tempoRota.postValue(tempoRota)
+                            _distanciaRota.postValue(distanciaRota)
                         }
                     } else {
                         Log.i(tag, json.get("status").asString)

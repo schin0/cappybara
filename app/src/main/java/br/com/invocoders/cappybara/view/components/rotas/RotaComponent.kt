@@ -39,12 +39,20 @@ fun RotaComponent(
     tituloDestino: String = "",
     snippetOrigem: String? = null,
     snippetDestino: String? = null,
-    deveConsiderarAlternativas: Boolean = false
+    deveConsiderarAlternativas: Boolean = false,
+    onTempoRotaChange: (String) -> Unit = {},
+    onDistanciaRotaChange: (String) -> Unit = {}
 ) {
     val rotaCores = colors ?: listOf(Color.Blue, Color.Red, Color.Green, Color.Magenta)
     val apiService: RotaViewModel = viewModel()
     val rotas by apiService.rotas.observeAsState()
+    val tempoRota by apiService.tempoRota.observeAsState()
+    val distanciaRota by apiService.distanciaRota.observeAsState()
+
     apiService.obterRota(key, localizacaoAtual, localizacaoEvento, deveConsiderarAlternativas)
+
+    tempoRota?.let { onTempoRotaChange(it) }
+    distanciaRota?.let { onDistanciaRotaChange(it) }
 
     val marcadorDestinoState = rememberMarkerState(position = localizacaoEvento)
     val marcadorInicialState = rememberMarkerState(position = localizacaoAtual)

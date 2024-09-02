@@ -4,23 +4,51 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.gson.JsonArray
 
 class RotaService {
-    fun getRoutes(routesJson: JsonArray): List<List<LatLng>> {
-        val routes = mutableListOf<List<LatLng>>()
-        routesJson.forEach { it ->
-            val route = mutableListOf<LatLng>()
+    fun listarRotas(rotaJson: JsonArray): List<List<LatLng>> {
+        val rotas = mutableListOf<List<LatLng>>()
+        rotaJson.forEach { it ->
+            val rota = mutableListOf<LatLng>()
             it.asJsonObject.getAsJsonArray("legs").forEach { it ->
                 it.asJsonObject.getAsJsonArray("steps").forEach {
-                    route.addAll(
+                    rota.addAll(
                         decodePoly(
                             it.asJsonObject.getAsJsonObject("polyline").get("points").asString
                         )
                     )
                 }
             }
-            routes.add(route)
+            rotas.add(rota)
         }
-        return routes
+        return rotas
     }
+
+    fun listarDuracoes(rotaJson: JsonArray): List<String> {
+        val duracoes = mutableListOf<String>()
+        rotaJson.forEach { routeElement ->
+            routeElement.asJsonObject.getAsJsonArray("legs").forEach { legElement ->
+                val duracaoTexto = legElement
+                    .asJsonObject
+                    .getAsJsonObject("duration")
+                    .get("text")
+                    .asString
+                duracoes.add(duracaoTexto)
+            }
+        }
+        return duracoes
+    }
+
+    fun listarDistancias(rotasJsonArray: JsonArray): List<String> {
+        val distancias = mutableListOf<String>()
+        for (rota in rotasJsonArray) {
+            val legs = rota.asJsonObject.getAsJsonArray("legs")
+            for (leg in legs) {
+                val distancia = leg.asJsonObject.getAsJsonObject("distance").get("text").asString
+                distancias.add(distancia)
+            }
+        }
+        return distancias
+    }
+
 
     private fun decodePoly(encoded: String): List<LatLng> {
         val poly: MutableList<LatLng> = ArrayList()
