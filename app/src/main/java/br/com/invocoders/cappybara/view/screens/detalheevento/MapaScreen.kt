@@ -28,28 +28,38 @@ fun MapaScreen(evento: EventoDetalhe) {
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val posicaoCamera = rememberCameraPositionState {
-            position = CameraPosition.fromLatLngZoom(LatLng(evento.latitude, evento.longitude), 15f)
-        }
+        if (evento.latitude != 0.0 && evento.longitude != 0.0) {
 
-        GoogleMap(
-            modifier = Modifier
-                .fillMaxSize(),
-            onMapLoaded = { mapaCarregado = true },
-            googleMapOptionsFactory = {
-                GoogleMapOptions().mapId("mapa-evento-${evento.titulo}")
-            },
-            cameraPositionState = posicaoCamera,
-        ) {
-            Marker(
-                state = rememberMarkerState(position = LatLng(evento.latitude, evento.longitude)),
-                title = evento.titulo,
-                tag = evento,
-                onClick = { marker ->
-                    false
+            val posicaoCamera = rememberCameraPositionState {
+                position =
+                    CameraPosition.fromLatLngZoom(LatLng(evento.latitude, evento.longitude), 15f)
+            }
+
+            GoogleMap(
+                modifier = Modifier
+                    .fillMaxSize(),
+                onMapLoaded = { mapaCarregado = true },
+                googleMapOptionsFactory = {
+                    GoogleMapOptions().mapId("mapa-evento-${evento.titulo}")
                 },
-            )
+                cameraPositionState = posicaoCamera,
+            ) {
+                Marker(
+                    state = rememberMarkerState(
+                        position = LatLng(
+                            evento.latitude,
+                            evento.longitude
+                        )
+                    ),
+                    title = evento.titulo,
+                    tag = evento,
+                    onClick = { marker ->
+                        false
+                    },
+                )
+            }
         }
     }
+
 }
 

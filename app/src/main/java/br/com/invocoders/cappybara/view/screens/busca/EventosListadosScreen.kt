@@ -25,7 +25,7 @@ import br.com.invocoders.cappybara.R
 @Composable
 fun EventosListadosScreen() {
     Column {
-        Row(modifier = Modifier) {
+        Row {
             Card(
                 modifier = Modifier.padding(end = 15.dp),
                 elevation = CardDefaults.cardElevation(8.dp),
