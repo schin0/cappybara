@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
+import br.com.invocoders.cappybara.view.components.home.EventosPertoDeMimComponent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,8 +50,6 @@ fun BuscaScreen(navController: NavController) {
     val scrollState = rememberScrollState(0)
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
     var showDefault by remember { mutableStateOf(false) }
-
-    // TODO: Usar CardEventoPertoComponent
 
     Column(
         modifier = Modifier
@@ -163,14 +162,10 @@ fun BuscaScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(32.dp))
 
-        EventosListadosScreen()
+        EventosPertoDeMimComponent(navController, 2)
 
         Spacer(modifier = Modifier.height(18.dp))
 
         TaBombandoScreen()
     }
 }
-
-
-
-

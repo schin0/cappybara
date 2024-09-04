@@ -31,7 +31,7 @@ fun listarEventosDetalhes(eventoViewModel: EventoViewModel = viewModel()): List<
 }
 
 @Composable
-fun listarEventosProximos(eventoViewModel: EventoViewModel = viewModel()): List<EventoResumo> {
+fun listarEventosProximos(eventoViewModel: EventoViewModel = viewModel(), itens: Int): List<EventoResumo> {
     val eventosProximos by eventoViewModel.eventosProximos
     val context = LocalContext.current
 
@@ -41,7 +41,7 @@ fun listarEventosProximos(eventoViewModel: EventoViewModel = viewModel()): List<
         }
 
         localizacaoAtual?.let {
-            eventoViewModel.listarEventosProximos(it.latitude, it.longitude)
+            eventoViewModel.listarEventosProximos(it.latitude, it.longitude, itens)
         }
     }
 

@@ -10,14 +10,14 @@ import androidx.navigation.NavController
 import br.com.invocoders.cappybara.core.services.listarEventosProximos
 
 @Composable
-fun EventosPertoDeMimComponent(navController: NavController) {
+fun EventosPertoDeMimComponent(navController: NavController, itens: Int = 5) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        val eventosPerto = listarEventosProximos()
+        val eventosPerto = listarEventosProximos(itens = itens)
 
         if (eventosPerto.isNotEmpty()) {
             eventosPerto.forEach {
