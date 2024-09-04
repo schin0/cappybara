@@ -54,12 +54,12 @@ class EventoViewModel : ViewModel() {
     private val _eventosProximos = mutableStateOf<List<EventoResumo>>(emptyList())
     var eventosProximos: State<List<EventoResumo>> = _eventosProximos
 
-    fun listarEventosProximos(latitude: Double, longitude: Double) {
+    fun listarEventosProximos(latitude: Double, longitude: Double, itens: Int) {
         viewModelScope.launch {
             try {
                 val raioEmKm = 100.0
                 val call = EventoRetrofitFactory().eventoRepository()
-                    .listarEventosProximos(latitude, longitude, raioEmKm)
+                    .listarEventosProximos(latitude, longitude, raioEmKm, itens = itens)
 
                 call.enqueue(object : Callback<List<EventoResumo>> {
                     override fun onResponse(
