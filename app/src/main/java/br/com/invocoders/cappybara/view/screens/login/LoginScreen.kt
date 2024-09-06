@@ -55,7 +55,7 @@ fun LoginScreen(navController: NavController, contexto: Context) {
             .padding(top = 40.dp, start = 15.dp, end = 15.dp),
     ) {
         LogoComponent()
-        Column {
+        Column() {
             Spacer(modifier = Modifier.height(40.dp))
 
             Text(
@@ -80,7 +80,7 @@ fun LoginScreen(navController: NavController, contexto: Context) {
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(65.dp),
                 singleLine = true,
                 label = {
                     Row(
@@ -114,7 +114,8 @@ fun LoginScreen(navController: NavController, contexto: Context) {
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(65.dp)
+                    ,
                 label = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically
@@ -193,6 +194,13 @@ fun LoginScreen(navController: NavController, contexto: Context) {
                 text = "Entrar",
                 color = Color.White,
             )
+        }
+        Button(
+            onClick = {
+                navController.navigate("cadastroUsuario")
+            }
+        ) {
+            Text("Cria Conta")
         }
 
     }

@@ -21,6 +21,8 @@ import br.com.invocoders.cappybara.view.screens.inicio.InicioScreen
 import br.com.invocoders.cappybara.view.screens.busca.BuscaScreen
 import br.com.invocoders.cappybara.view.screens.login.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
+import br.com.invocoders.cappybara.view.screens.cadastroUsuario.CadastroUsuarioScreen
+import br.com.invocoders.cappybara.view.screens.preferenciaUsuario.PreferenciaUsuarioScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +51,13 @@ class MainActivity : ComponentActivity() {
                         composable("login") {
                             LoginScreen(navController, contexto)
                         }
+                        composable("cadastroUsuario") {
+                            CadastroUsuarioScreen(navController)
+                        }
+                        composable("preferenciaUsuario") {
+                            PreferenciaUsuarioScreen(navController)
+                        }
+
 
                         composable("home") {
                             HomeScreen(navController)
