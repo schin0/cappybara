@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import br.com.invocoders.cappybara.view.screens.detalheevento.DetalhesEventoScreen
 import br.com.invocoders.cappybara.view.screens.home.HomeScreen
 import br.com.invocoders.cappybara.view.screens.inicio.InicioScreen
@@ -23,6 +24,8 @@ import br.com.invocoders.cappybara.view.screens.login.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 import br.com.invocoders.cappybara.view.screens.cadastroUsuario.CadastroUsuarioScreen
 import br.com.invocoders.cappybara.view.screens.preferenciaUsuario.PreferenciaUsuarioScreen
+import br.com.invocoders.cappybara.view.screens.detalheevento.RotaScreen
+import com.google.gson.Gson
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,10 +70,21 @@ class MainActivity : ComponentActivity() {
                             BuscaScreen(navController)
                         }
 
-                        composable("detalhesEventoNovo/{id}") {
+                        composable("detalhesEvento/{id}") {
                             val eventoId = it.arguments?.getString("id")
                             eventoId?.toLong()
                                 ?.let { id -> DetalhesEventoScreen(id, navController) }
+                        }
+
+                        composable("rotaEvento/?eventoDetalhe={eventoDetalhe}") { backStackEntry->
+                            val jsonEvento = backStackEntry.arguments?.getString("eventoDetalhe")
+
+                            if (jsonEvento != null) {
+                                val eventoDetalhe = Gson().fromJson(jsonEvento, EventoDetalhe::class.java)
+
+                                RotaScreen(eventoDetalhe, navController)
+                            }
+
                         }
                     }
                 }

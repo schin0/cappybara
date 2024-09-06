@@ -72,7 +72,7 @@ fun CardEventoComponent(evento: EventoResumo, navController: NavController) {
                 color = Color(0xFFFFFFFF),
                 shape = RoundedCornerShape(size = 18.dp)
             ).clickable {
-                navController.navigate("detalhesEventoNovo/${evento.id}")
+                 navController.navigate("detalhesEvento/${evento.id}")
             },
         colors = CardColors(
             containerColor = Color(0xFFFFFFFF),

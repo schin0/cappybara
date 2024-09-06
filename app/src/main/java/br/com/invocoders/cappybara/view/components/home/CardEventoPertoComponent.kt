@@ -44,11 +44,12 @@ import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.core.services.obterEnderecoTexto
+import br.com.invocoders.cappybara.core.utils.abreviarDuracao
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
 
 @Composable
-fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController) {
+fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController, duracaoRota: String? = null, distanciaRota: String? = null) {
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
@@ -62,7 +63,8 @@ fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController)
             .fillMaxWidth()
             .height(112.dp)
             .clickable {
-                navController.navigate("detalhesEventoNovo/${evento.id}")
+                if (duracaoRota == null && distanciaRota == null)
+                    navController.navigate("detalhesEvento/${evento.id}")
             },
         shape = RoundedCornerShape(size = 18.dp),
         colors = CardColors(
@@ -102,6 +104,7 @@ fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController)
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    // TODO: Ajustar data
                     Text(
                         text = "11 JUL - QUI - 15h00",
                         style = TextStyle(
@@ -133,6 +136,22 @@ fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController)
                             color = Color(0xFF120D26),
                         )
                     )
+                }
+
+                if (duracaoRota != null && distanciaRota != null) {
+                    Row {
+                        Text(
+                            text = "${abreviarDuracao(duracaoRota)} ($distanciaRota)",
+                            style = TextStyle(
+                                fontSize = 15.sp,
+                                fontFamily = roboto,
+                                fontWeight = FontWeight(500),
+                                color = Color(0xFF120D26),
+                            ),
+                            modifier = Modifier
+                                .padding(5.dp)
+                        )
+                    }
                 }
 
                 Row(
