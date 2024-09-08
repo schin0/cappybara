@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -25,8 +26,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -63,6 +63,8 @@ dependencies {
     implementation(libs.androidx.navigation)
     implementation(libs.play.services.location)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -75,6 +77,10 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.kotlinx.coroutines.play.services)
     implementation(libs.jakewharton.retrofit2.kotlin.coroutines.adapter)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.core)
+
+    implementation(libs.play.services.auth)
 
     implementation(libs.maps.compose)
     implementation(libs.maps.compose.utils)
