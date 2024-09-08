@@ -2,6 +2,7 @@ package br.com.invocoders.cappybara.view.screens.login
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -195,13 +196,13 @@ fun LoginScreen(navController: NavController, contexto: Context) {
                 color = Color.White,
             )
         }
-        Button(
-            onClick = {
-                navController.navigate("cadastroUsuario")
-            }
-        ) {
-            Text("Cria Conta")
-        }
+        Text("Ainda não possui uma conta !")
+        Text(
+            text = "Crie uma Conta",
+            color = Color(0xFFFD3A84),
+            modifier = Modifier
+                .clickable { navController.navigate("cadastroUsuario") }
+        )
 
     }
 }

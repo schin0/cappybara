@@ -23,7 +23,7 @@ import br.com.invocoders.cappybara.view.screens.busca.BuscaScreen
 import br.com.invocoders.cappybara.view.screens.login.LoginScreen
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 import br.com.invocoders.cappybara.view.screens.cadastroUsuario.CadastroUsuarioScreen
-import br.com.invocoders.cappybara.view.screens.preferenciaUsuario.PreferenciaUsuarioScreen
+import br.com.invocoders.cappybara.view.screens.cadastroUsuario.preferenciaUsuario.PreferenciaUsuarioScreen
 import br.com.invocoders.cappybara.view.screens.detalheevento.RotaScreen
 import com.google.gson.Gson
 

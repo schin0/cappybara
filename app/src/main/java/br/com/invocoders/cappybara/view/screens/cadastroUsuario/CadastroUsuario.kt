@@ -1,6 +1,7 @@
 package br.com.invocoders.cappybara.view.screens.cadastroUsuario
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -14,8 +15,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
@@ -38,11 +42,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.core.services.LoginService
+import br.com.invocoders.cappybara.core.services.cadastrarUsuario
+import br.com.invocoders.cappybara.data.enuns.RoleEnum
+import br.com.invocoders.cappybara.model.Usuario
 import br.com.invocoders.cappybara.view.components.cadastroUsuario.LinhasCarregamento
 import br.com.invocoders.cappybara.view.components.shared.BotaoVoltar
 import br.com.invocoders.cappybara.view.screens.login.mostrarMensagemErro
@@ -60,7 +70,10 @@ fun CadastroUsuarioScreen(navController: NavController){
     var data by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
+
     var confirmarSenha by remember { mutableStateOf("") }
+    var usuario = Usuario(nome, email, senha, data, role = "ORGANIZADOR")
 
     var abrirDatePicker by remember { mutableStateOf(false) }
 
@@ -153,7 +166,7 @@ fun CadastroUsuarioScreen(navController: NavController){
                     },  confirmButton = {
                         Button(onClick = {
                            data = state.selectedDateMillis?.let { millis ->
-                               Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault()).toLocalDateTime()
+                               Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault()).toLocalDate()
                            }.toString()
                                 abrirDatePicker = false
                             abrirDatePicker = false
@@ -186,7 +199,7 @@ fun CadastroUsuarioScreen(navController: NavController){
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Abc@email.com")
+                        Text("Email")
                     }
                 },
                 maxLines = 1,
@@ -222,7 +235,26 @@ fun CadastroUsuarioScreen(navController: NavController){
                         Text("Digite sua senha")
                     }
                 },
-                maxLines = 1,
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                trailingIcon = {
+                    val image = if (passwordVisible) {
+                        painterResource(id = R.drawable.baseline_visibility_24) // Substitua pelo seu ícone de visibilidade "on"
+                    } else {
+                        painterResource(id = R.drawable.baseline_visibility_off_24) // Substitua pelo seu ícone de visibilidade "off"
+                    }
+
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(
+                            painter = image,
+                            contentDescription = if (passwordVisible) "Hide password" else "Show password",
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+
+
+                },
+                    maxLines = 1,
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,
@@ -255,6 +287,25 @@ fun CadastroUsuarioScreen(navController: NavController){
                         Text("Confirme sua senha")
                     }
                 },
+                visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                trailingIcon = {
+                    val image = if (passwordVisible) {
+                        painterResource(id = R.drawable.baseline_visibility_24) // Substitua pelo seu ícone de visibilidade "on"
+                    } else {
+                        painterResource(id = R.drawable.baseline_visibility_off_24) // Substitua pelo seu ícone de visibilidade "off"
+                    }
+
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                        Icon(
+                            painter = image,
+                            contentDescription = if (passwordVisible) "Hide password" else "Show password",
+                            modifier = Modifier.size(24.dp)
+                        )
+                    }
+
+
+                },
                 maxLines = 1,
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
@@ -265,6 +316,7 @@ fun CadastroUsuarioScreen(navController: NavController){
             )
             Button(
                 onClick = {
+                    cadastrarUsuario(usuario)
                     navController.navigate("PreferenciaUsuario")
                 },
                 modifier = Modifier

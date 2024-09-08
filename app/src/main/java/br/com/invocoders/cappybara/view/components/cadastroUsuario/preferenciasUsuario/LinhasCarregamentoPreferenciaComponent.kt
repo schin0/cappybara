@@ -1,4 +1,4 @@
-package br.com.invocoders.cappybara.view.components.preferenciasUsuario
+package br.com.invocoders.cappybara.view.components.cadastroUsuario.preferenciasUsuario
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
