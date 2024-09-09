@@ -120,7 +120,7 @@ fun CadastroUsuarioScreen(navController: NavController) {
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_calendar_month_24),
+                            painter = painterResource(id = R.drawable.baseline_calendar_month_24_black),
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )

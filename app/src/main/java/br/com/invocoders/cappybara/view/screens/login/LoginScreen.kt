@@ -125,7 +125,7 @@ fun LoginScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_email_24),
+                            painter = painterResource(id = R.drawable.baseline_email_24_white),
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
@@ -158,7 +158,7 @@ fun LoginScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_password_24),
+                            painter = painterResource(id = R.drawable.baseline_password_24_white),
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
