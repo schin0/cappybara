@@ -6,21 +6,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.invocoders.cappybara.data.api.CategoriaEventoRetrofitFactory
-import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.model.CategoriaEvento
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PreferenciaViewModel: ViewModel() {
+class PreferenciaViewModel : ViewModel() {
     private val _categoriaEvento = mutableStateOf<List<CategoriaEvento>>(emptyList())
     var categoriaEvento: State<List<CategoriaEvento>> = _categoriaEvento
 
     fun listarCategoriaEvento() {
         viewModelScope.launch {
             try {
-                val call = CategoriaEventoRetrofitFactory().categoriaEventoRepository().listarCategoriaEvento()
+                val call = CategoriaEventoRetrofitFactory().categoriaEventoRepository()
+                    .listarCategoriaEvento()
 
                 call.enqueue(object : Callback<List<CategoriaEvento>> {
                     override fun onResponse(

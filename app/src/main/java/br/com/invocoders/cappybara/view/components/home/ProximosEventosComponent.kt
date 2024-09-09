@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import br.com.invocoders.cappybara.view.components.shared.CardEventoComponent
 import br.com.invocoders.cappybara.core.services.listarEventosDetalhes
+import br.com.invocoders.cappybara.view.components.shared.CardEventoComponent
 
 @Composable
 fun ProximosEventosComponent(navController: NavController) {

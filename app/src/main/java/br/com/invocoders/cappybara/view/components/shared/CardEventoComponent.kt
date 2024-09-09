@@ -45,8 +45,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.core.services.obterEnderecoTexto
+import br.com.invocoders.cappybara.data.model.EventoResumo
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime

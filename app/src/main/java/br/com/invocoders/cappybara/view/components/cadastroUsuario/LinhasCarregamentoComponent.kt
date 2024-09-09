@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,10 +18,7 @@ fun LinhasCarregamento(){
         modifier = Modifier
             .fillMaxWidth()
             .height(4.dp)
-
-
     ) {
-        // Linha azul
         Box(
             modifier = Modifier
                 .weight(1f)
@@ -30,10 +26,8 @@ fun LinhasCarregamento(){
                 .background(Color(0xFF586BFF))
         )
 
+        Spacer(modifier = Modifier.width(15.dp))
 
-        Spacer(modifier = Modifier.width(15.dp)) // Espaço entre as linhas
-
-        // Linha cinza
         Box(
             modifier = Modifier
                 .weight(1f)

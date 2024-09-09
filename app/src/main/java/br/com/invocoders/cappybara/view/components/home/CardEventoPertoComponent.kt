@@ -42,9 +42,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.core.services.obterEnderecoTexto
 import br.com.invocoders.cappybara.core.utils.abreviarDuracao
+import br.com.invocoders.cappybara.data.model.EventoResumo
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
 

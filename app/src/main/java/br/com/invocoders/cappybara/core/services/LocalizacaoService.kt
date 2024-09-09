@@ -9,8 +9,8 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class LocalizacaoService(context: Context) {
     private var fusedLocationClient: FusedLocationProviderClient =

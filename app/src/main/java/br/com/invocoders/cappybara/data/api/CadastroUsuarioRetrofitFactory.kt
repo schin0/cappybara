@@ -1,7 +1,6 @@
 package br.com.invocoders.cappybara.data.api
 
 import br.com.invocoders.cappybara.data.repository.CadastroUsuarioRepository
-import br.com.invocoders.cappybara.data.repository.CategoriaEventoRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

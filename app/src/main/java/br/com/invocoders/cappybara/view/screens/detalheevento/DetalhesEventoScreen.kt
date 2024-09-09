@@ -1,6 +1,5 @@
 package br.com.invocoders.cappybara.view.screens.detalheevento
 
-import com.google.gson.Gson
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -60,6 +59,7 @@ import br.com.invocoders.cappybara.core.utils.formatarDataHora
 import br.com.invocoders.cappybara.core.utils.mostrarMensagemEmConstrucao
 import br.com.invocoders.cappybara.view.components.shared.ImagemUsuarioComponent
 import coil.compose.AsyncImage
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale

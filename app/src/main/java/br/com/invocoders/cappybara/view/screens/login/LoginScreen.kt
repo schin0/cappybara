@@ -93,7 +93,7 @@ fun LoginScreen(
             .padding(top = 40.dp, start = 15.dp, end = 15.dp),
     ) {
         LogoComponent()
-        Column() {
+        Column {
             Spacer(modifier = Modifier.height(40.dp))
 
             Text(
@@ -125,7 +125,7 @@ fun LoginScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_email_24),
+                            painter = painterResource(id = R.drawable.baseline_email_24_white),
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
@@ -152,14 +152,13 @@ fun LoginScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(65.dp)
-                    ,
+                    .height(65.dp),
                 label = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_password_24),
+                            painter = painterResource(id = R.drawable.baseline_password_24_white),
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
@@ -274,13 +273,6 @@ fun LoginScreen(
                 )
             )
         }
-        Text("Ainda não possui uma conta !")
-        Text(
-            text = "Crie uma Conta",
-            color = Color(0xFFFD3A84),
-            modifier = Modifier
-                .clickable { navController.navigate("cadastroUsuario") }
-        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -333,6 +325,22 @@ fun LoginScreen(
                     )
                 }
             }
+        }
+
+        Spacer(modifier = Modifier.height(40.dp))
+
+        Row(
+            modifier = Modifier.padding(horizontal = 15.dp),
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text("Ainda não possui uma conta? ", color = Color.Black)
+            Text(
+                text = "Cadastre-se",
+                color = Color(0xFFFD3A84),
+                modifier = Modifier
+                    .clickable { navController.navigate("cadastroUsuario") }
+            )
         }
 
     }

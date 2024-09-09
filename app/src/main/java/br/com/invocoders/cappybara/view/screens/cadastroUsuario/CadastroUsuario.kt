@@ -1,12 +1,8 @@
 package br.com.invocoders.cappybara.view.screens.cadastroUsuario
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,10 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
@@ -49,23 +41,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.core.services.LoginService
 import br.com.invocoders.cappybara.core.services.cadastrarUsuario
-import br.com.invocoders.cappybara.data.enuns.RoleEnum
 import br.com.invocoders.cappybara.model.Usuario
 import br.com.invocoders.cappybara.view.components.cadastroUsuario.LinhasCarregamento
 import br.com.invocoders.cappybara.view.components.shared.BotaoVoltar
-import br.com.invocoders.cappybara.view.screens.login.mostrarMensagemErro
-import br.com.invocoders.cappybara.view.screens.login.redirecionarParaHome
 import kotlinx.coroutines.flow.collectLatest
 import java.time.Instant
-import java.time.LocalDateTime
 import java.time.ZoneId
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CadastroUsuarioScreen(navController: NavController){
+fun CadastroUsuarioScreen(navController: NavController) {
     var nome by remember { mutableStateOf("") }
     var data by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -73,14 +59,20 @@ fun CadastroUsuarioScreen(navController: NavController){
     var passwordVisible by remember { mutableStateOf(false) }
 
     var confirmarSenha by remember { mutableStateOf("") }
-    var usuario = Usuario(nome, email, senha, data, role = "ORGANIZADOR")
+    val usuario = Usuario(nome, email, senha, data, role = "ORGANIZADOR")
 
     var abrirDatePicker by remember { mutableStateOf(false) }
 
-    Column (modifier = Modifier.padding(20.dp)){
-
+    Column(modifier = Modifier.padding(20.dp)) {
         BotaoVoltar(navController)
-        Text(text = "Crie a sua Conta", color = Color.Black, fontSize = 22.sp, fontWeight = FontWeight.Bold , modifier = Modifier.padding(bottom = 30.dp))
+
+        Text(
+            text = "Crie sua Conta",
+            color = Color.Black,
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 30.dp)
+        )
         LinhasCarregamento()
         Column(modifier = Modifier.padding(top = 35.dp)) {
             TextField(
@@ -90,8 +82,7 @@ fun CadastroUsuarioScreen(navController: NavController){
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(65.dp)
-                    ,
+                    .height(65.dp),
                 singleLine = true,
                 label = {
                     Row(
@@ -129,7 +120,7 @@ fun CadastroUsuarioScreen(navController: NavController){
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
-                            painter = painterResource(id = R.drawable.baseline_calendar_month_24),
+                            painter = painterResource(id = R.drawable.baseline_calendar_month_24_black),
                             contentDescription = null,
                             modifier = Modifier.size(24.dp)
                         )
@@ -142,7 +133,7 @@ fun CadastroUsuarioScreen(navController: NavController){
                 }.also {
                     LaunchedEffect(it) {
                         it.interactions.collectLatest { interaction ->
-                            if(interaction is PressInteraction.Release)
+                            if (interaction is PressInteraction.Release)
                                 abrirDatePicker = true
                         }
                     }
@@ -163,12 +154,13 @@ fun CadastroUsuarioScreen(navController: NavController){
                 DatePickerDialog(
                     onDismissRequest = {
                         abrirDatePicker = false
-                    },  confirmButton = {
+                    }, confirmButton = {
                         Button(onClick = {
-                           data = state.selectedDateMillis?.let { millis ->
-                               Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault()).toLocalDate()
-                           }.toString()
-                                abrirDatePicker = false
+                            data = state.selectedDateMillis?.let { millis ->
+                                Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault())
+                                    .toLocalDate()
+                            }.toString()
+                            abrirDatePicker = false
                             abrirDatePicker = false
                         }) {
                             Text("selecionar")
@@ -254,7 +246,7 @@ fun CadastroUsuarioScreen(navController: NavController){
 
 
                 },
-                    maxLines = 1,
+                maxLines = 1,
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color.White,
                     unfocusedContainerColor = Color.White,

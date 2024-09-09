@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -79,14 +78,12 @@ dependencies {
     implementation(libs.jakewharton.retrofit2.kotlin.coroutines.adapter)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.core)
-
     implementation(libs.play.services.auth)
 
     implementation(libs.maps.compose)
     implementation(libs.maps.compose.utils)
     implementation(libs.maps.compose.widgets)
     implementation(libs.coil.compose)
-
 }
 
 secrets {
