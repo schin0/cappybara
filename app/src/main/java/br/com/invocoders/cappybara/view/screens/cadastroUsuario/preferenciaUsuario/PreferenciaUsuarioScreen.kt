@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.invocoders.cappybara.core.services.cadastrarUsuario
 import br.com.invocoders.cappybara.core.services.listarCategoriaEvento
 import br.com.invocoders.cappybara.view.components.cadastroUsuario.preferenciasUsuario.CardsPreferenciaUsuarioComponent
 import br.com.invocoders.cappybara.view.components.cadastroUsuario.preferenciasUsuario.LinhasCarregamentoPreferencia
@@ -68,6 +70,7 @@ fun PreferenciaUsuarioScreen(navController: NavController) {
         bottomBar = {
             BottomAppBar(
                 modifier = Modifier.height(130.dp),
+                containerColor = Color.White,
                 content = {
                     Button(
                         onClick = {
@@ -75,13 +78,20 @@ fun PreferenciaUsuarioScreen(navController: NavController) {
                         },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(60.dp)
+                            .padding(36.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            Color(0xFF5669FF)
+                        )
                     ) {
-                        Text(text = "Criar Conta")
+                        Text(
+                            text = "Criar Conta",
+                            color = Color.White,
+                        )
                     }
                 }
             )
-        }
+        },
+        containerColor = Color.White
     )
 
 }

@@ -54,13 +54,14 @@ class MainActivity : ComponentActivity() {
                         composable("login") {
                             LoginScreen(navController, contexto)
                         }
+
                         composable("cadastroUsuario") {
                             CadastroUsuarioScreen(navController)
                         }
+
                         composable("preferenciaUsuario") {
                             PreferenciaUsuarioScreen(navController)
                         }
-
 
                         composable("home") {
                             HomeScreen(navController)
