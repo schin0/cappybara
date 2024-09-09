@@ -7,7 +7,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import br.com.invocoders.cappybara.model.CategoriaEvento
 import br.com.invocoders.cappybara.viewmodel.PreferenciaViewModel
 
-
 @Composable
 fun listarCategoriaEvento(categoriaViewModel: PreferenciaViewModel = viewModel()): List<CategoriaEvento> {
     val categoria by categoriaViewModel.categoriaEvento
