@@ -1,12 +1,13 @@
 package br.com.invocoders.cappybara.core.services
 
+import br.com.invocoders.cappybara.BuildConfig
 import br.com.invocoders.cappybara.data.api.GoogleMapsRetrofitFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 suspend fun obterEnderecoTexto(latitude: Double, longitude: Double): String {
     return withContext(Dispatchers.IO) {
-        val apiKey = ""
+        val apiKey = BuildConfig.MAPS_API_KEY
         val response = GoogleMapsRetrofitFactory().googleMapsRepository().obterEndereco("$latitude,$longitude", apiKey)
 
         if (response.isSuccessful) {

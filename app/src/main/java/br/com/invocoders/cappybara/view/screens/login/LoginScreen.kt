@@ -47,6 +47,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import br.com.invocoders.cappybara.BuildConfig
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.core.services.LoginService
 import br.com.invocoders.cappybara.view.components.login.LogoComponent
@@ -68,7 +69,7 @@ fun LoginScreen(
     var checked by remember { mutableStateOf(true) }
     var rememberMe by remember { mutableStateOf(false) }
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
-    val token = ""
+    val token = BuildConfig.TOKEN_FIREBASE
     val context = LocalContext.current
 
     val launcher =
