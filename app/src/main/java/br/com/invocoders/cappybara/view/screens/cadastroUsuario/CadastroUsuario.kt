@@ -64,8 +64,8 @@ fun CadastroUsuarioScreen(navController: NavController) {
     var abrirDatePicker by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.padding(20.dp)) {
-
         BotaoVoltar(navController)
+
         Text(
             text = "Crie sua Conta",
             color = Color.Black,

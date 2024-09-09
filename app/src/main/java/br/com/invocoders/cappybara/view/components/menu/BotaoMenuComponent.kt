@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.model.MenuItem
 import br.com.invocoders.cappybara.core.utils.mostrarMensagemEmConstrucao
+import br.com.invocoders.cappybara.model.MenuItem
 
 @Composable
 fun BotaoMenuComponent(item: MenuItem, selecionado: Boolean, navController: NavController) {

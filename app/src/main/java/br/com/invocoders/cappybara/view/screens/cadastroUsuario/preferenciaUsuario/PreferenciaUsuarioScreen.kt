@@ -53,7 +53,7 @@ fun PreferenciaUsuarioScreen(navController: NavController) {
                 LinhasCarregamentoPreferencia()
                 Spacer(modifier = Modifier.height(20.dp))
                 LazyVerticalGrid(
-                    columns = GridCells.Fixed(2), // Define 2 colunas
+                    columns = GridCells.Fixed(2),
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp),
