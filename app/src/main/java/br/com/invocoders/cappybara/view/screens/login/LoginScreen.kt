@@ -7,6 +7,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -92,7 +93,7 @@ fun LoginScreen(
             .padding(top = 40.dp, start = 15.dp, end = 15.dp),
     ) {
         LogoComponent()
-        Column {
+        Column() {
             Spacer(modifier = Modifier.height(40.dp))
 
             Text(
@@ -117,7 +118,7 @@ fun LoginScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(65.dp),
                 singleLine = true,
                 label = {
                     Row(
@@ -151,7 +152,8 @@ fun LoginScreen(
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp),
+                    .height(65.dp)
+                    ,
                 label = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically
@@ -272,6 +274,13 @@ fun LoginScreen(
                 )
             )
         }
+        Text("Ainda não possui uma conta !")
+        Text(
+            text = "Crie uma Conta",
+            color = Color(0xFFFD3A84),
+            modifier = Modifier
+                .clickable { navController.navigate("cadastroUsuario") }
+        )
 
         Spacer(modifier = Modifier.height(10.dp))
 
