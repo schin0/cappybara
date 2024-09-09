@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import br.com.invocoders.cappybara.BuildConfig
 import br.com.invocoders.cappybara.core.services.LocalizacaoService
 import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import br.com.invocoders.cappybara.data.model.EventoResumo
@@ -71,7 +72,7 @@ fun RotaScreen(
         ) {
             if (origem != null) {
                 RotaComponent(
-                    key = "API_KEY",
+                    key = BuildConfig.MAPS_API_KEY,
                     localizacaoAtual = origem,
                     localizacaoEvento = destino,
                     deveConsiderarMarcadorInicial = true,
