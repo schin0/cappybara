@@ -23,7 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import br.com.invocoders.cappybara.core.services.cadastrarUsuario
 import br.com.invocoders.cappybara.core.services.listarCategoriaEvento
 import br.com.invocoders.cappybara.view.components.cadastroUsuario.preferenciasUsuario.CardsPreferenciaUsuarioComponent
 import br.com.invocoders.cappybara.view.components.cadastroUsuario.preferenciasUsuario.LinhasCarregamentoPreferencia

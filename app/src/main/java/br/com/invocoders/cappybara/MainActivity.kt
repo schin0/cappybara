@@ -71,6 +71,10 @@ class MainActivity : ComponentActivity() {
                             BuscaScreen(navController)
                         }
 
+                        composable("cadastroEvento") {
+                            CadastroEventoScreen(navController)
+                        }
+
                         composable("detalhesEvento/{id}") {
                             val eventoId = it.arguments?.getString("id")
                             eventoId?.toLong()
