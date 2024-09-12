@@ -30,7 +30,8 @@ class RotaViewModel : ViewModel() {
         key: String,
         localizacaoAtual: LatLng,
         localizacaoEvento: LatLng,
-        deveConsiderarAlternativas: Boolean
+        deveConsiderarAlternativas: Boolean,
+        modo: String
     ) {
         val tag = "Erro Rota:"
 
@@ -41,7 +42,7 @@ class RotaViewModel : ViewModel() {
                 val request = rotaApi.getRoute(
                     "${localizacaoAtual.latitude},${localizacaoAtual.longitude}",
                     "${localizacaoEvento.latitude},${localizacaoEvento.longitude}",
-                    key, deveConsiderarAlternativas
+                    key, deveConsiderarAlternativas, modo
                 )
                 val retorno = CoroutineScope(Dispatchers.IO).async {
                     if (request.isSuccessful)

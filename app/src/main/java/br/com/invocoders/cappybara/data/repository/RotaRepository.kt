@@ -11,6 +11,7 @@ interface RotaRepository {
         @Query("origin") origin: String,
         @Query("destination") destination: String,
         @Query("key") key: String,
-        @Query("alternatives") alternatives:Boolean
+        @Query("alternatives") alternatives:Boolean,
+        @Query("mode") mode: String
     ): Response<ResponseBody>
 }
