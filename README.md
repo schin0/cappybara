@@ -51,6 +51,13 @@ O projeto é dividido em duas partes principais: o backend, implementado em Java
     -   `local.defaults.properties`
     -   `secrets.properties`
 
+### Open Weather API ❄️
+-   Crie uma API Key no Open Weather, habilitando o seguinte serviço:
+    -   **Weather**: Obtém o clima atual e a previsão.
+-   Substitua a API Key nos arquivos (WEATHER_MAP_API_KEY=**colarChaveDaApiAqui**):
+    -   `local.defaults.properties`
+    -   `secrets.properties`
+
 
 ## 🔗 Links importantes
 
