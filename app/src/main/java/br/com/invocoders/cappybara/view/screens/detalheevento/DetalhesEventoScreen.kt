@@ -57,6 +57,7 @@ import br.com.invocoders.cappybara.core.services.obterEnderecoTexto
 import br.com.invocoders.cappybara.core.services.obterEventoDetalhePorId
 import br.com.invocoders.cappybara.core.utils.formatarDataHora
 import br.com.invocoders.cappybara.core.utils.mostrarMensagemEmConstrucao
+import br.com.invocoders.cappybara.view.components.shared.ClimaComponent
 import br.com.invocoders.cappybara.view.components.shared.ImagemUsuarioComponent
 import coil.compose.AsyncImage
 import com.google.gson.Gson
@@ -494,7 +495,10 @@ fun DetalhesEventoScreen(eventoId: Long, navController: NavController) {
 
                                     LaunchedEffect(Unit) {
                                         scope.launch {
-                                            endereco = obterEnderecoTexto(evento.latitude, evento.longitude)
+                                            endereco = obterEnderecoTexto(
+                                                evento.latitude,
+                                                evento.longitude
+                                            )
                                         }
                                     }
 
@@ -528,6 +532,18 @@ fun DetalhesEventoScreen(eventoId: Long, navController: NavController) {
                     ) {
                         MapaScreen(evento = (evento))
                     }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                evento.clima?.let {
+                    ClimaComponent(
+                        it.temperaturaMin,
+                        it.temperaturaMax,
+                        it.descricao,
+                        "http://openweathermap.org/img/w/${it.iconeId}.png",
+                        it.dica
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -622,7 +638,6 @@ fun DetalhesEventoScreen(eventoId: Long, navController: NavController) {
 
                 Spacer(modifier = Modifier.height(20.dp))
             }
-
         }
 
         Box(

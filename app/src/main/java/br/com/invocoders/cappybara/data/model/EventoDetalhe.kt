@@ -1,5 +1,7 @@
 package br.com.invocoders.cappybara.data.model
 
+import br.com.invocoders.cappybara.model.Clima
+
 data class EventoDetalhe(
     var id: Long,
     val titulo: String,
@@ -11,5 +13,6 @@ data class EventoDetalhe(
     val artistas: String,
     val dataHoraInicio: String,
     val dataHoraTermino: String,
-    val imagens: List<String>
+    val imagens: List<String>,
+    val clima: Clima?
 )
