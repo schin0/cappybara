@@ -16,18 +16,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import br.com.invocoders.cappybara.R
+import br.com.invocoders.cappybara.core.utils.mostrarMensagemEmConstrucao
 
 @Composable
 fun SelecaoLocalizacaoComponent() {
     Spacer(modifier = Modifier.height(10.dp))
+    val contexto = LocalContext.current
 
     Column {
         OutlinedButton(
-            onClick = { /* TODO: ação para exibir detalhes da localização */ },
+            onClick = {
+                mostrarMensagemEmConstrucao(contexto)
+            },
             border = BorderStroke(1.dp, Color(0xFFF0F0F0)),
             colors = ButtonDefaults.outlinedButtonColors(
                 containerColor = Color(0xFFF0F0F0),

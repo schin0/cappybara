@@ -14,6 +14,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,14 +29,31 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import br.com.invocoders.cappybara.data.model.FiltroEvento
+import br.com.invocoders.cappybara.model.CategoriaEvento
 import br.com.invocoders.cappybara.view.components.busca.CategoriaComponent
 import br.com.invocoders.cappybara.view.components.busca.SelecaoDataComponent
 import br.com.invocoders.cappybara.view.components.busca.SelecaoFaixaPrecoComponent
 import br.com.invocoders.cappybara.view.components.busca.SelecaoLocalizacaoComponent
+import com.google.gson.Gson
 
 @Composable
-fun FiltroScreen() {
+fun FiltroScreen(navController: NavController) {
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
+
+    var categoriasSelecionadas by remember { mutableStateOf<List<CategoriaEvento>>(emptyList()) }
+    var data by remember { mutableStateOf("") }
+    val valorMinimo by remember { mutableFloatStateOf(20f) }
+    var valorMaximo by remember { mutableFloatStateOf(120f) }
+
+    fun aplicarFiltros() {
+        val filtroBusca =
+            FiltroEvento(categoriasSelecionadas.map { it.id }, valorMinimo, valorMaximo, data)
+        val jsonFiltro = Gson().toJson(filtroBusca)
+
+        navController.navigate("retornoBusca/?filtroEvento=$jsonFiltro")
+    }
 
     Column(
         horizontalAlignment = Alignment.Start,
@@ -56,7 +78,9 @@ fun FiltroScreen() {
         Spacer(modifier = Modifier.height(20.dp))
 
         Row(modifier = Modifier.fillMaxWidth()) {
-            CategoriaComponent()
+            CategoriaComponent(onCategoriasSelecionadas = { selecionadas ->
+                categoriasSelecionadas = selecionadas
+            })
         }
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -74,7 +98,9 @@ fun FiltroScreen() {
             )
         }
 
-        SelecaoDataComponent()
+        SelecaoDataComponent(onDataSelecionada = { dataSelecionada ->
+            data = dataSelecionada
+        })
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -108,7 +134,9 @@ fun FiltroScreen() {
             )
         }
 
-        SelecaoFaixaPrecoComponent()
+        SelecaoFaixaPrecoComponent(onPrecoSelecionado = { preco ->
+            valorMaximo = preco
+        })
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -133,7 +161,9 @@ fun FiltroScreen() {
             Spacer(modifier = Modifier.width(16.dp))
 
             Button(
-                onClick = { /* TODO: ação de aplicar filtros */ },
+                onClick = {
+                    aplicarFiltros()
+                },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFF65A38),
                     contentColor = Color.White
@@ -148,3 +178,4 @@ fun FiltroScreen() {
     }
 
 }
+

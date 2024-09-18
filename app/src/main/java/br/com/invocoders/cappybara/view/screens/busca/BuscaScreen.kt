@@ -156,7 +156,7 @@ fun BuscaScreen(navController: NavController) {
                 showSheet = showDefault,
                 onDismissRequest = { showDefault = false }
             ) {
-                FiltroScreen()
+                FiltroScreen(navController)
             }
         }
 
