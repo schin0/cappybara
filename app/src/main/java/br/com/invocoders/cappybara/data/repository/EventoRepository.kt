@@ -9,7 +9,7 @@ import retrofit2.http.Query
 import java.time.LocalDate
 
 interface EventoRepository {
-    @GET("listar-resumo-evento?pagina=0&itens=2")
+    @GET("listar-resumo-evento?pagina=0&itens=5")
     fun listarEventosDetalhes(): Call<List<EventoResumo>>
 
     @GET("listar-por-raio-km")
