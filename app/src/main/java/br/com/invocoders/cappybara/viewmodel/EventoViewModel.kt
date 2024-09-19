@@ -15,6 +15,8 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 class EventoViewModel : ViewModel() {
     private val _eventosDetalhes = mutableStateOf<List<EventoResumo>>(emptyList())
@@ -236,5 +238,47 @@ class EventoViewModel : ViewModel() {
         }
     }
 
+    private val _eventosFiltrados = mutableStateOf<List<EventoResumo>>(emptyList())
+    var eventosFiltrados: State<List<EventoResumo>> = _eventosFiltrados
+
+    fun filtrarEventos(idCategoria: List<Long>, precoInicial: Float, precoFinal: Float, data: String) {
+        viewModelScope.launch {
+            try {
+                val localDate: LocalDate? = if (data.isNotEmpty()) {
+                    val formatter = DateTimeFormatter.ofPattern("d/M/yyyy")
+                    LocalDate.parse(data, formatter)
+                } else null
+
+                val call = EventoRetrofitFactory().eventoRepository()
+                    .filtrarEventos(idCategoria, precoInicial, precoFinal, localDate)
+
+                call.enqueue(object : Callback<List<EventoResumo>> {
+                    override fun onResponse(
+                        call: Call<List<EventoResumo>>,
+                        response: Response<List<EventoResumo>>
+                    ) {
+                        if (response.isSuccessful) {
+                            _eventosFiltrados.value = response.body() ?: emptyList()
+                        } else {
+                            Log.e(
+                                "TesteAqui",
+                                "Código: ${response.code()}, Mensagem: ${response.message()}"
+                            )
+                            response.errorBody()?.let { errorBody ->
+                                Log.e("TesteAqui", errorBody.string())
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<EventoResumo>>, t: Throwable) {
+                        Log.e("TesteAqui", t.message ?: "Erro desconhecido")
+                    }
+                })
+
+            } catch (e: Exception) {
+                Log.e("Erro1", e.message ?: "Erro desconhecido")
+            }
+        }
+    }
 
 }

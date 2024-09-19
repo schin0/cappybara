@@ -9,18 +9,26 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SelecaoFaixaPrecoComponent() {
+fun SelecaoFaixaPrecoComponent(onPrecoSelecionado: (Float) -> Unit) {
     Spacer(modifier = Modifier.height(10.dp))
+
+    val valorMinimo by remember { mutableFloatStateOf(20f) }
+    val valorMaximo by remember { mutableFloatStateOf(120f) }
+    var valorSelecionado by remember { mutableFloatStateOf(valorMinimo) }
 
     Column {
         Text(
-            text = "R$20-R$120",
+            text = "R$${valorMinimo.toInt()}-R$${valorSelecionado.toInt()}",
             color = Color(0xFF6F7CF5),
             fontWeight = FontWeight.Bold
         )
@@ -28,9 +36,14 @@ fun SelecaoFaixaPrecoComponent() {
         Spacer(modifier = Modifier.height(8.dp))
 
         Slider(
-            value = 0.5f,
-            onValueChange = { /* TODO: Atualizar faixa de preço */ },
-            valueRange = 0f..1f,
+            value = valorSelecionado,
+            onValueChange = { valor ->
+                valorSelecionado = valor
+            },
+            onValueChangeFinished = {
+                onPrecoSelecionado(valorSelecionado)
+            },
+            valueRange = valorMinimo..valorMaximo,
             colors = SliderDefaults.colors(
                 thumbColor = Color(0xFF6F7CF5),
                 activeTrackColor = Color(0xFF6F7CF5),
@@ -41,5 +54,6 @@ fun SelecaoFaixaPrecoComponent() {
                 .padding(end = 20.dp)
         )
     }
+
 
 }

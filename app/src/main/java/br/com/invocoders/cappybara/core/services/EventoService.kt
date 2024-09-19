@@ -5,16 +5,11 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.viewmodel.EventoViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
-fun abrirEvento(navController: NavController, destinoClique: String) {
-    navController.navigate(destinoClique)
-}
 
 @Composable
 fun listarEventosDetalhes(eventoViewModel: EventoViewModel = viewModel()): List<EventoResumo> {
@@ -24,14 +19,15 @@ fun listarEventosDetalhes(eventoViewModel: EventoViewModel = viewModel()): List<
         eventoViewModel.listarEventosDetalhes()
     }
 
-    if (eventosDetalhes.isNotEmpty())
-        return eventosDetalhes
+    if (eventosDetalhes.isNotEmpty()) return eventosDetalhes
 
     return emptyList()
 }
 
 @Composable
-fun listarEventosProximos(eventoViewModel: EventoViewModel = viewModel(), itens: Int): List<EventoResumo> {
+fun listarEventosProximos(
+    eventoViewModel: EventoViewModel = viewModel(), itens: Int
+): List<EventoResumo> {
     val eventosProximos by eventoViewModel.eventosProximos
     val context = LocalContext.current
 
@@ -54,8 +50,7 @@ fun listarEventosProximos(eventoViewModel: EventoViewModel = viewModel(), itens:
 
 @Composable
 fun obterEventoDetalhePorId(
-    id: Long,
-    eventoViewModel: EventoViewModel = viewModel()
+    id: Long, eventoViewModel: EventoViewModel = viewModel()
 ): EventoDetalhe {
     val evento by eventoViewModel.eventoDetalhe
 
@@ -64,4 +59,25 @@ fun obterEventoDetalhePorId(
     }
 
     return evento
+}
+
+@Composable
+fun filtrarEventos(
+    idCategoria: List<Long>,
+    precoInicial: Float,
+    precoFinal: Float,
+    data: String,
+    eventoViewModel: EventoViewModel = viewModel(),
+): List<EventoResumo> {
+    val eventosFiltrados by eventoViewModel.eventosFiltrados
+
+    LaunchedEffect(Unit) {
+        eventoViewModel.filtrarEventos(idCategoria, precoInicial, precoFinal, data)
+    }
+
+    if (eventosFiltrados.isNotEmpty()) {
+        return eventosFiltrados
+    }
+
+    return emptyList()
 }

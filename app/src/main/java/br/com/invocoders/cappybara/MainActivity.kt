@@ -16,10 +16,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.invocoders.cappybara.data.model.EventoDetalhe
+import br.com.invocoders.cappybara.data.model.FiltroEvento
 import br.com.invocoders.cappybara.ui.theme.CappybaraTheme
 import br.com.invocoders.cappybara.view.screens.busca.BuscaScreen
+import br.com.invocoders.cappybara.view.screens.busca.RetornoBuscaScreen
 import br.com.invocoders.cappybara.view.screens.cadastroUsuario.CadastroUsuarioScreen
 import br.com.invocoders.cappybara.view.screens.cadastroUsuario.preferenciaUsuario.PreferenciaUsuarioScreen
+import br.com.invocoders.cappybara.view.screens.cadastroevento.CadastroEventoScreen
 import br.com.invocoders.cappybara.view.screens.detalheevento.DetalhesEventoScreen
 import br.com.invocoders.cappybara.view.screens.detalheevento.RotaScreen
 import br.com.invocoders.cappybara.view.screens.home.HomeScreen
@@ -89,7 +92,16 @@ class MainActivity : ComponentActivity() {
 
                                 RotaScreen(eventoDetalhe, navController)
                             }
+                        }
 
+                        composable("retornoBusca/?filtroEvento={filtroEvento}") { backStackEntry->
+                            val jsonEvento = backStackEntry.arguments?.getString("filtroEvento")
+
+                            if (jsonEvento != null) {
+                                val filtroEvento = Gson().fromJson(jsonEvento, FiltroEvento::class.java)
+
+                                RetornoBuscaScreen(filtroEvento, navController)
+                            }
                         }
                     }
                 }

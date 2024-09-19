@@ -44,12 +44,18 @@ import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
 import br.com.invocoders.cappybara.core.services.obterEnderecoTexto
 import br.com.invocoders.cappybara.core.utils.abreviarDuracao
+import br.com.invocoders.cappybara.core.utils.formatarDataComDiaSemana
 import br.com.invocoders.cappybara.data.model.EventoResumo
 import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
 
 @Composable
-fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController, duracaoRota: String? = null, distanciaRota: String? = null) {
+fun CardEventoPertoComponent(
+    evento: EventoResumo,
+    navController: NavController,
+    duracaoRota: String? = null,
+    distanciaRota: String? = null
+) {
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
 
     Card(
@@ -104,9 +110,8 @@ fun CardEventoPertoComponent(evento: EventoResumo, navController: NavController,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // TODO: Ajustar data
                     Text(
-                        text = "11 JUL - QUI - 15h00",
+                        text = if (evento.dataHoraInicio != "") formatarDataComDiaSemana(evento.dataHoraInicio) else "11 JUL - QUI - 15h00",
                         style = TextStyle(
                             fontSize = 12.sp,
                             fontFamily = roboto,

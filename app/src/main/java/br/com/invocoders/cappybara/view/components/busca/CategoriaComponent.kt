@@ -10,41 +10,47 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.model.Categoria
+import br.com.invocoders.cappybara.core.services.listarCategoriaEvento
+import br.com.invocoders.cappybara.model.CategoriaEvento
 
 @Composable
-fun CategoriaComponent() {
-    val categorias = listOf(
-        Categoria("Esportes", R.drawable.baseline_sports_basketball_24),
-        Categoria("Música", R.drawable.baseline_queue_music_24),
-        Categoria("Arte", R.drawable.baseline_palette_24),
-        Categoria("Comida", R.drawable.baseline_restaurant_menu_24),
-        Categoria("Bebida", R.drawable.baseline_sports_bar_24)
-    )
+fun CategoriaComponent(onCategoriasSelecionadas: (List<CategoriaEvento>) -> Unit) {
+    val lista = listarCategoriaEvento()
+    val categoriasSelecionadas = remember { mutableStateListOf<CategoriaEvento>() }
 
-    val categoriasSelecionadas = remember { mutableStateListOf<Categoria>() }
-
-    fun selecionar(categoria: Categoria) {
+    fun selecionar(categoria: CategoriaEvento) {
         if (categoriasSelecionadas.contains(categoria)) {
             categoriasSelecionadas.remove(categoria)
-            return
+        } else {
+            categoriasSelecionadas.add(categoria)
         }
-        categoriasSelecionadas.add(categoria)
+        onCategoriasSelecionadas(categoriasSelecionadas.toList())
     }
 
     LazyRow(
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        items(categorias) { categoria ->
+        items(lista) { categoria ->
             ItemCategoriaComponent(
                 filtro = categoria.nome,
                 selecionado = categoriasSelecionadas.contains(categoria),
-                iconeId = categoria.iconeId,
+                iconeId = obterIcone(categoria.nome),
                 onClick = { selecionar(categoria) }
             )
         }
     }
 
+}
 
+fun obterIcone(descricaoCategoria: String): Int {
+    return when (descricaoCategoria) {
+        "Teatro" -> R.drawable.baseline_theater_comedy_24
+        "Caridade" -> R.drawable.baseline_favorite_24
+        "Concerto" -> R.drawable.baseline_music_note_24
+        "Webinar" -> R.drawable.baseline_ondemand_video_24
+        "Dança" -> R.drawable.baseline_accessibility_new_24
+
+        else -> R.drawable.baseline_sports_bar_24
+    }
 }
