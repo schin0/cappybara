@@ -23,6 +23,7 @@ android {
 
         buildConfigField("String", "MAPS_API_KEY", "\"${properties["MAPS_API_KEY"]}\"")
         buildConfigField("String", "TOKEN_FIREBASE", "\"${properties["TOKEN_FIREBASE"]}\"")
+        buildConfigField("String", "WEATHER_MAP_API_KEY", "\"${properties["WEATHER_MAP_API_KEY"]}\"")
     }
 
     buildTypes {
