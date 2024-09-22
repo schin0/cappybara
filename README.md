@@ -24,8 +24,8 @@ O projeto é dividido em duas partes principais: o backend, implementado em Java
 ### Backend ⚙️
 
 1. Ambas as APIs já estão publicadas no Azure, portanto, não há necessidade de rodá-las localmente. Acesse-as nos links abaixo:
-	- [API Evento](https://cappybara-service-spring-app-cappybara-evento.azuremicroservices.io/evento/)
-	- [API Usuario](https://cappybara-service-spring-app-cappybara-usuario.azuremicroservices.io/)
+	- [API Evento](https://cappybara-service2-spring-app-cappybara-evento.azuremicroservices.io/evento/)
+	- [API Usuario](https://cappybara-service2-spring-app-cappybara-usuario.azuremicroservices.io/)
 
 ### Frontend 🎨
 
@@ -65,6 +65,7 @@ O projeto é dividido em duas partes principais: o backend, implementado em Java
 - 🎨[Figma](https://www.figma.com/design/B3DTn5RlmunHxD8IKBEHPD/DESIGN-SYSTEM%3A-The-Cappybara-Project%3A-Enterprise-Challenge---ManageEngine?node-id=296-422&t=s6vNofi7TBjlnnIr-0)
 - 💻 [Vídeo técnico](https://www.youtube.com/watch?v=kAcxnidVAeE)
 - 📅 [Cronograma](https://docs.google.com/spreadsheets/d/1fLMJTAmETbPDATLy6dYs3G-HygjCjWUNQBwMHjY8lXo/edit?usp=sharing)
+- 📂 [APK](https://drive.google.com/file/d/1eSu1PGNlUdMId_SNQm0F2my4EsS9RB2V/view?usp=sharing)
 
 ## 📞 Participantes
 - [Alex Coelho de Oliveira](https://www.linkedin.com/in/alex-coelho-de-oliveira/)
