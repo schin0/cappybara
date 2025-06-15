@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class CadastroUsuarioRetrofitFactory {
-    private val URL = "https://cappybara-service2-spring-app-cappybara-usuario.azuremicroservices.io/usuario/"
+    private val URL = "httphttp://cappybara-evento-dyagdvfdfbd3hvg3.brazilsouth-01.azurewebsites.net/usuario/"
     val retrofitFactory = Retrofit.Builder()
         .baseUrl(URL)
         .addConverterFactory(GsonConverterFactory.create())

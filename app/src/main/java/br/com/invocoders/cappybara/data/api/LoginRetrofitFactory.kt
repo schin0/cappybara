@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class LoginRetrofitFactory {
-    private val URL = "https://cappybara-service2-spring-app-cappybara-usuario.azuremicroservices.io/"
+    private val URL = "http://cappybara-evento-dyagdvfdfbd3hvg3.brazilsouth-01.azurewebsites.net/"
 
     val gson = GsonBuilder()
         .setLenient()

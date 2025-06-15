@@ -93,82 +93,84 @@ fun CardEventoComponent(evento: EventoResumo, navController: NavController) {
                 disabledContainerColor = Color(0xFFFFFFFF)
             )
         ) {
-            Box {
-                AsyncImage(
-                    model = evento.urlImagem.first(),
-                    contentDescription = evento.titulo,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .zIndex(-1f),
-                    contentScale = ContentScale.Crop
-                )
-
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Top,
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .fillMaxWidth()
-                        .zIndex(1f)
-                ) {
-                    Card(
+            if (evento.urlImagem.any()) {
+                Box {
+                    AsyncImage(
+                        model = evento.urlImagem.first(),
+                        contentDescription = evento.titulo,
                         modifier = Modifier
-                            .width(45.dp)
-                            .height(45.dp),
-                        colors = CardColors(
-                            containerColor = colorResource(id = R.color.cinza_escuro),
-                            contentColor = Color.White,
-                            disabledContentColor = Color(0xFFFFFFFF),
-                            disabledContainerColor = Color(0xFFFFFFFF)
-                        ),
-                        shape = RoundedCornerShape(size = 7.dp)
-                    ) {
-                        val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
-                        val data = LocalDateTime.parse(evento.dataHoraInicio, formatter)
+                            .fillMaxSize()
+                            .zIndex(-1f),
+                        contentScale = ContentScale.Crop
+                    )
 
-                        val dia = data.dayOfMonth
-                        val mes = data.month.getDisplayName(
-                            java.time.format.TextStyle.SHORT,
-                            Locale.ENGLISH
-                        )
-                            .uppercase(Locale.ROOT)
-
-                        Text(
-                            text = "${dia}\n${mes}",
-                            style = TextStyle(
-                                fontSize = 18.sp,
-                                lineHeight = 18.sp,
-                                fontFamily = roboto,
-                                fontWeight = FontWeight(700),
-                                color = Color(0xFFE7215F),
-                                textAlign = TextAlign.Center,
-                            ),
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    }
-
-                    Card(
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Top,
                         modifier = Modifier
-                            .width(30.dp)
-                            .height(30.dp),
-                        colors = CardColors(
-                            containerColor = colorResource(id = R.color.cinza_escuro),
-                            contentColor = Color.White,
-                            disabledContentColor = Color(0xFFFFFFFF),
-                            disabledContainerColor = Color(0xFFFFFFFF)
-                        ),
-                        shape = RoundedCornerShape(size = 7.dp)
+                            .padding(8.dp)
+                            .fillMaxWidth()
+                            .zIndex(1f)
                     ) {
-                        Icon(
-                            painterResource(id = R.drawable.baseline_bookmark_24),
-                            contentDescription = "Salvar",
-                            tint = colorResource(
-                                id = R.color.salmao
-                            ),
+                        Card(
                             modifier = Modifier
-                                .fillMaxSize()
-                                .padding(5.dp)
-                        )
+                                .width(45.dp)
+                                .height(45.dp),
+                            colors = CardColors(
+                                containerColor = colorResource(id = R.color.cinza_escuro),
+                                contentColor = Color.White,
+                                disabledContentColor = Color(0xFFFFFFFF),
+                                disabledContainerColor = Color(0xFFFFFFFF)
+                            ),
+                            shape = RoundedCornerShape(size = 7.dp)
+                        ) {
+                            val formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+                            val data = LocalDateTime.parse(evento.dataHoraInicio, formatter)
+
+                            val dia = data.dayOfMonth
+                            val mes = data.month.getDisplayName(
+                                java.time.format.TextStyle.SHORT,
+                                Locale.ENGLISH
+                            )
+                                .uppercase(Locale.ROOT)
+
+                            Text(
+                                text = "${dia}\n${mes}",
+                                style = TextStyle(
+                                    fontSize = 18.sp,
+                                    lineHeight = 18.sp,
+                                    fontFamily = roboto,
+                                    fontWeight = FontWeight(700),
+                                    color = Color(0xFFE7215F),
+                                    textAlign = TextAlign.Center,
+                                ),
+                                modifier = Modifier.fillMaxSize()
+                            )
+                        }
+
+                        Card(
+                            modifier = Modifier
+                                .width(30.dp)
+                                .height(30.dp),
+                            colors = CardColors(
+                                containerColor = colorResource(id = R.color.cinza_escuro),
+                                contentColor = Color.White,
+                                disabledContentColor = Color(0xFFFFFFFF),
+                                disabledContainerColor = Color(0xFFFFFFFF)
+                            ),
+                            shape = RoundedCornerShape(size = 7.dp)
+                        ) {
+                            Icon(
+                                painterResource(id = R.drawable.baseline_bookmark_24),
+                                contentDescription = "Salvar",
+                                tint = colorResource(
+                                    id = R.color.salmao
+                                ),
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(5.dp)
+                            )
+                        }
                     }
                 }
             }
