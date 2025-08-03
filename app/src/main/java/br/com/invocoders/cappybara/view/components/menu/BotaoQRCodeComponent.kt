@@ -1,5 +1,6 @@
 package br.com.invocoders.cappybara.view.components.menu
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
@@ -47,12 +48,19 @@ fun BotaoQRCodeComponent(item: MenuItem, navController: NavController) {
             containerColor = colorResource(id = R.color.salmao)
         )
     ) {
-        Icon(
-            painter = painterResource(id = item.iconeId),
-            contentDescription = item.descricaoIcone,
-            tint = Color.White,
-            modifier = Modifier
-                .size(30.dp)
-        )
+        if (item.iconeId == R.drawable.iconia) {
+            Image(
+                painter = painterResource(id = item.iconeId),
+                contentDescription = item.descricaoIcone,
+                modifier = Modifier.size(30.dp)
+            )
+        } else {
+            Icon(
+                painter = painterResource(id = item.iconeId),
+                contentDescription = item.descricaoIcone,
+                tint = Color.White,
+                modifier = Modifier.size(30.dp)
+            )
+        }
     }
 }

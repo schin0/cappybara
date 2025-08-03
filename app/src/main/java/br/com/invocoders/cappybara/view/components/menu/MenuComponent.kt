@@ -31,11 +31,11 @@ fun MenuComponent(navController: NavController, itemSelecionado: String) {
     ) {
         Column {
             val botaoqrcode = MenuItem(
-                "qrcode",
-                R.drawable.baseline_qr_code_2_24,
-                R.drawable.baseline_qr_code_2_24,
+                "quebragelo",
+                R.drawable.iconia,
+                R.drawable.iconia,
                 "",
-                false
+                true
             )
             Box(
                 modifier = Modifier
@@ -102,11 +102,11 @@ fun MenuComponent(navController: NavController, itemSelecionado: String) {
                         "Buscar"
                     ),
                     MenuItem(
-                        "pesquisa",
+                        "perfil",
                         R.drawable.baseline_person_24,
                         R.drawable.baseline_person_24_azul,
                         "Perfil",
-                        habilitado = false
+                        habilitado = true
                     )
                 )
 

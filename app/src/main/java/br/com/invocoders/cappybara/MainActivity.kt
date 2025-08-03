@@ -28,6 +28,8 @@ import br.com.invocoders.cappybara.view.screens.detalheevento.RotaScreen
 import br.com.invocoders.cappybara.view.screens.home.HomeScreen
 import br.com.invocoders.cappybara.view.screens.inicio.InicioScreen
 import br.com.invocoders.cappybara.view.screens.login.LoginScreen
+import br.com.invocoders.cappybara.view.screens.perfil.PerfilScreen
+import br.com.invocoders.cappybara.view.screens.quebragelo.QuebraGeloScreen
 import com.google.gson.Gson
 
 class MainActivity : ComponentActivity() {
@@ -102,6 +104,14 @@ class MainActivity : ComponentActivity() {
 
                                 RetornoBuscaScreen(filtroEvento, navController)
                             }
+                        }
+
+                        composable("quebragelo") {
+                            QuebraGeloScreen(navController)
+                        }
+
+                        composable("perfil") {
+                            PerfilScreen(navController)
                         }
                     }
                 }

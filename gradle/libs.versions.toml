@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.0"
+agp = "8.6.0"
 coilCompose = "2.7.0"
 firebaseBom = "33.2.0"
 firebaseCore = "21.1.1"
@@ -26,6 +26,8 @@ firebaseAuthKtx = "23.0.0"
 secretsGradlePlugin = "2.0.1"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.0.0"
+material = "1.12.0"
+composeMaterial = "1.4.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -61,6 +63,8 @@ androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtim
 firebase-auth-ktx = { group = "com.google.firebase", name = "firebase-auth-ktx", version.ref = "firebaseAuthKtx" }
 secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-compose-material = { group = "androidx.wear.compose", name = "compose-material", version.ref = "composeMaterial" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
