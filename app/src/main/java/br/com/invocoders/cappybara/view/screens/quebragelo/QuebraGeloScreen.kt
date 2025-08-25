@@ -131,33 +131,18 @@ fun QuebraGeloScreen(navController: NavController) {
             )
             
             Spacer(modifier = Modifier.height(16.dp))
-            
-            if (mensagemMotivacional.isNotEmpty()) {
-                Text(
-                    text = mensagemMotivacional,
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        fontFamily = roboto,
-                        fontWeight = FontWeight.Normal,
-                        color = Color.Gray,
-                        textAlign = TextAlign.Center
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-            } else {
-                Text(
-                    text = "Use estas sugestões para iniciar conversas significativas e encontrar pontos em comum para o seu próximo encontro presencial.",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        fontFamily = roboto,
-                        fontWeight = FontWeight.Normal,
-                        color = Color.Gray,
-                        textAlign = TextAlign.Center
-                    ),
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+
+            Text(
+                text = "Use estas sugestões para iniciar conversas significativas e encontrar pontos em comum para o seu próximo encontro presencial.",
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    fontFamily = roboto,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Gray,
+                    textAlign = TextAlign.Center
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
         }
         
         if (ideias.isNotEmpty()) {
@@ -173,7 +158,7 @@ fun QuebraGeloScreen(navController: NavController) {
                     state = pagerState,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp),
+                        .height(350.dp),
                     contentPadding = PaddingValues(horizontal = 16.dp),
                     pageSpacing = 16.dp,
                     flingBehavior = PagerDefaults.flingBehavior(state = pagerState)
@@ -183,7 +168,7 @@ fun QuebraGeloScreen(navController: NavController) {
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(200.dp)
+                            .height(350.dp)
                             .padding(horizontal = 8.dp),
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(

@@ -44,16 +44,6 @@ class QuebraGeloViewModel : ViewModel() {
                 categoria = "Sonhos",
                 pergunta = "Qual é o seu maior sonho que ainda não realizou?",
                 corFundo = "#45B7D1"
-            ),
-            IdeiaQuebraGelo(
-                categoria = "Música",
-                pergunta = "Qual música sempre te anima, não importa o seu humor?",
-                corFundo = "#96CEB4"
-            ),
-            IdeiaQuebraGelo(
-                categoria = "Comida",
-                pergunta = "Qual é a refeição mais memorável que você já teve?",
-                corFundo = "#FFEAA7"
             )
         )
     }
@@ -74,30 +64,31 @@ class QuebraGeloViewModel : ViewModel() {
             
             val request = QuebraGeloRequest(
                 contexto = contexto,
-                quantidade = 3,
+                quantidade = 1,
                 tipoPreferido = 0
             )
             
             gerarIdeiasQuebraGelo(
                 request = request,
                 onSuccess = { resposta ->
-                    val novasIdeias = resposta.ideias.map { ideiaAPI ->
-                        IdeiaQuebraGelo(
-                            categoria = ideiaAPI.tags.firstOrNull() ?: "Geral",
-                            pergunta = ideiaAPI.descricao,
+                    if (resposta.ideias.isNotEmpty()) {
+                        val novaIdeia = resposta.ideias.first()
+                        val ideiaQuebraGelo = IdeiaQuebraGelo(
+                            categoria = novaIdeia.tags.firstOrNull() ?: "Geral",
+                            pergunta = novaIdeia.descricao,
                             corFundo = obterCorAleatoria(),
-                            id = ideiaAPI.id,
-                            titulo = ideiaAPI.titulo,
-                            descricao = ideiaAPI.descricao,
-                            tipo = ideiaAPI.tipo,
-                            tags = ideiaAPI.tags,
-                            nivelDificuldade = ideiaAPI.nivelDificuldade,
-                            tempoEstimado = ideiaAPI.tempoEstimado
+                            id = novaIdeia.id,
+                            titulo = novaIdeia.titulo,
+                            descricao = novaIdeia.descricao,
+                            tipo = novaIdeia.tipo,
+                            tags = novaIdeia.tags,
+                            nivelDificuldade = novaIdeia.nivelDificuldade,
+                            tempoEstimado = novaIdeia.tempoEstimado
                         )
+                        
+                        _ideias.value = _ideias.value + ideiaQuebraGelo
+                        _mensagemMotivacional.value = resposta.mensagemMotivacional
                     }
-                    
-                    _ideias.value = novasIdeias
-                    _mensagemMotivacional.value = resposta.mensagemMotivacional
                     _carregando.value = false
                 },
                 onError = { mensagemErro ->
