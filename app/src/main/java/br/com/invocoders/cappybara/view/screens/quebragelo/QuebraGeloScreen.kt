@@ -22,13 +22,12 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,48 +39,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import br.com.invocoders.cappybara.R
-import br.com.invocoders.cappybara.model.IdeiaQuebraGelo
 import br.com.invocoders.cappybara.view.components.quebragelo.BotaoEscreverPropriaComponent
 import br.com.invocoders.cappybara.view.components.quebragelo.BotaoGerarNovaSugestaoComponent
+import br.com.invocoders.cappybara.viewmodel.QuebraGeloViewModel
 
 @Composable
 fun QuebraGeloScreen(navController: NavController) {
     val contexto = LocalContext.current
     val roboto = FontFamily.Default
+    val viewModel: QuebraGeloViewModel = viewModel()
     
-    val ideiasMock = remember {
-        listOf(
-            IdeiaQuebraGelo(
-                categoria = "Crescimento Pessoal",
-                pergunta = "Qual é uma habilidade que você adoraria aprender e por quê?",
-                corFundo = "#FF6B9D"
-            ),
-            IdeiaQuebraGelo(
-                categoria = "Viagens",
-                pergunta = "Se você pudesse viajar para qualquer lugar do mundo amanhã, para onde iria?",
-                corFundo = "#4ECDC4"
-            ),
-            IdeiaQuebraGelo(
-                categoria = "Sonhos",
-                pergunta = "Qual é o seu maior sonho que ainda não realizou?",
-                corFundo = "#45B7D1"
-            ),
-            IdeiaQuebraGelo(
-                categoria = "Música",
-                pergunta = "Qual música sempre te anima, não importa o seu humor?",
-                corFundo = "#96CEB4"
-            ),
-            IdeiaQuebraGelo(
-                categoria = "Comida",
-                pergunta = "Qual é a refeição mais memorável que você já teve?",
-                corFundo = "#FFEAA7"
-            )
-        )
+    val ideias by viewModel.ideias
+    val carregando by viewModel.carregando
+    val erro by viewModel.erro
+    val mensagemMotivacional by viewModel.mensagemMotivacional
+
+    LaunchedEffect(erro) {
+        if (erro != null) {
+            viewModel.limparErro()
+        }
     }
-    
-    var ideiasAtuais by remember { mutableStateOf(ideiasMock) }
 
     Box(
         modifier = Modifier
@@ -151,7 +131,7 @@ fun QuebraGeloScreen(navController: NavController) {
             )
             
             Spacer(modifier = Modifier.height(16.dp))
-            
+
             Text(
                 text = "Use estas sugestões para iniciar conversas significativas e encontrar pontos em comum para o seu próximo encontro presencial.",
                 style = TextStyle(
@@ -165,8 +145,8 @@ fun QuebraGeloScreen(navController: NavController) {
             )
         }
         
-        if (ideiasAtuais.isNotEmpty()) {
-            val pagerState = rememberPagerState(pageCount = { ideiasAtuais.size })
+        if (ideias.isNotEmpty()) {
+            val pagerState = rememberPagerState(pageCount = { ideias.size })
             
             Column(
                 modifier = Modifier
@@ -178,17 +158,17 @@ fun QuebraGeloScreen(navController: NavController) {
                     state = pagerState,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(200.dp),
+                        .height(350.dp),
                     contentPadding = PaddingValues(horizontal = 16.dp),
                     pageSpacing = 16.dp,
                     flingBehavior = PagerDefaults.flingBehavior(state = pagerState)
                 ) { page ->
-                    val ideiaAtual = ideiasAtuais[page]
+                    val ideiaAtual = ideias[page]
                     
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(200.dp)
+                            .height(350.dp)
                             .padding(horizontal = 8.dp),
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(
@@ -233,7 +213,7 @@ fun QuebraGeloScreen(navController: NavController) {
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    ideiasAtuais.forEachIndexed { index, _ ->
+                    ideias.forEachIndexed { index, _ ->
                         Box(
                             modifier = Modifier
                                 .padding(horizontal = 4.dp)
@@ -248,6 +228,19 @@ fun QuebraGeloScreen(navController: NavController) {
             }
         }
         
+        if (carregando) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .align(Alignment.Center),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(
+                    color = colorResource(id = R.color.azul)
+                )
+            }
+        }
+        
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -255,9 +248,9 @@ fun QuebraGeloScreen(navController: NavController) {
         ) {
             BotaoGerarNovaSugestaoComponent(
                 onClick = {
-                    val novaIdeia = gerarNovaIdeia()
-                    ideiasAtuais = ideiasAtuais + novaIdeia
-                }
+                    viewModel.gerarNovasIdeias()
+                },
+                habilitado = !carregando
             )
             
             Spacer(modifier = Modifier.height(16.dp))
@@ -269,25 +262,4 @@ fun QuebraGeloScreen(navController: NavController) {
             )
         }
     }
-}
-
-private fun gerarNovaIdeia(): IdeiaQuebraGelo {
-    val categorias = listOf(
-        "Hobbies" to "Qual hobby você gostaria de experimentar se tivesse tempo ilimitado?",
-        "Filmes" to "Qual filme você assistiria repetidamente e por quê?",
-        "Tecnologia" to "Qual invenção tecnológica mudou mais a sua vida?",
-        "Natureza" to "Qual é o lugar mais bonito da natureza que você já visitou?",
-        "Aprendizado" to "Qual foi a lição mais importante que você aprendeu este ano?"
-    )
-    
-    val cores = listOf("#FF6B9D", "#4ECDC4", "#45B7D1", "#96CEB4", "#FFEAA7", "#DDA0DD", "#98D8C8")
-    
-    val categoriaEscolhida = categorias.random()
-    val corEscolhida = cores.random()
-    
-    return IdeiaQuebraGelo(
-        categoria = categoriaEscolhida.first,
-        pergunta = categoriaEscolhida.second,
-        corFundo = corEscolhida
-    )
 } 

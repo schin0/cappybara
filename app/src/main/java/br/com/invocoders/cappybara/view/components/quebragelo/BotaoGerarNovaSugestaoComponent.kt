@@ -15,7 +15,10 @@ import androidx.compose.ui.unit.sp
 import br.com.invocoders.cappybara.R
 
 @Composable
-fun BotaoGerarNovaSugestaoComponent(onClick: () -> Unit) {
+fun BotaoGerarNovaSugestaoComponent(
+    onClick: () -> Unit,
+    habilitado: Boolean = true
+) {
     val roboto = FontFamily.Default
     
     Button(
@@ -24,8 +27,9 @@ fun BotaoGerarNovaSugestaoComponent(onClick: () -> Unit) {
             .fillMaxWidth()
             .height(56.dp),
         shape = RoundedCornerShape(12.dp),
+        enabled = habilitado,
         colors = ButtonDefaults.buttonColors(
-            containerColor = colorResource(id = R.color.azul)
+            containerColor = if (habilitado) colorResource(id = R.color.azul) else colorResource(id = R.color.azul).copy(alpha = 0.6f)
         )
     ) {
         Text(
