@@ -23,6 +23,7 @@ android {
 
         buildConfigField("String", "MAPS_API_KEY", "\"${properties["MAPS_API_KEY"]}\"")
         buildConfigField("String", "TOKEN_FIREBASE", "\"${properties["TOKEN_FIREBASE"]}\"")
+        buildConfigField("String", "TICKETMASTER_API_KEY", "\"${properties["TICKETMASTER_API_KEY"]}\"")
     }
 
     buildTypes {
@@ -90,6 +91,7 @@ dependencies {
     implementation(libs.maps.compose.utils)
     implementation(libs.maps.compose.widgets)
     implementation(libs.coil.compose)
+    implementation(libs.lottie.compose)
 }
 
 secrets {

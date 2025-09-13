@@ -8,14 +8,19 @@ import androidx.lifecycle.viewModelScope
 import br.com.invocoders.cappybara.BuildConfig
 import br.com.invocoders.cappybara.data.api.ClimaRetrofitFactory
 import br.com.invocoders.cappybara.data.api.EventoRetrofitFactory
+import br.com.invocoders.cappybara.data.api.TicketmasterRetrofitFactory
 import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import br.com.invocoders.cappybara.data.model.EventoResumo
+import br.com.invocoders.cappybara.data.model.ticketmaster.TicketmasterEventAdapter
+import br.com.invocoders.cappybara.data.model.ticketmaster.TicketmasterResponse
 import br.com.invocoders.cappybara.model.Clima
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 class EventoViewModel : ViewModel() {
@@ -62,37 +67,56 @@ class EventoViewModel : ViewModel() {
     fun listarEventosProximos(latitude: Double, longitude: Double, itens: Int) {
         viewModelScope.launch {
             try {
-                val raioEmKm = 100.0
-                val call = EventoRetrofitFactory().eventoRepository()
-                    .listarEventosProximos(latitude, longitude, raioEmKm, itens = itens)
+                val latlong = "$latitude,$longitude"
+                val dataHoraAtual = obterDataHoraAtual()
+                val ticketmasterFactory = TicketmasterRetrofitFactory()
+                
+                val call = ticketmasterFactory.ticketmasterRepository().listarEventos(
+                    tamanho = itens,
+                    latlong = latlong,
+                    raio = 100,
+                    dataHoraInicio = dataHoraAtual,
+                    unidade = "km",
+                    chaveApi = ticketmasterFactory.obterChaveApi()
+                )
 
-                call.enqueue(object : Callback<List<EventoResumo>> {
+                call.enqueue(object : Callback<TicketmasterResponse> {
                     override fun onResponse(
-                        call: Call<List<EventoResumo>>,
-                        response: Response<List<EventoResumo>>
+                        call: Call<TicketmasterResponse>,
+                        response: Response<TicketmasterResponse>
                     ) {
                         if (response.isSuccessful) {
-                            _eventosProximos.value = response.body() ?: emptyList()
+                            val ticketmasterResponse = response.body()
+                            val eventos = ticketmasterResponse?.embedded?.eventos?.map { evento ->
+                                TicketmasterEventAdapter.converterParaEventoResumo(evento)
+                            } ?: emptyList()
+                            _eventosProximos.value = eventos
                         } else {
                             Log.e(
-                                "TesteAqui",
+                                "TicketmasterErro",
                                 "Código: ${response.code()}, Mensagem: ${response.message()}"
                             )
                             response.errorBody()?.let { errorBody ->
-                                Log.e("TesteAqui", errorBody.string())
+                                Log.e("TicketmasterErro", errorBody.string())
                             }
                         }
                     }
 
-                    override fun onFailure(call: Call<List<EventoResumo>>, t: Throwable) {
-                        Log.e("TesteAqui", t.message ?: "Erro desconhecido")
+                    override fun onFailure(call: Call<TicketmasterResponse>, t: Throwable) {
+                        Log.e("TicketmasterErro", t.message ?: "Erro desconhecido")
                     }
                 })
 
             } catch (e: Exception) {
-                Log.e("Erro1", e.message ?: "Erro desconhecido")
+                Log.e("TicketmasterErro", e.message ?: "Erro desconhecido")
             }
         }
+    }
+
+    private fun obterDataHoraAtual(): String {
+        val agora = LocalDateTime.now(ZoneOffset.UTC)
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        return agora.format(formatter)
     }
 
     val eventoDetalhePadrao = EventoDetalhe(
