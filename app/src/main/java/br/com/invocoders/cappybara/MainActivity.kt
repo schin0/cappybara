@@ -82,8 +82,7 @@ class MainActivity : ComponentActivity() {
 
                         composable("detalhesEvento/{id}") {
                             val eventoId = it.arguments?.getString("id")
-                            eventoId?.toLong()
-                                ?.let { id -> DetalhesEventoScreen(id, navController) }
+                            eventoId?.let { id -> DetalhesEventoScreen(id, navController) }
                         }
 
                         composable("rotaEvento/?eventoDetalhe={eventoDetalhe}") { backStackEntry->

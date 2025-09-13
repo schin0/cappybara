@@ -1,8 +1,10 @@
 package br.com.invocoders.cappybara.data.repository
 
 import br.com.invocoders.cappybara.data.model.ticketmaster.TicketmasterResponse
+import br.com.invocoders.cappybara.data.model.ticketmaster.TicketmasterEventDetail
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface TicketmasterRepository {
@@ -16,4 +18,10 @@ interface TicketmasterRepository {
         @Query("sort") ordenacao: String? = null,
         @Query("apikey") chaveApi: String
     ): Call<TicketmasterResponse>
+
+    @GET("discovery/v2/events/{id}")
+    fun obterDetalhesEvento(
+        @Path("id") id: String,
+        @Query("apikey") chaveApi: String
+    ): Call<TicketmasterEventDetail>
 }

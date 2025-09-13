@@ -69,8 +69,10 @@ fun CardEventoPertoComponent(
             .fillMaxWidth()
             .height(112.dp)
             .clickable {
-                if (duracaoRota == null && distanciaRota == null)
-                    navController.navigate("detalhesEvento/${evento.id}")
+                if (duracaoRota == null && distanciaRota == null) {
+                    val eventoId = evento.ticketmasterId ?: evento.id.toString()
+                    navController.navigate("detalhesEvento/$eventoId")
+                }
             },
         shape = RoundedCornerShape(size = 18.dp),
         colors = CardColors(

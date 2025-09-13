@@ -15,7 +15,8 @@ object TicketmasterEventAdapter {
             latitude = localizacao.first,
             longitude = localizacao.second,
             dataHoraInicio = dataHoraInicio,
-            urlImagem = imagens
+            urlImagem = imagens,
+            ticketmasterId = evento.id
         )
     }
     

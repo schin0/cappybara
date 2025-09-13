@@ -12,7 +12,9 @@ import br.com.invocoders.cappybara.data.api.TicketmasterRetrofitFactory
 import br.com.invocoders.cappybara.data.model.EventoDetalhe
 import br.com.invocoders.cappybara.data.model.EventoResumo
 import br.com.invocoders.cappybara.data.model.ticketmaster.TicketmasterEventAdapter
+import br.com.invocoders.cappybara.data.model.ticketmaster.TicketmasterEventDetailAdapter
 import br.com.invocoders.cappybara.data.model.ticketmaster.TicketmasterResponse
+import br.com.invocoders.cappybara.data.model.ticketmaster.TicketmasterEventDetail
 import br.com.invocoders.cappybara.model.Clima
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -190,42 +192,49 @@ class EventoViewModel : ViewModel() {
     private val _eventoDetalhe = mutableStateOf(eventoDetalhePadrao)
     var eventoDetalhe: State<EventoDetalhe> = _eventoDetalhe
 
-    fun obterEventoDetalhePorId(id: Long) {
+    fun obterEventoDetalhePorId(id: String) {
         viewModelScope.launch {
             try {
-                val call = EventoRetrofitFactory().eventoRepository().obterPorId(id)
+                val ticketmasterFactory = TicketmasterRetrofitFactory()
+                val call = ticketmasterFactory.ticketmasterRepository().obterDetalhesEvento(
+                    id = id,
+                    chaveApi = ticketmasterFactory.obterChaveApi()
+                )
 
-                call.enqueue(object : Callback<EventoDetalhe> {
+                call.enqueue(object : Callback<TicketmasterEventDetail> {
                     override fun onResponse(
-                        call: Call<EventoDetalhe>,
-                        response: Response<EventoDetalhe>
+                        call: Call<TicketmasterEventDetail>,
+                        response: Response<TicketmasterEventDetail>
                     ) {
                         if (response.isSuccessful) {
-                            val eventoDetalhe = response.body()!!
-                            _eventoDetalhe.value = eventoDetalhe
+                            val ticketmasterEventDetail = response.body()
+                            if (ticketmasterEventDetail != null) {
+                                val eventoDetalhe = TicketmasterEventDetailAdapter.converterParaEventoDetalhe(ticketmasterEventDetail)
+                                _eventoDetalhe.value = eventoDetalhe
 
-                            val lat = eventoDetalhe.latitude.toString()
-                            val lon = eventoDetalhe.longitude.toString()
+                                val lat = eventoDetalhe.latitude.toString()
+                                val lon = eventoDetalhe.longitude.toString()
 
-                            obterClima(eventoDetalhe, lat, lon)
+                                obterClima(eventoDetalhe, lat, lon)
+                            }
                         } else {
                             Log.e(
-                                "TesteAqui",
+                                "TicketmasterErro",
                                 "Código: ${response.code()}, Mensagem: ${response.message()}"
                             )
                             response.errorBody()?.let { errorBody ->
-                                Log.e("TesteAqui", errorBody.string())
+                                Log.e("TicketmasterErro", errorBody.string())
                             }
                         }
                     }
 
-                    override fun onFailure(call: Call<EventoDetalhe>, t: Throwable) {
-                        Log.e("TesteAqui", t.message ?: "Erro desconhecido")
+                    override fun onFailure(call: Call<TicketmasterEventDetail>, t: Throwable) {
+                        Log.e("TicketmasterErro", t.message ?: "Erro desconhecido")
                     }
                 })
 
             } catch (e: Exception) {
-                Log.e("Erro1", e.message ?: "Erro desconhecido")
+                Log.e("TicketmasterErro", e.message ?: "Erro desconhecido")
             }
         }
     }

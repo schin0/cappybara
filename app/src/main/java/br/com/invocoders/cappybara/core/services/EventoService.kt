@@ -74,7 +74,7 @@ fun listarProximosEventos(
 
 @Composable
 fun obterEventoDetalhePorId(
-    id: Long, eventoViewModel: EventoViewModel = viewModel()
+    id: String, eventoViewModel: EventoViewModel = viewModel()
 ): EventoDetalhe {
     val evento by eventoViewModel.eventoDetalhe
 

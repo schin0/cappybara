@@ -6,5 +6,6 @@ data class EventoResumo(
     val latitude: Double,
     val longitude: Double,
     val dataHoraInicio: String,
-    val urlImagem: List<String>
+    val urlImagem: List<String>,
+    val ticketmasterId: String? = null
 )

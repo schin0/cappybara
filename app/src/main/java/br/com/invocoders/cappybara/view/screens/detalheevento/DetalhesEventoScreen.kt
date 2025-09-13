@@ -66,7 +66,7 @@ import java.text.NumberFormat
 import java.util.Locale
 
 @Composable
-fun DetalhesEventoScreen(eventoId: Long, navController: NavController) {
+fun DetalhesEventoScreen(eventoId: String, navController: NavController) {
     val evento = obterEventoDetalhePorId(eventoId)
 
     val roboto = FontFamily(Font(DeviceFontFamilyName("sans-serif-condensed")))
