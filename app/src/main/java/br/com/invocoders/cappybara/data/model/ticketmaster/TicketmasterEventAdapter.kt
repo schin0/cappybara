@@ -42,8 +42,17 @@ object TicketmasterEventAdapter {
     }
     
     private fun obterImagens(evento: TicketmasterEvent): List<String> {
-        return evento.imagens
-            .filter { it.proporcao == "16_9" }
+        val imagens16_9 = evento.imagens.filter { it.proporcao == "16_9" }
+        
+        if (imagens16_9.isEmpty()) {
+            return evento.imagens
+                .sortedByDescending { it.largura * it.altura }
+                .take(3)
+                .map { it.url }
+        }
+        
+        return imagens16_9
+            .sortedByDescending { it.largura * it.altura }
             .take(3)
             .map { it.url }
     }

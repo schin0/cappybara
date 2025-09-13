@@ -102,6 +102,10 @@ data class TicketmasterClassification(
     val genero: TicketmasterGenre,
     @SerializedName("subGenre")
     val subGenero: TicketmasterSubGenre,
+    @SerializedName("type")
+    val tipo: TicketmasterType?,
+    @SerializedName("subType")
+    val subTipo: TicketmasterSubType?,
     @SerializedName("family")
     val familia: Boolean
 )
@@ -121,6 +125,20 @@ data class TicketmasterGenre(
 )
 
 data class TicketmasterSubGenre(
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
+    val nome: String
+)
+
+data class TicketmasterType(
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
+    val nome: String
+)
+
+data class TicketmasterSubType(
     @SerializedName("id")
     val id: String,
     @SerializedName("name")
@@ -217,6 +235,12 @@ data class TicketmasterLocation(
 )
 
 data class TicketmasterUpcomingEvents(
+    @SerializedName("ticketnet")
+    val ticketnet: Int,
+    @SerializedName("ticketmaster")
+    val ticketmaster: Int,
+    @SerializedName("mfx-no")
+    val mfxNo: Int,
     @SerializedName("crowder")
     val crowder: Int,
     @SerializedName("_total")

@@ -14,5 +14,6 @@ data class EventoDetalhe(
     val dataHoraInicio: String,
     val dataHoraTermino: String,
     val imagens: List<String>,
-    val clima: Clima?
+    val clima: Clima?,
+    val artistaInfo: ArtistaInfo? = null
 )

@@ -186,7 +186,8 @@ class EventoViewModel : ViewModel() {
         dataHoraInicio = "",
         dataHoraTermino = "",
         imagens = emptyList(),
-        clima = null
+        clima = null,
+        artistaInfo = null
     )
 
     private val _eventoDetalhe = mutableStateOf(eventoDetalhePadrao)

@@ -35,7 +35,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -57,6 +56,7 @@ import br.com.invocoders.cappybara.core.services.obterEnderecoTexto
 import br.com.invocoders.cappybara.core.services.obterEventoDetalhePorId
 import br.com.invocoders.cappybara.core.utils.formatarDataHora
 import br.com.invocoders.cappybara.core.utils.mostrarMensagemEmConstrucao
+import br.com.invocoders.cappybara.view.components.shared.ArtistaInfoComponent
 import br.com.invocoders.cappybara.view.components.shared.ClimaComponent
 import br.com.invocoders.cappybara.view.components.shared.ImagemUsuarioComponent
 import coil.compose.AsyncImage
@@ -548,62 +548,9 @@ fun DetalhesEventoScreen(eventoId: String, navController: NavController) {
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Row {
-                            AsyncImage(
-                                model = "https://images.unsplash.com/photo-1530649159659-c8beb2992433?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                                contentDescription = evento.artistas,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .width(48.dp)
-                                    .height(48.dp)
-                                    .clip(RoundedCornerShape(12.dp)),
-                            )
-
-                            Column(
-                                Modifier.padding(start = 14.dp),
-                                horizontalAlignment = Alignment.Start,
-                                verticalArrangement = Arrangement.Center
-                            ) {
-                                Spacer(modifier = Modifier.height(5.dp))
-
-                                Row {
-                                    Text(
-                                        text = evento.artistas,
-                                        style = TextStyle(
-                                            fontSize = 15.sp,
-                                            lineHeight = 25.sp,
-                                            fontFamily = roboto,
-                                            fontWeight = FontWeight(900),
-                                            color = Color(0xFF0D0C26),
-                                        )
-                                    )
-                                }
-
-                                Spacer(modifier = Modifier.height(5.dp))
-
-                                Row {
-                                    Text(
-                                        text = "Organizador",
-                                        style = TextStyle(
-                                            fontSize = 12.sp,
-                                            fontFamily = roboto,
-                                            fontWeight = FontWeight(400),
-                                            color = Color(0xFF747688),
-                                        )
-                                    )
-                                }
-                            }
-                        }
-                    }
+                // Informações do Artista
+                evento.artistaInfo?.let { artistaInfo ->
+                    ArtistaInfoComponent(artistaInfo)
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
@@ -637,6 +584,7 @@ fun DetalhesEventoScreen(eventoId: String, navController: NavController) {
                 }
 
                 Spacer(modifier = Modifier.height(20.dp))
+
             }
         }
 
