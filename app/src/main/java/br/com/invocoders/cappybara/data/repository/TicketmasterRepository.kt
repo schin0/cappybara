@@ -13,6 +13,7 @@ interface TicketmasterRepository {
         @Query("radius") raio: Int = 100,
         @Query("startDateTime") dataHoraInicio: String,
         @Query("unit") unidade: String = "km",
+        @Query("sort") ordenacao: String? = null,
         @Query("apikey") chaveApi: String
     ): Call<TicketmasterResponse>
 }

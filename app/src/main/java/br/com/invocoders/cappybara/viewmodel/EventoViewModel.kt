@@ -64,6 +64,9 @@ class EventoViewModel : ViewModel() {
     private val _eventosProximos = mutableStateOf<List<EventoResumo>>(emptyList())
     var eventosProximos: State<List<EventoResumo>> = _eventosProximos
 
+    private val _proximosEventos = mutableStateOf<List<EventoResumo>>(emptyList())
+    var proximosEventos: State<List<EventoResumo>> = _proximosEventos
+
     fun listarEventosProximos(latitude: Double, longitude: Double, itens: Int) {
         viewModelScope.launch {
             try {
@@ -91,6 +94,56 @@ class EventoViewModel : ViewModel() {
                                 TicketmasterEventAdapter.converterParaEventoResumo(evento)
                             } ?: emptyList()
                             _eventosProximos.value = eventos
+                        } else {
+                            Log.e(
+                                "TicketmasterErro",
+                                "Código: ${response.code()}, Mensagem: ${response.message()}"
+                            )
+                            response.errorBody()?.let { errorBody ->
+                                Log.e("TicketmasterErro", errorBody.string())
+                            }
+                        }
+                    }
+
+                    override fun onFailure(call: Call<TicketmasterResponse>, t: Throwable) {
+                        Log.e("TicketmasterErro", t.message ?: "Erro desconhecido")
+                    }
+                })
+
+            } catch (e: Exception) {
+                Log.e("TicketmasterErro", e.message ?: "Erro desconhecido")
+            }
+        }
+    }
+
+    fun listarProximosEventos(latitude: Double, longitude: Double, itens: Int) {
+        viewModelScope.launch {
+            try {
+                val latlong = "$latitude,$longitude"
+                val dataHoraAtual = obterDataHoraAtual()
+                val ticketmasterFactory = TicketmasterRetrofitFactory()
+                
+                val call = ticketmasterFactory.ticketmasterRepository().listarEventos(
+                    tamanho = itens,
+                    latlong = latlong,
+                    raio = 100,
+                    dataHoraInicio = dataHoraAtual,
+                    unidade = "km",
+                    ordenacao = "date,asc",
+                    chaveApi = ticketmasterFactory.obterChaveApi()
+                )
+
+                call.enqueue(object : Callback<TicketmasterResponse> {
+                    override fun onResponse(
+                        call: Call<TicketmasterResponse>,
+                        response: Response<TicketmasterResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val ticketmasterResponse = response.body()
+                            val eventos = ticketmasterResponse?.embedded?.eventos?.map { evento ->
+                                TicketmasterEventAdapter.converterParaEventoResumo(evento)
+                            } ?: emptyList()
+                            _proximosEventos.value = eventos
                         } else {
                             Log.e(
                                 "TicketmasterErro",

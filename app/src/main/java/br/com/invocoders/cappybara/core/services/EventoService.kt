@@ -49,6 +49,30 @@ fun listarEventosProximos(
 }
 
 @Composable
+fun listarProximosEventos(
+    eventoViewModel: EventoViewModel = viewModel(), itens: Int
+): List<EventoResumo> {
+    val proximosEventos by eventoViewModel.proximosEventos
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        val localizacaoAtual = withContext(Dispatchers.Main) {
+            LocalizacaoService(context).obterLocalizacaoAtual(context)
+        }
+
+        localizacaoAtual?.let {
+            eventoViewModel.listarProximosEventos(it.latitude, it.longitude, itens)
+        }
+    }
+
+    if (proximosEventos.isNotEmpty()) {
+        return proximosEventos
+    }
+
+    return emptyList()
+}
+
+@Composable
 fun obterEventoDetalhePorId(
     id: Long, eventoViewModel: EventoViewModel = viewModel()
 ): EventoDetalhe {
